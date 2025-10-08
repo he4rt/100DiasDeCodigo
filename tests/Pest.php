@@ -22,9 +22,7 @@ pest()->group('browser')->in('Browser');
 
 pest()->extend(TestCase::class)
     ->use(RefreshDatabase::class)
-    ->in('Feature', 'Unit', 'Browser');
-
-pest()->browser()->inFirefox();
+    ->in('Feature', 'Unit');
 
 pest()->printer()->compact();
 
