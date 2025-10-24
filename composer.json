@@ -11,13 +11,13 @@
         "php": "^8.4",
         "filament/filament": "^4.1.10",
         "filament/spatie-laravel-media-library-plugin": "^4.1.10",
-        "laravel/framework": "^12.34.0",
+        "laravel/framework": "^12.35.1",
         "laravel/tinker": "^2.10.1"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.16.0",
         "barryvdh/laravel-ide-helper": "^3.6.0",
-        "driftingly/rector-laravel": "^2.1.0",
+        "driftingly/rector-laravel": "^2.1.1",
         "fakerphp/faker": "^1.24.1",
         "larastan/larastan": "^3.7.2",
         "laravel/pail": "^1.2.3",
@@ -30,7 +30,7 @@
         "pestphp/pest-plugin-faker": "^4.0.0",
         "pestphp/pest-plugin-laravel": "^4.0.0",
         "pestphp/pest-plugin-livewire": "^4.0.1",
-        "rector/rector": "^2.2.3"
+        "rector/rector": "^2.2.5"
     },
     "autoload": {
         "psr-4": {
