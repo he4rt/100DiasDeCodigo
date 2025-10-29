@@ -27,7 +27,7 @@ return RectorConfig::configure()
         __DIR__.'/tests',
     ])
     ->withCache(
-        cacheDirectory: __DIR__.'/.rector.cache',
+        cacheDirectory: sys_get_temp_dir().'/rector_cache',
         cacheClass: FileCacheStorage::class,
     )
     ->withImportNames(importShortClasses: false, removeUnusedImports: true)
@@ -45,7 +45,7 @@ return RectorConfig::configure()
         carbon: true,
         rectorPreset: true,
     )
-    ->withPhpSets(php84: true)
+    ->withPhpSets()
     ->withRules([
         ApplyDefaultInsteadOfNullCoalesceRector::class,
         EmptyToBlankAndFilledFuncRector::class,
