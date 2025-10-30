@@ -11,8 +11,8 @@
         "php": "^8.4",
         "filament/filament": "^4.1.10",
         "filament/spatie-laravel-media-library-plugin": "^4.1.10",
-        "laravel/framework": "^12.36.0",
-        "laravel/sanctum": "^4.0",
+        "laravel/framework": "^12.36.1",
+        "laravel/sanctum": "^4.2.0",
         "laravel/tinker": "^2.10.1"
     },
     "require-dev": {
@@ -120,6 +120,9 @@
         "allow-plugins": {
             "pestphp/pest-plugin": true,
             "php-http/discovery": true
+        },
+        "audit": {
+            "abandoned": "report"
         }
     },
     "minimum-stability": "stable",
