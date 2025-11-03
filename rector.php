@@ -6,34 +6,39 @@ use Rector\Caching\ValueObject\Storage\FileCacheStorage;
 use Rector\CodingStyle\Rector\PostInc\PostIncDecToPreIncDecRector;
 use Rector\Config\RectorConfig;
 use Rector\EarlyReturn\Rector\If_\ChangeOrIfContinueToMultiContinueRector;
+use Rector\Php70\Rector\StaticCall\StaticCallOnNonStaticToInstanceCallRector;
 use Rector\Php83\Rector\ClassMethod\AddOverrideAttributeToOverriddenMethodsRector;
+use Rector\Php84\Rector\MethodCall\NewMethodCallWithoutParenthesesRector;
 use Rector\TypeDeclaration\Rector\ArrowFunction\AddArrowFunctionReturnTypeRector;
 use RectorLaravel\Rector\Class_\ModelCastsPropertyToCastsMethodRector;
 use RectorLaravel\Rector\Class_\ReplaceExpectsMethodsInTestsRector;
 use RectorLaravel\Rector\Coalesce\ApplyDefaultInsteadOfNullCoalesceRector;
 use RectorLaravel\Rector\Empty_\EmptyToBlankAndFilledFuncRector;
 use RectorLaravel\Rector\FuncCall\ConfigToTypedConfigMethodCallRector;
+use RectorLaravel\Rector\FuncCall\RemoveDumpDataDeadCodeRector;
 use RectorLaravel\Rector\MethodCall\RefactorBlueprintGeometryColumnsRector;
 use RectorLaravel\Rector\PropertyFetch\ReplaceFakerInstanceWithHelperRector;
 use RectorLaravel\Set\LaravelSetList;
+use RectorLaravel\Set\LaravelSetProvider;
 
 return RectorConfig::configure()
     ->withPaths([
         __DIR__.'/app',
-        __DIR__.'/bootstrap/app.php',
+        __DIR__.'/bootstrap',
         __DIR__.'/config',
         __DIR__.'/database',
         __DIR__.'/routes',
         __DIR__.'/tests',
     ])
-    ->withCache(
-        cacheDirectory: sys_get_temp_dir().'/rector_cache',
-        cacheClass: FileCacheStorage::class,
-    )
+    ->withSkip([__DIR__.'/bootstrap/cache'])
+    ->withCache(cacheDirectory: sys_get_temp_dir().'/rector_cache', cacheClass: FileCacheStorage::class)
     ->withImportNames(importShortClasses: false, removeUnusedImports: true)
     ->withRootFiles()
+    ->withPhpSets()
+    ->withComposerBased(laravel: true)
+    ->withSetProviders(LaravelSetProvider::class)
     ->withBootstrapFiles([__DIR__.'/vendor/larastan/larastan/bootstrap.php'])
-    ->withPHPStanConfigs([__DIR__.'/phpstan-baseline.neon'])
+    ->withPHPStanConfigs([__DIR__.'/phpstan.neon.dist'])
     ->withPreparedSets(
         deadCode: true,
         codeQuality: true,
@@ -44,8 +49,8 @@ return RectorConfig::configure()
         earlyReturn: true,
         carbon: true,
         rectorPreset: true,
+        phpunitCodeQuality: true,
     )
-    ->withPhpSets()
     ->withRules([
         ApplyDefaultInsteadOfNullCoalesceRector::class,
         EmptyToBlankAndFilledFuncRector::class,
@@ -68,9 +73,14 @@ return RectorConfig::configure()
         LaravelSetList::LARAVEL_TESTING,
         LaravelSetList::LARAVEL_TYPE_DECLARATIONS,
     ])
+    ->withConfiguredRule(RemoveDumpDataDeadCodeRector::class, [
+        'dd', 'dump', 'var_dump',
+    ])
     ->withSkip([
         AddOverrideAttributeToOverriddenMethodsRector::class,
         ChangeOrIfContinueToMultiContinueRector::class,
         PostIncDecToPreIncDecRector::class,
         AddArrowFunctionReturnTypeRector::class,
+        NewMethodCallWithoutParenthesesRector::class,
+        StaticCallOnNonStaticToInstanceCallRector::class,
     ]);

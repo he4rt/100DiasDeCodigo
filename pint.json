@@ -1,7 +1,6 @@
 {
     "preset": "laravel",
     "cache-file": ".pint.result.cache",
-    "notPath": ["tests/TestCase.php"],
     "rules": {
         "operator_linebreak": true,
         "no_unused_imports": true,

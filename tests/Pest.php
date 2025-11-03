@@ -16,15 +16,8 @@ use Tests\TestCase;
 |
 */
 
-pest()->group('feature')->in('Feature');
-pest()->group('unit')->in('Unit');
-pest()->group('browser')->in('Browser');
-
-pest()->extend(TestCase::class)
-    ->use(RefreshDatabase::class)
-    ->in('Feature', 'Unit');
-
-pest()->printer()->compact();
+pest()->extends(TestCase::class)->group('unit')->in('Unit');
+pest()->extends(TestCase::class)->use(RefreshDatabase::class)->group('feature')->in('Feature');
 
 /*
 |--------------------------------------------------------------------------
