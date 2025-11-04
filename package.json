@@ -39,8 +39,8 @@
             "prettier --write"
         ],
         "*.php": [
-            "vendor/bin/pint",
-            "vendor/bin/rector process"
+            "vendor/bin/rector process",
+            "vendor/bin/pint"
         ]
     }
 }
