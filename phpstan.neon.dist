@@ -5,5 +5,3 @@ parameters:
     level: 6
     paths:
         - app
-    scanFiles:
-        - ./_ide_helper_models.php
