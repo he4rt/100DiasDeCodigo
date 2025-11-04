@@ -73,6 +73,18 @@ jobs:
         run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist --optimize-autoloader
         shell: bash
 
+      - name: Setup Node.js
+        uses: actions/setup-node@2028fbc5c25fe9cf00d9f06a71cc4710d4507903 # v6.0.0
+        with:
+          package-manager-cache: false
+          node-version-file: '.nvmrc'
+          cache: 'npm'
+
+      - name: Install node dependencies
+        run: |
+          npm ci
+          npm run build
+
   pint:
     if: false # TODO: refactor cache keys and re-enable
     name: Perform Pint format
