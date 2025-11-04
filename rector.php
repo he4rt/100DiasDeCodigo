@@ -15,11 +15,9 @@ use RectorLaravel\Rector\Class_\ReplaceExpectsMethodsInTestsRector;
 use RectorLaravel\Rector\Coalesce\ApplyDefaultInsteadOfNullCoalesceRector;
 use RectorLaravel\Rector\Empty_\EmptyToBlankAndFilledFuncRector;
 use RectorLaravel\Rector\FuncCall\ConfigToTypedConfigMethodCallRector;
-use RectorLaravel\Rector\FuncCall\RemoveDumpDataDeadCodeRector;
 use RectorLaravel\Rector\MethodCall\RefactorBlueprintGeometryColumnsRector;
 use RectorLaravel\Rector\PropertyFetch\ReplaceFakerInstanceWithHelperRector;
 use RectorLaravel\Set\LaravelSetList;
-use RectorLaravel\Set\LaravelSetProvider;
 
 return RectorConfig::configure()
     ->withPaths([
@@ -36,7 +34,6 @@ return RectorConfig::configure()
     ->withRootFiles()
     ->withPhpSets()
     ->withComposerBased(laravel: true)
-    ->withSetProviders(LaravelSetProvider::class)
     ->withBootstrapFiles([__DIR__.'/vendor/larastan/larastan/bootstrap.php'])
     ->withPHPStanConfigs([__DIR__.'/phpstan.neon.dist'])
     ->withPreparedSets(
@@ -72,9 +69,6 @@ return RectorConfig::configure()
         LaravelSetList::LARAVEL_IF_HELPERS,
         LaravelSetList::LARAVEL_TESTING,
         LaravelSetList::LARAVEL_TYPE_DECLARATIONS,
-    ])
-    ->withConfiguredRule(RemoveDumpDataDeadCodeRector::class, [
-        'dd', 'dump', 'var_dump',
     ])
     ->withSkip([
         AddOverrideAttributeToOverriddenMethodsRector::class,
