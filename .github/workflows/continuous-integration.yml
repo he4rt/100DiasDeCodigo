@@ -16,7 +16,7 @@ concurrency:
 jobs:
   setup:
     name: Setup PHP
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     timeout-minutes: 5
     env:
       php-version: '8.4'
