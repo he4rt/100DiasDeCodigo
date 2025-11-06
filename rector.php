@@ -35,7 +35,7 @@ return RectorConfig::configure()
     ->withPhpSets()
     ->withComposerBased(laravel: true)
     ->withBootstrapFiles([__DIR__.'/vendor/larastan/larastan/bootstrap.php'])
-    ->withPHPStanConfigs([__DIR__.'/phpstan.neon.dist'])
+    ->withPHPStanConfigs([__DIR__.'/phpstan.neon'])
     ->withPreparedSets(
         deadCode: true,
         codeQuality: true,

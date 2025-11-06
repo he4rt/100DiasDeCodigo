@@ -5,7 +5,7 @@ help: ## Show available commands
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-20s\033[0m %s\n", $$1, $$2}'
 
 .PHONY: route-list
-route-list: ## Show the application route list
+route-list: ## List all registered routes
 	@php artisan route:list --ansi
 
 .PHONY: pint
@@ -31,6 +31,9 @@ test-rector: ## Run Rector in test mode
 .PHONY: phpstan
 phpstan: ## Run PHPStan
 	@$(CURDIR)/vendor/bin/phpstan analyse --ansi
+
+.PHONY: p
+p: phpstan ## Alias for phpstan
 
 .PHONY: test-phpstan
 test-phpstan: ## Run PHPStan in test mode
