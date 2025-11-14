@@ -9,9 +9,9 @@
     "license": "MIT",
     "require": {
         "php": "^8.4",
-        "filament/filament": "^4.2.0",
-        "filament/spatie-laravel-media-library-plugin": "^4.2.0",
-        "laravel/framework": "^12.37.0",
+        "filament/filament": "^4.2.2",
+        "filament/spatie-laravel-media-library-plugin": "^4.2.2",
+        "laravel/framework": "^12.38.1",
         "laravel/sanctum": "^4.2.0",
         "laravel/tinker": "^2.10.1",
         "tpetry/laravel-postgresql-enhanced": "^3.4.0"
@@ -24,7 +24,7 @@
         "larastan/larastan": "^3.8.0",
         "laravel/pail": "^1.2.3",
         "laravel/pint": "^1.25.1",
-        "laravel/sail": "^1.47.0",
+        "laravel/sail": "^1.48.0",
         "laravel/telescope": "^5.15.0",
         "mockery/mockery": "^1.6.12",
         "nunomaduro/collision": "^8.8.2",
@@ -33,7 +33,7 @@
         "pestphp/pest-plugin-laravel": "^4.0.0",
         "pestphp/pest-plugin-livewire": "^4.0.1",
         "phpstan/extension-installer": "^1.4.3",
-        "rector/rector": "^2.2.7"
+        "rector/rector": "^2.2.8"
     },
     "autoload": {
         "psr-4": {
