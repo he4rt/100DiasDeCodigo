@@ -20,3 +20,6 @@ indent_style = tab
 [{Dockerfile,*.Dockerfile}]
 indent_style = space
 indent_size = 4
+
+[.neon]
+indent_size = 2
