@@ -30,3 +30,7 @@ _ide_helper_models.php
 tests/Browser/Screenshots
 .github/git-commit-instructions.md
 /.composer
+/.gemini
+/.junie
+boost.json
+GEMINI.md
