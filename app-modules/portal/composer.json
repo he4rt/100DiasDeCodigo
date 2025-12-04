@@ -7,10 +7,7 @@
     "require": {},
     "autoload": {
         "psr-4": {
-            "He4rt\\Portal\\": "src/",
-            "He4rt\\Portal\\Tests\\": "tests/",
-            "He4rt\\Portal\\Database\\Factories\\": "database/factories/",
-            "He4rt\\Portal\\Database\\Seeders\\": "database/seeders/"
+            "He4rt\\Portal\\": "src/"
         }
     },
     "minimum-stability": "stable",
