@@ -8,7 +8,6 @@
     "autoload": {
         "psr-4": {
             "He4rt\\User\\": "src/",
-            "He4rt\\User\\Tests\\": "tests/",
             "He4rt\\User\\Database\\Factories\\": "database/factories/",
             "He4rt\\User\\Database\\Seeders\\": "database/seeders/"
         }

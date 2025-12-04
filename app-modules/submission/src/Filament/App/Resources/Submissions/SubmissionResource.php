@@ -39,7 +39,7 @@ class SubmissionResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+
         ];
     }
 
@@ -52,6 +52,9 @@ class SubmissionResource extends Resource
         ];
     }
 
+    /**
+     * @return Builder<Submission>
+     */
     public static function getRecordRouteBindingEloquentQuery(): Builder
     {
         return parent::getRecordRouteBindingEloquentQuery()

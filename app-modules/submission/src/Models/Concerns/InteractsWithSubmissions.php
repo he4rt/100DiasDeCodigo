@@ -33,6 +33,9 @@ trait InteractsWithSubmissions
             ->whereDate('submitted_at', Date::today());
     }
 
+    /**
+     * @return array{current_streak: int, longest_streak: int, total_days: int, total_submissions: int}
+     */
     public function getSubmissionStats(): array
     {
         return Cache::remember($this->getSubmissionStatsCacheKey(), 3600, fn () => $this->calculateSubmissionStats());
@@ -48,6 +51,9 @@ trait InteractsWithSubmissions
         Cache::forget($this->getSubmissionStatsCacheKey());
     }
 
+    /**
+     * @return array{current_streak: int, longest_streak: int, total_days: int, total_submissions: int}
+     */
     protected function calculateSubmissionStats(): array
     {
         // Get all submission dates, distinct, ordered by date desc

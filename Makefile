@@ -6,7 +6,10 @@ help: ## Show available commands
 
 .PHONY: route-list
 route-list: ## List all registered routes
-	@php artisan route:list --ansi
+	@php artisan route:list --ansi --except-vendor
+
+.PHONY: rl
+rl: route-list ## Alias for route-list
 
 .PHONY: pint
 pint: ## Run Pint code style fixer

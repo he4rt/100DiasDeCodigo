@@ -8,6 +8,7 @@ use Filament\Resources\Pages\ListRecords;
 use Filament\Schemas\Components\Tabs\Tab;
 use He4rt\Submission\Enums\SubmissionStatus;
 use He4rt\Submission\Filament\App\Resources\Submissions\SubmissionResource;
+use He4rt\Submission\Models\Submission;
 use Illuminate\Database\Eloquent\Builder;
 
 class ListSubmissions extends ListRecords
@@ -27,6 +28,9 @@ class ListSubmissions extends ListRecords
         ];
     }
 
+    /**
+     * @return Builder<Submission>|null
+     */
     protected function getTableQuery(): ?Builder
     {
         return parent::getTableQuery()

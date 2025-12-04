@@ -13,6 +13,9 @@ use He4rt\Submission\Filament\App\Resources\Submissions\Schemas\SubmissionForm;
 use He4rt\Submission\Models\Submission;
 use Throwable;
 
+/**
+ * @property Schema $submissionForm
+ */
 class UserDashboard extends Dashboard
 {
     use CanUseDatabaseTransactions;

@@ -5,7 +5,6 @@ declare(strict_types=1);
 use Rector\Caching\ValueObject\Storage\FileCacheStorage;
 use Rector\CodingStyle\Rector\PostInc\PostIncDecToPreIncDecRector;
 use Rector\Config\RectorConfig;
-use Rector\EarlyReturn\Rector\If_\ChangeOrIfContinueToMultiContinueRector;
 use Rector\Php70\Rector\StaticCall\StaticCallOnNonStaticToInstanceCallRector;
 use Rector\Php83\Rector\ClassMethod\AddOverrideAttributeToOverriddenMethodsRector;
 use Rector\Php84\Rector\MethodCall\NewMethodCallWithoutParenthesesRector;
@@ -27,10 +26,15 @@ return RectorConfig::configure()
         __DIR__.'/database',
         __DIR__.'/routes',
         __DIR__.'/tests',
+        __DIR__.'/app-modules/*/src',
+        __DIR__.'/app-modules/*/config',
+        __DIR__.'/app-modules/*/database',
+        __DIR__.'/app-modules/*/routes',
+        __DIR__.'/app-modules/*/tests',
     ])
     ->withSkip([__DIR__.'/bootstrap/cache'])
     ->withCache(cacheDirectory: sys_get_temp_dir().'/rector_cache', cacheClass: FileCacheStorage::class)
-    ->withImportNames(importShortClasses: false, removeUnusedImports: true)
+    ->withImportNames(removeUnusedImports: true)
     ->withRootFiles()
     ->withPhpSets()
     ->withComposerBased(laravel: true)
@@ -72,7 +76,6 @@ return RectorConfig::configure()
     ])
     ->withSkip([
         AddOverrideAttributeToOverriddenMethodsRector::class,
-        ChangeOrIfContinueToMultiContinueRector::class,
         PostIncDecToPreIncDecRector::class,
         AddArrowFunctionReturnTypeRector::class,
         NewMethodCallWithoutParenthesesRector::class,
