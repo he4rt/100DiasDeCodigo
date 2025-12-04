@@ -41,6 +41,7 @@ return [
         'client_id' => env('GITHUB_CLIENT_ID'),
         'client_secret' => env('GITHUB_CLIENT_SECRET'),
         'redirect' => env('GITHUB_CLIENT_REDIRECT_URI'),
+        'scopes' => explode(',', (string) env('GITHUB_CLIENT_SCOPES', 'user:email,read:user')),
     ],
 
 ];

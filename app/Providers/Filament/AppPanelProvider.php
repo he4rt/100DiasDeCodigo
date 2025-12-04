@@ -66,7 +66,7 @@ class AppPanelProvider extends PanelProvider
                             ->label('GitHub')
                             ->icon('fab-github')
                             ->color(Color::hex('#2f2a6b'))
-                            ->scopes(['user:email']),
+                            ->scopes(config('services.github.scopes')),
                     ]),
             ])
             ->pages([
