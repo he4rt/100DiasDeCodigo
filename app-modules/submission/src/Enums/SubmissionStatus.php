@@ -4,12 +4,11 @@ declare(strict_types=1);
 
 namespace He4rt\Submission\Enums;
 
-use BackedEnum;
 use Filament\Support\Contracts\HasColor;
 use Filament\Support\Contracts\HasDescription;
 use Filament\Support\Contracts\HasIcon;
 use Filament\Support\Contracts\HasLabel;
-use Illuminate\Contracts\Support\Htmlable;
+use Filament\Support\Icons\Heroicon;
 
 enum SubmissionStatus: string implements HasColor, HasDescription, HasIcon, HasLabel
 {
@@ -17,7 +16,7 @@ enum SubmissionStatus: string implements HasColor, HasDescription, HasIcon, HasL
     case Approved = 'approved';
     case Rejected = 'rejected';
 
-    public function getColor(): string|array|null
+    public function getColor(): string
     {
         return match ($this) {
             self::Pending => 'gray',
@@ -26,7 +25,7 @@ enum SubmissionStatus: string implements HasColor, HasDescription, HasIcon, HasL
         };
     }
 
-    public function getDescription(): string|Htmlable|null
+    public function getDescription(): string
     {
         return match ($this) {
             self::Pending => 'This submission is pending review',
@@ -35,16 +34,16 @@ enum SubmissionStatus: string implements HasColor, HasDescription, HasIcon, HasL
         };
     }
 
-    public function getIcon(): string|BackedEnum|Htmlable|null
+    public function getIcon(): Heroicon
     {
         return match ($this) {
-            self::Pending => 'heroicon-o-clock',
-            self::Approved => 'heroicon-o-check-circle',
-            self::Rejected => 'heroicon-o-x-circle',
+            self::Pending => Heroicon::OutlinedClock,
+            self::Approved => Heroicon::OutlinedCheckCircle,
+            self::Rejected => Heroicon::OutlinedXCircle,
         };
     }
 
-    public function getLabel(): string|Htmlable|null
+    public function getLabel(): string
     {
         return match ($this) {
             self::Pending => 'Pending',
