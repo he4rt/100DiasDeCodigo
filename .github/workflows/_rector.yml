@@ -23,6 +23,7 @@ jobs:
   run:
     name: Run
     runs-on: ubuntu-latest
+    if: ${{ !github.event.pull_request.draft }}
     timeout-minutes: 5
     concurrency:
       group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}-rector

@@ -2,11 +2,10 @@ name: Continuous Integration
 
 on:
   push:
-    branches:
-      - main
+    branches: [1.x]
   pull_request:
-    branches:
-      - main
+    branches: [1.x]
+    types: [opened, reopened, synchronize, ready_for_review]
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
@@ -16,6 +15,7 @@ jobs:
   setup:
     name: Setup PHP
     runs-on: ubuntu-latest
+    if: ${{ !github.event.pull_request.draft }}
     timeout-minutes: 5
     outputs:
       CACHE_KEY: ${{ steps.cache.outputs.key }}
