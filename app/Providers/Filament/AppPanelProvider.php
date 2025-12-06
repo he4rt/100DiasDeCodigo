@@ -65,7 +65,7 @@ class AppPanelProvider extends PanelProvider
                         $query = User::query();
 
                         return $query->create([
-                            'name' => $oauthUser->getName(),
+                            'name' => $oauthUser->getName() ?? $oauthUser->getNickname(),
                             'email' => $oauthUser->getEmail(),
                             'username' => $oauthUser->getNickname(),
                         ]);
