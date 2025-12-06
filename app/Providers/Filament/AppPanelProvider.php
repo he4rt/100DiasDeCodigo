@@ -8,6 +8,8 @@ use App\Filament\Shared\Pages\LoginPage;
 use App\Models\User;
 use DutchCodingCompany\FilamentSocialite\FilamentSocialitePlugin;
 use DutchCodingCompany\FilamentSocialite\Provider;
+use Filament\Actions\Action;
+use Filament\Facades\Filament;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -15,6 +17,7 @@ use Filament\Http\Middleware\DispatchServingFilamentEvent;
 use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
+use Filament\Support\Icons\Heroicon;
 use Filament\Widgets\AccountWidget;
 use Filament\Widgets\FilamentInfoWidget;
 use He4rt\User\Filament\Pages\UserDashboard;
@@ -42,6 +45,14 @@ class AppPanelProvider extends PanelProvider
             ->topNavigation()
             ->discoverResources(in: app_path('Filament/App/Resources'), for: 'App\Filament\App\Resources')
             ->discoverPages(in: app_path('Filament/App/Pages'), for: 'App\Filament\App\Pages')
+            ->userMenuItems([
+                Action::make('go-to-admin')
+                    ->label('Ir para o administrativo')
+                    ->icon(Heroicon::BuildingOffice2)
+                    ->visible(fn () => auth()->user()?->isAdmin())
+                    ->url(url: fn () => Filament::getPanel('admin')->getUrl(),
+                        shouldOpenInNewTab: true),
+            ])
             ->plugins([
                 FilamentSocialitePlugin::make()
                     // (required) Add providers corresponding with providers in `config/services.php`.
