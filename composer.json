@@ -34,7 +34,6 @@
         "laravel/pail": "^1.2.4",
         "laravel/pint": "^1.26.0",
         "laravel/sail": "^1.50.0",
-        "laravel/telescope": "^5.15.1",
         "mockery/mockery": "^1.6.12",
         "nunomaduro/collision": "^8.8.3",
         "pestphp/pest": "^4.1.6",
@@ -117,7 +116,6 @@
     "extra": {
         "laravel": {
             "dont-discover": [
-                "laravel/telescope",
                 "barryvdh/laravel-debugbar"
             ]
         }

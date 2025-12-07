@@ -20,7 +20,6 @@ final class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->registerTelescope();
         $this->registerDebugbar();
     }
 
@@ -84,13 +83,6 @@ final class AppServiceProvider extends ServiceProvider
     private function configureHttp(): void
     {
         // Http::preventStrayRequests();
-    }
-
-    private function registerTelescope(): void
-    {
-        if (app()->isLocal() && class_exists(\Laravel\Telescope\TelescopeServiceProvider::class)) {
-            $this->app->register(TelescopeServiceProvider::class);
-        }
     }
 
     private function registerDebugbar(): void
