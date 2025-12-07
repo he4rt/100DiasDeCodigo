@@ -18,7 +18,8 @@ class SubmissionFactory extends Factory
     {
         return [
             'submitted_at' => Date::now(),
-            'tweet_url' => fake()->url(),
+            'tweet_id' => fake()->randomNumber(7),
+            'metadata' => [],
             'status' => fake()->word(),
             'content' => fake()->sentence(),
             'approved_at' => Date::now(),

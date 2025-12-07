@@ -54,15 +54,34 @@ class AppPanelProvider extends PanelProvider
             ])
             ->plugins([
                 FilamentSocialitePlugin::make()
-                    // (required) Add providers corresponding with providers in `config/services.php`.
-                    ->registration(true)
+                    ->registration(function ($provider): bool {
+                        if (! auth()->check() && $provider === 'github') {
+                            return true;
+                        }
+
+                        return auth()->check() && $provider === 'twitter';
+                    })
                     ->slug('app')
                     ->createUserUsing(function (
                         string $provider,
                         SocialiteUserContract $oauthUser,
                         FilamentSocialitePlugin $plugin,
                     ) {
+
+                        if (auth()->check()) {
+                            return auth()->user();
+                        }
+
                         $query = User::query();
+
+                        $user = $query
+                            ->where('email', $oauthUser->getEmail())
+                            ->orWhere('username', $oauthUser->getNickname())
+                            ->first();
+
+                        if ($user) {
+                            return $user;
+                        }
 
                         return $query->create([
                             'name' => $oauthUser->getName() ?? $oauthUser->getNickname(),
@@ -71,12 +90,15 @@ class AppPanelProvider extends PanelProvider
                         ]);
                     })
                     ->providers([
-                        // Create a provider 'gitlab' corresponding to the Socialite driver with the same name.
                         Provider::make('github')
-                            ->label('GitHub')
+                            ->label('Login with Github')
                             ->icon('fab-github')
                             ->color(Color::hex('#2f2a6b'))
                             ->scopes(config('services.github.scopes')),
+                        Provider::make('twitter')
+                            ->label('Twitter')
+                            ->icon('fab-twitter')
+                            ->color(Color::Blue),
                     ]),
             ])
             ->pages([

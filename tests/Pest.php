@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\LazilyRefreshDatabase;
 use Tests\TestCase;
 
 /*
@@ -16,8 +16,14 @@ use Tests\TestCase;
 |
 */
 
-pest()->extends(TestCase::class)->group('unit')->in('Unit');
-pest()->extends(TestCase::class)->use(RefreshDatabase::class)->group('feature')->in('Feature');
+pest()->extend(TestCase::class)
+    ->group('unit')
+    ->in('Unit', '../app-modules/*/tests/Unit');
+
+pest()->extend(TestCase::class)
+    ->use(LazilyRefreshDatabase::class)
+    ->group('feature')
+    ->in('Feature', '../app-modules/*/tests/Feature');
 
 /*
 |--------------------------------------------------------------------------

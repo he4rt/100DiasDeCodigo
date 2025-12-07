@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace He4rt\Submission\Enums;
 
+use Filament\Support\Colors\Color;
 use Filament\Support\Contracts\HasColor;
 use Filament\Support\Contracts\HasDescription;
 use Filament\Support\Contracts\HasIcon;
@@ -16,12 +17,12 @@ enum SubmissionStatus: string implements HasColor, HasDescription, HasIcon, HasL
     case Approved = 'approved';
     case Rejected = 'rejected';
 
-    public function getColor(): string
+    public function getColor(): array
     {
         return match ($this) {
-            self::Pending => 'gray',
-            self::Approved => 'success',
-            self::Rejected => 'danger',
+            self::Pending => Color::Neutral,
+            self::Approved => Color::Green,
+            self::Rejected => Color::Red,
         };
     }
 

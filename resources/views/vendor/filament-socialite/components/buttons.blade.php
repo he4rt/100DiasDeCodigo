@@ -19,8 +19,9 @@
                 </div>
             @endif
 
-            <div class="grid @if(count($visibleProviders) > 1) grid-cols-2 @endif gap-4">
+            <div class="grid  gap-4">
                 @foreach($visibleProviders as $key => $provider)
+                    @if($key == 'github')
                     <x-filament::button
                         :color="$provider->getColor()"
                         :outlined="$provider->getOutlined()"
@@ -31,6 +32,7 @@
                     >
                         {{ $provider->getLabel() }}
                     </x-filament::button>
+                    @endif
                 @endforeach
             </div>
         @else

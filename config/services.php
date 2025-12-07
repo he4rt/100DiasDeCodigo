@@ -44,4 +44,12 @@ return [
         'scopes' => explode(',', (string) env('GITHUB_CLIENT_SCOPES', 'user:email,read:user')),
     ],
 
+    'twitter' => [
+        'client_id' => env('TWITTER_CLIENT_ID'),
+        'client_secret' => env('TWITTER_CLIENT_SECRET'),
+        'redirect' => env('TWITTER_REDIRECT_URI'),
+        'oauth' => 2,
+        'api_key' => env('TWITTER_API_KEY'),
+    ],
+
 ];

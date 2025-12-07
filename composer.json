@@ -14,6 +14,7 @@
         "filament/spatie-laravel-media-library-plugin": "^4.3.0",
         "filament/spatie-laravel-tags-plugin": "^4.3.0",
         "he4rt/he4rt-core": ">=1",
+        "he4rt/integration-twitter-api": ">=1",
         "he4rt/portal": ">=1",
         "he4rt/submission": ">=1",
         "he4rt/user": ">=1",
@@ -21,7 +22,9 @@
         "laravel/framework": "^12.41.1",
         "laravel/sanctum": "^4.2.1",
         "laravel/tinker": "^2.10.2",
+        "marvinlabs/laravel-discord-logger": "^1.4.3",
         "owenvoke/blade-fontawesome": "^3.0.0",
+        "socialiteproviders/twitter": "^4.1.2",
         "tpetry/laravel-postgresql-enhanced": "^3.5.0"
     },
     "require-dev": {

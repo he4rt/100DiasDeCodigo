@@ -1,3 +1,6 @@
+@props([
+    'hasTwitterIntegration',
+])
 <x-filament-panels::page>
     <div class="space-y-6">
         {{-- Header --}}
@@ -7,6 +10,16 @@
                 Acompanhe seu progresso e conecte-se com a comunidade
             </p>
         </div>
+
+        @if (! $hasTwitterIntegration)
+            <x-filament::section :secondary="true" icon="fab-twitter" heading="Conecte sua conta do Twitter">
+                Pra participar do desafio você deve conectar sua conta do Twitter.
+
+                <x-slot name="footer">
+                    <x-filament::button tag="a" href="/app/oauth/twitter">Conectar</x-filament::button>
+                </x-slot>
+            </x-filament::section>
+        @endif
 
         {{-- Stats Row --}}
         <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">

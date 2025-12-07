@@ -1,0 +1,26 @@
+{
+    "name": "he4rt/integration-twitter-api",
+    "description": "",
+    "type": "library",
+    "version": "1.0",
+    "license": "proprietary",
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "He4rt\\IntegrationTwitterApi\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "He4rt\\IntegrationTwitterApi\\Tests\\": "tests/"
+        }
+    },
+    "minimum-stability": "stable",
+    "extra": {
+        "laravel": {
+            "providers": [
+                "He4rt\\IntegrationTwitterApi\\IntegrationTwitterApiServiceProvider"
+            ]
+        }
+    }
+}

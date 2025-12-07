@@ -4,14 +4,13 @@ declare(strict_types=1);
 
 namespace He4rt\Submission\Models\Concerns;
 
-use Carbon\Month;
-use Carbon\WeekDay;
-use DateTimeInterface;
 use He4rt\Submission\Models\Submission;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Date;
+
+use function Illuminate\Support\minutes;
 
 trait InteractsWithSubmissions
 {
@@ -38,7 +37,7 @@ trait InteractsWithSubmissions
      */
     public function getSubmissionStats(): array
     {
-        return Cache::remember($this->getSubmissionStatsCacheKey(), 3600, fn () => $this->calculateSubmissionStats());
+        return Cache::remember($this->getSubmissionStatsCacheKey(), minutes(1), fn () => $this->calculateSubmissionStats());
     }
 
     public function getSubmissionStatsCacheKey(): string
@@ -63,7 +62,7 @@ trait InteractsWithSubmissions
             ->distinct()
             ->orderBy('date', 'desc')
             ->pluck('date')
-            ->map(fn (DateTimeInterface|WeekDay|Month|string|int|float|null $date) => Date::parse($date)->startOfDay());
+            ->map(fn (string $date) => Date::parse($date)->startOfDay());
 
         if ($dates->isEmpty()) {
             return [

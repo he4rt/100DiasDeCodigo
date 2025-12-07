@@ -30,7 +30,7 @@ class GuestPanelProvider extends PanelProvider
             ->id('guest')
             ->path('')
             ->colors([
-                'primary' => Color::Amber,
+                'primary' => Color::Purple,
             ])
             ->topNavigation(true)
             ->navigationItems([
