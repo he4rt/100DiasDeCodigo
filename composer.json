@@ -71,7 +71,8 @@
             "composer run-script post-create-project-cmd",
             "@php artisan key:generate --ansi",
             "@php artisan storage:link --ansi",
-            "composer run-script ide-helper"
+            "composer run-script ide-helper",
+            "@php artisan modules:sync"
         ],
         "dev": [
             "Composer\\Config::disableProcessTimeout",
@@ -102,7 +103,8 @@
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover --ansi",
-            "@php artisan filament:upgrade"
+            "@php artisan filament:upgrade",
+            "@php artisan modules:sync"
         ],
         "post-update-cmd": [
             "@php artisan vendor:publish --tag=laravel-assets --ansi --force"
