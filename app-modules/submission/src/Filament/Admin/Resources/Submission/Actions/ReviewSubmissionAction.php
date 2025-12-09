@@ -30,7 +30,7 @@ class ReviewSubmissionAction extends Action
                     ->required(),
             ])
             ->action(function (array $data, $record): void {
-                $status = SubmissionStatus::from($data['status']);
+                $status = $data['status'];
                 $updateData = [
                     'status' => $status,
                     'approver_id' => auth()->id(),
