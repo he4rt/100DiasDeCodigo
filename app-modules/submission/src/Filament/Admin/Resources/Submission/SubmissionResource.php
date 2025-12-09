@@ -73,6 +73,7 @@ class SubmissionResource extends Resource
                         Select::make('approver_id')
                             ->relationship('approver', 'name')
                             ->searchable()
+                            ->disabled()
                             ->required(),
 
                         Select::make('status')

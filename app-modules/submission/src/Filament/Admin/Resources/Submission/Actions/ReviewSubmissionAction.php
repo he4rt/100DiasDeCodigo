@@ -40,7 +40,7 @@ class ReviewSubmissionAction extends Action
                     $updateData['approved_at'] = now();
                 }
 
-                $this->record->update($updateData);
+                $record->update($updateData);
 
                 Notification::make()
                     ->success()
