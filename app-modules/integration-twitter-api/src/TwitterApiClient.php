@@ -18,7 +18,7 @@ final readonly class TwitterApiClient
 
     public function __construct()
     {
-        $this->client = Http::baseUrl('https://api.twitterapi.io')
+        $this->client = Http::baseUrl(config('services.twitter.base_url'))
             ->withHeader('X-API-KEY', config('services.twitter.api_key'));
     }
 

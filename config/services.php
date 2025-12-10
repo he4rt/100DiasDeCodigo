@@ -50,6 +50,7 @@ return [
         'redirect' => env('TWITTER_REDIRECT_URI'),
         'oauth' => 2,
         'api_key' => env('TWITTER_API_KEY'),
+        'base_url' => env('TWITTER_API_BASE_URL', 'https://api.twitterapi.io'),
     ],
 
 ];
