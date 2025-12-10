@@ -97,6 +97,7 @@ return [
             'prefix_indexes' => true,
             'search_path' => 'public',
             'sslmode' => 'prefer',
+            'application_name' => env('APP_NAME', 'Laravel'),
         ],
 
         'sqlsrv' => [
