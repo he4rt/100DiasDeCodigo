@@ -74,7 +74,9 @@
             @endif
 
             <div class="flex items-center gap-1 px-4 pb-3 text-[15px] text-gray-500 dark:text-gray-400">
-                <span>{{ \Carbon\Carbon::parse($tweet->createdAt)->format('g:i A · M j, Y') }}</span>
+                <span>
+                    {{ \Carbon\Carbon::parse($tweet->createdAt)->timezone(config('app.timezone'))->format('g:i A · M j, Y') }}
+                </span>
             </div>
             <div class="mx-4 border-t border-gray-200 dark:border-gray-700"></div>
             <div class="flex items-center gap-6 px-4 py-3">
