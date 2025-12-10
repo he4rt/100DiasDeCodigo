@@ -28,6 +28,7 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\TrashedFilter;
 use Filament\Tables\Table;
 use He4rt\Submission\Enums\SubmissionStatus;
+use He4rt\Submission\Filament\Admin\Resources\Submission\Actions\ReviewSubmissionAction;
 use He4rt\Submission\Filament\Admin\Resources\Submission\Pages\CreateSubmission;
 use He4rt\Submission\Filament\Admin\Resources\Submission\Pages\EditSubmission;
 use He4rt\Submission\Filament\Admin\Resources\Submission\Pages\ListSubmissions;
@@ -59,13 +60,15 @@ class SubmissionResource extends Resource
                                 Select::make('user_id')
                                     ->relationship('user', 'name')
                                     ->searchable()
+                                    ->disabled()
                                     ->required(),
                                 TextInput::make('tweet_id')
                                     ->readOnly()
+                                    ->disabled()
                                     ->suffixAction(
                                         Action::make('Check Tweet')
-                                            ->icon(Heroicon::Link)
-                                            ->url(fn ($state) => 'https://twitter.com/he4rt/status/'.$state, true)
+                                            ->icon(Heroicon::ArrowUpRight)
+                                            ->url(fn (string $state) => sprintf('https://x.com/i/status/%s', $state), true)
                                     )
                                     ->required(),
                             ]),
@@ -77,6 +80,7 @@ class SubmissionResource extends Resource
                             ->required(),
 
                         Select::make('status')
+                            ->disabled()
                             ->options(SubmissionStatus::class)
                             ->required(),
 
@@ -126,6 +130,7 @@ class SubmissionResource extends Resource
                 TrashedFilter::make(),
             ])
             ->recordActions([
+                ReviewSubmissionAction::make(),
                 EditAction::make(),
                 DeleteAction::make(),
                 RestoreAction::make(),
