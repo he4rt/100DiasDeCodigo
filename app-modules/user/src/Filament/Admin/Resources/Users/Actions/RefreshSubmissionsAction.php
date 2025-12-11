@@ -79,7 +79,9 @@ class RefreshSubmissionsAction extends Action
             }
 
             $submission->update([
+                'content' => $tweet->text,
                 'metadata' => $tweet->jsonSerialize(),
+                'submitted_at' => Date::parse($tweet->createdAt)->timezone(config('app.timezone')),
             ]);
         }
     }
