@@ -50,7 +50,6 @@ class SubmissionResource extends Resource
         return $schema
             ->columns(2)
             ->components([
-
                 Fieldset::make('Submission Details')
                     ->columnSpan(1)
                     ->schema([
@@ -114,13 +113,21 @@ class SubmissionResource extends Resource
                     ->default(fn (?Submission $record): string => $record->getTweet()->author->userName)
                     ->sortable(),
 
+                TextColumn::make('user.username')
+                    ->copyable()
+                    ->badge()
+                    ->toggleable()
+                    ->searchable(),
+
                 TextColumn::make('status')
                     ->badge(),
+
                 TextColumn::make('progress'),
 
                 TextColumn::make('submitted_at')
                     ->label('Submitted Date')
                     ->date(),
+
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

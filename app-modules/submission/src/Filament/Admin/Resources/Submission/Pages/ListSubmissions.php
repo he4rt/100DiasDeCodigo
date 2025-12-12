@@ -16,6 +16,13 @@ class ListSubmissions extends ListRecords
 {
     protected static string $resource = SubmissionResource::class;
 
+    protected ?string $heading = '';
+
+    public function getBreadcrumbs(): array
+    {
+        return [];
+    }
+
     public function getTabs(): array
     {
         $tabs = collect(SubmissionStatus::cases())

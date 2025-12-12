@@ -25,6 +25,9 @@ class UsersTable
                     ->label('Email address')
                     ->searchable(),
                 TextColumn::make('username')
+                    ->copyable()
+                    ->copyMessage('Username copied to clipboard!')
+                    ->badge()
                     ->searchable(),
                 IconColumn::make('has_twitter')
                     ->boolean()
@@ -46,7 +49,9 @@ class UsersTable
             ])
             ->recordActions([
                 RefreshSubmissionsAction::make(),
-                EditAction::make(),
+                EditAction::make()
+                    ->label('')
+                    ->tooltip('Edit User'),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
