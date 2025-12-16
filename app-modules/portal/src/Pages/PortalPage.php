@@ -15,8 +15,6 @@ class PortalPage extends Dashboard
 {
     protected string $view = 'portal::homepage';
 
-    protected static bool $shouldRegisterNavigation = false;
-
     protected static ?string $title = 'Desafio';
 
     protected string $description = 'Um desafio simples, consistente e transformador. Dedique 1 hora por dia durante 100 dias e mude sua carreira.';
@@ -28,6 +26,11 @@ class PortalPage extends Dashboard
     protected static ?string $navigationLabel = 'Portal';
 
     protected Width|string|null $maxContentWidth = Width::Full;
+
+    public static function getNavigationIcon(): null
+    {
+        return null;
+    }
 
     public function mount(): void
     {

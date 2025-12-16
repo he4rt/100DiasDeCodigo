@@ -18,7 +18,9 @@ class ParticipantsPage extends Page
 {
     protected string $view = 'portal::filament.guest.pages.participants-page';
 
-    protected static bool $shouldRegisterNavigation = false;
+    protected static ?string $title = 'Participantes';
+
+    protected static ?string $slug = 'participants';
 
     protected string $heroTitle = 'Meet the Challengers';
 

@@ -96,7 +96,7 @@
                     <input
                         x-model="search"
                         data-slot="input"
-                        class="border-border bg-card/50 text-foreground placeholder:text-muted-foreground focus:ring-ring focus:border-ring dark:bg-input/30 h-9 w-full rounded-md border px-3 pl-10 text-sm focus:ring-2 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50"
+                        class="bg-primary/1 text-foreground placeholder:text-muted-foreground focus:ring-primary/40 focus:border-ring dark:bg-input/30 h-9 w-full rounded-md border border-gray-200 px-3 pl-10 text-sm focus:ring-2 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50 dark:border-gray-700"
                         placeholder="Busque por nome ou username..."
                         value=""
                     />
