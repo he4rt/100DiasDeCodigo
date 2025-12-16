@@ -10,6 +10,7 @@ use Filament\Models\Contracts\HasAvatar;
 use Filament\Panel;
 use He4rt\Submission\Models\Concerns\InteractsWithSubmissions;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -63,6 +64,14 @@ final class User extends Authenticatable implements FilamentUser, HasAvatar, Has
     public function getFilamentAvatarUrl(): string
     {
         return sprintf('https://github.com/%s.png', $this->username);
+    }
+
+    /**
+     * @return HasMany<SocialiteUser, $this>
+     */
+    public function accounts(): HasMany
+    {
+        return $this->hasMany(SocialiteUser::class, 'user_id', 'id');
     }
 
     /**

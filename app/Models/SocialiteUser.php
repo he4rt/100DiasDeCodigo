@@ -8,6 +8,7 @@ use Database\Factories\SocialiteUserFactory;
 use DutchCodingCompany\FilamentSocialite\Models\SocialiteUser as BaseSocialiteUser;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Laravel\Socialite\Contracts\User as SocialiteUserContract;
 use Override;
 
@@ -37,5 +38,13 @@ class SocialiteUser extends BaseSocialiteUser
                 'display_name' => $oauthUser->getName(),
                 'email' => $oauthUser->getEmail() ?? '',
             ]);
+    }
+
+    /**
+     * @return BelongsTo<User, $this>
+     */
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
     }
 }
