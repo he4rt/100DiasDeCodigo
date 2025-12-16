@@ -6,6 +6,7 @@ namespace He4rt\User\Filament\Admin\Resources\Users\Pages;
 
 use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ListRecords;
+use He4rt\User\Filament\Admin\Resources\Users\Actions\BulkRefreshSubmissionsAction;
 use He4rt\User\Filament\Admin\Resources\Users\UserResource;
 
 class ListUsers extends ListRecords
@@ -14,14 +15,10 @@ class ListUsers extends ListRecords
 
     protected ?string $heading = '';
 
-    public function getBreadcrumbs(): array
-    {
-        return [];
-    }
-
     protected function getHeaderActions(): array
     {
         return [
+            BulkRefreshSubmissionsAction::make(),
             CreateAction::make(),
         ];
     }
