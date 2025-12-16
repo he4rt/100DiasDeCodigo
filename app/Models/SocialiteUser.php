@@ -42,6 +42,8 @@ class SocialiteUser extends BaseSocialiteUser
 
     /**
      * @return BelongsTo<User, $this>
+     *
+     * @phpstan-ignore method.childReturnType
      */
     public function user(): BelongsTo
     {
