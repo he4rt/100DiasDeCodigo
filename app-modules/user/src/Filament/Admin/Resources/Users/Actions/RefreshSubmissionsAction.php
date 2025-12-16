@@ -10,7 +10,7 @@ use Closure;
 use Exception;
 use Filament\Actions\Action;
 use Filament\Support\Icons\Heroicon;
-use He4rt\User\Actions\RefreshUserSubmissions;
+use He4rt\User\Jobs\RefreshUserSubmissionJob;
 use Illuminate\Contracts\Support\Htmlable;
 
 class RefreshSubmissionsAction extends Action
@@ -36,6 +36,6 @@ class RefreshSubmissionsAction extends Action
      */
     public function refreshSubmissions(User $record): void
     {
-        resolve(RefreshUserSubmissions::class)->for($record);
+        dispatch(new RefreshUserSubmissionJob($record));
     }
 }
