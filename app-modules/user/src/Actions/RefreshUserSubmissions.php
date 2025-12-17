@@ -11,14 +11,14 @@ use He4rt\IntegrationTwitterApi\Endpoints\AdvancedSearch\AdvancedSearchRequest;
 use He4rt\IntegrationTwitterApi\Endpoints\AdvancedSearch\AdvancedSearchResponse;
 use He4rt\IntegrationTwitterApi\Endpoints\FindTweet\FindTweetResponse;
 use He4rt\IntegrationTwitterApi\TwitterApiClient;
-use He4rt\Submission\Enums\SubmissionStatus;
-use He4rt\Submission\Models\Submission;
-use Illuminate\Support\Facades\Date;
+use He4rt\Submission\Actions\CreateSubmissionAction;
 
 use function Illuminate\Support\hours;
 
 class RefreshUserSubmissions
 {
+    public function __construct(private readonly CreateSubmissionAction $createSubmissionAction) {}
+
     public function for(User $record): void
     {
         $socialiteUser = SocialiteUser::query()
@@ -44,32 +44,7 @@ class RefreshUserSubmissions
         }
 
         foreach ($response->tweets as $tweet) {
-
-            $isPropaganda = str($tweet->text)->lower()->doesntContain('100diasdecodigo');
-            if ($isPropaganda) {
-                continue;
-            }
-
-            $submission = Submission::query()->where('tweet_id', $tweet->id)->first();
-
-            if (! $submission) {
-                Submission::query()->create([
-                    'user_id' => $socialiteUser->user_id,
-                    'content' => $tweet->text,
-                    'tweet_id' => $tweet->id,
-                    'status' => SubmissionStatus::Pending,
-                    'metadata' => $tweet->jsonSerialize(),
-                    'submitted_at' => Date::parse($tweet->createdAt)->timezone(config('app.timezone')),
-                ]);
-
-                continue;
-            }
-
-            $submission->update([
-                'content' => $tweet->text,
-                'metadata' => $tweet->jsonSerialize(),
-                'submitted_at' => Date::parse($tweet->createdAt)->timezone(config('app.timezone')),
-            ]);
+            $this->createSubmissionAction->for($socialiteUser->user, $tweet);
         }
     }
 

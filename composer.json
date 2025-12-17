@@ -16,6 +16,7 @@
         "he4rt/he4rt-core": ">=1",
         "he4rt/integration-twitter-api": ">=1",
         "he4rt/portal": ">=1",
+        "basementdevs/filament-webhooks": "^0.1.2",
         "he4rt/submission": ">=1",
         "he4rt/user": ">=1",
         "internachi/modular": "^2.3.0",
@@ -30,7 +31,7 @@
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.16.2",
         "barryvdh/laravel-ide-helper": "^3.6.1",
-        "driftingly/rector-laravel": "^2.1.7",
+        "driftingly/rector-laravel": "^2.1.8",
         "fakerphp/faker": "^1.24.1",
         "larastan/larastan": "^3.8.1",
         "laravel/boost": "^1.8.5",

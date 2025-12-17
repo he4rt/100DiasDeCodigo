@@ -7,7 +7,8 @@
     "require": {},
     "autoload": {
         "psr-4": {
-            "He4rt\\IntegrationTwitterApi\\": "src/"
+            "He4rt\\IntegrationTwitterApi\\": "src/",
+            "He4rt\\IntegrationTwitterApi\\Tests\\": "tests/"
         }
     },
     "autoload-dev": {

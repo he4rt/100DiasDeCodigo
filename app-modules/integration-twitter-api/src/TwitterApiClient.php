@@ -45,7 +45,6 @@ final readonly class TwitterApiClient
             ->client
             ->withQueryParameters([
                 'userId' => $userId,
-                'includeReplies' => true,
             ])
             ->get('/twitter/user/last_tweets');
 
