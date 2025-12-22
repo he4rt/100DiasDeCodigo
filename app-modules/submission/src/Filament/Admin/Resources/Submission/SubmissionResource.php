@@ -32,6 +32,7 @@ use He4rt\Submission\Filament\Admin\Resources\Submission\Actions\ReviewSubmissio
 use He4rt\Submission\Filament\Admin\Resources\Submission\Pages\CreateSubmission;
 use He4rt\Submission\Filament\Admin\Resources\Submission\Pages\EditSubmission;
 use He4rt\Submission\Filament\Admin\Resources\Submission\Pages\ListSubmissions;
+use He4rt\Submission\Filament\Admin\Resources\Submission\Pages\MatchSubmissionsPage;
 use He4rt\Submission\Models\Submission;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
@@ -158,6 +159,7 @@ class SubmissionResource extends Resource
             'index' => ListSubmissions::route('/'),
             'create' => CreateSubmission::route('/create'),
             'edit' => EditSubmission::route('/{record}/edit'),
+            'match' => MatchSubmissionsPage::route('/match'),
         ];
     }
 

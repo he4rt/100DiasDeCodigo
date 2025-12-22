@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace He4rt\Submission\Filament\Admin\Resources\Submission\Pages;
 
+use Filament\Actions\Action;
 use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ListRecords;
 use Filament\Schemas\Components\Tabs\Tab;
@@ -17,11 +18,6 @@ class ListSubmissions extends ListRecords
     protected static string $resource = SubmissionResource::class;
 
     protected ?string $heading = '';
-
-    public function getBreadcrumbs(): array
-    {
-        return [];
-    }
 
     public function getTabs(): array
     {
@@ -43,6 +39,10 @@ class ListSubmissions extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
+            Action::make('match')
+                ->url(MatchSubmissionsPage::getUrl())
+                ->outlined()
+                ->label('Match'),
             CreateAction::make(),
         ];
     }
