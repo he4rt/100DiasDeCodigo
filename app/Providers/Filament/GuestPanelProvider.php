@@ -35,11 +35,11 @@ class GuestPanelProvider extends PanelProvider
                 'primary' => Color::Purple,
             ])
             ->topNavigation()
-            ->renderHook(PanelsRenderHook::TOPBAR_END, fn () => Blade::render(<<<'BLADE'
-                @guest
-                    <x-he4rt::button href="/app" icon-position="leading" icon="heroicon-o-user">Acessar Plataforma</x-he4rt::button>
-                @endguest
-            BLADE
+            ->renderHook(PanelsRenderHook::TOPBAR_END, fn () => Blade::render(<<<'HTML'
+                    @guest
+                        <x-he4rt::button href="/app" icon-position="leading" icon="heroicon-o-user">Acessar Plataforma</x-he4rt::button>
+                    @endguest
+                HTML
             ))
             ->pages([
                 PortalPage::class,
