@@ -27,5 +27,6 @@
         <env name="PULSE_ENABLED" value="false"/>
         <env name="TELESCOPE_ENABLED" value="false"/>
         <env name="NIGHTWATCH_ENABLED" value="false"/>
+        <env name="LARAVEL_CLOUDFLARE_ENABLED" value="false"/>
     </php>
 </phpunit>
