@@ -73,23 +73,25 @@ class ParticipantsPage extends Page
             ->get()
             ->map(function (User $user): array {
                 $metrics = self::calculateTwitterMetrics($user->submissions);
+                $currentStreak = $user->current_streak;
+                $totalDays = $user->total_days;
 
-                $this->totalDaysCount += $user->total_days;
+                $this->totalDaysCount += $totalDays;
 
-                if ($user->total_days >= 100) {
-                    $this->winnersCount += 1;
+                if ($totalDays >= 100) {
+                    $this->winnersCount++;
                 }
 
-                if ($user->current_streak) {
-                    $this->generalStreakCount += $user->current_streak;
+                if ($currentStreak) {
+                    $this->generalStreakCount += $currentStreak;
                 }
 
                 return [
                     'name' => $user->name,
                     'username' => $user->username,
                     'avatar' => $user->getFilamentAvatarUrl(),
-                    'total_days' => static::abbreviate($user->total_days),
-                    'current_streak' => static::abbreviate($user->current_streak),
+                    'total_days' => $totalDays,
+                    'current_streak' => $currentStreak,
                     'tags' => ['#php', '#vibecoding', '#laravel', 'alpine.js', '#fullstack'],
                     'twitter_metrics' => [
                         'likes' => static::abbreviate($metrics['likes']),

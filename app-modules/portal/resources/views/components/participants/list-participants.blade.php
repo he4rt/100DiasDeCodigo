@@ -28,15 +28,11 @@
             })
         },
 
-        _viewMode: $queryString('grid').usePush().as('viewMode'),
-        get viewMode() {
-            return this._viewMode
-        },
+        viewMode: localStorage.getItem('viewMode') ?? 'grid',
 
-        set viewMode(value) {
-            this._viewMode = value
-            this.$nextTick(() => {
-                this.$refs.section.scrollIntoView({ behavior: 'smooth' })
+        init() {
+            this.$watch('viewMode', (value) => {
+                localStorage.setItem('viewMode', value)
             })
         },
 
@@ -103,7 +99,7 @@
                 </div>
                 <div class="flex items-center gap-2">
                     <div
-                        class="flex flex-row items-center justify-center gap-1 rounded-md border border-gray-200 bg-white px-3 py-2 text-sm dark:border-gray-700 dark:bg-gray-800"
+                        class="flex cursor-pointer flex-row items-center justify-center gap-1 rounded-md border border-gray-200 bg-white px-3 py-2 text-sm dark:border-gray-700 dark:bg-gray-800"
                     >
                         <x-filament::icon icon="heroicon-o-arrows-up-down" class="me-2 h-4 w-4" x-on::click="" />
                         <select class="border-0 bg-white text-sm outline-0 dark:bg-gray-800" x-model="selectedSort">
