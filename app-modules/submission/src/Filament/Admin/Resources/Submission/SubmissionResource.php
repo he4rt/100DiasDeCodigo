@@ -40,6 +40,7 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class SubmissionResource extends Resource
 {
+    /** @var class-string<Submission>|null */
     protected static ?string $model = Submission::class;
 
     protected static ?string $slug = 'submissions';
@@ -168,10 +169,8 @@ class SubmissionResource extends Resource
      */
     public static function getEloquentQuery(): Builder
     {
-        return parent::getEloquentQuery()
-            ->withoutGlobalScopes([
-                SoftDeletingScope::class,
-            ]);
+        /** @var Builder<Submission> */
+        return parent::getEloquentQuery()->withoutGlobalScopes([SoftDeletingScope::class]);
     }
 
     /**
@@ -179,6 +178,7 @@ class SubmissionResource extends Resource
      */
     public static function getGlobalSearchEloquentQuery(): Builder
     {
+        /** @var Builder<Submission> */
         return parent::getGlobalSearchEloquentQuery()->with(['approver', 'user']);
     }
 

@@ -20,6 +20,7 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class SubmissionResource extends Resource
 {
+    /** @var class-string<Submission>|null */
     protected static ?string $model = Submission::class;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
@@ -57,6 +58,7 @@ class SubmissionResource extends Resource
      */
     public static function getRecordRouteBindingEloquentQuery(): Builder
     {
+        /** @var Builder<Submission> */
         return parent::getRecordRouteBindingEloquentQuery()
             ->withoutGlobalScopes([
                 SoftDeletingScope::class,
