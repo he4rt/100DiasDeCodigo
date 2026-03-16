@@ -1,4 +1,4 @@
-@props([
+@props ([
     'counters' => [],
     'title' => '',
     'subtitle' => '',
@@ -37,15 +37,15 @@
                 >
                     <x-slot:icon class="mb-1 flex items-center justify-center">
                         <x-filament::icon icon="{{ $counter['icon'] }}" class="h-6 w-6 {{ $counter['color'] }}" />
-                    </x-slot>
+                    </x-slot:icon>
 
                     <x-slot:title class="flex items-center justify-center text-center text-2xl font-bold">
                         {{ $counter['value'] }}
-                    </x-slot>
+                    </x-slot:title>
 
                     <x-slot:description class="text-light-500 text-xs">
                         {{ $counter['label'] }}
-                    </x-slot>
+                    </x-slot:description>
                 </x-he4rt::card>
             @endforeach
         </div>

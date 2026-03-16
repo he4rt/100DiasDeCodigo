@@ -1,4 +1,4 @@
-@props([
+@props ([
     'status' => 'pending',
     'day' => 1,
     'date' => null,

@@ -1,4 +1,4 @@
-@props([
+@props ([
     'type' => 'text',
     'name' => null,
     'id' => null,
@@ -11,11 +11,15 @@
     $isDisabled = (bool) $disabled;
 @endphp
 
-<div {{ $attributes->class('hp-input-field') }}>
+<div
+    {{
+        $attributes->class(
+            'hp-input-field',
+        )
+    }}
+>
     @if ($label)
-        <label for="{{ $inputId }}" class="hp-input-label">
-            {{ $label }}
-        </label>
+        <label for="{{ $inputId }}" class="hp-input-label"> {{ $label }} </label>
     @endif
 
     <input

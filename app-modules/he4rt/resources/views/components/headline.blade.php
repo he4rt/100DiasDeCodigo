@@ -1,4 +1,4 @@
-@props([
+@props ([
     'as' => 'div',
     'align' => 'left',
     'size' => 'lg',
@@ -22,18 +22,15 @@
 
 <div {{ $attributes->class($classes) }}>
     <{{ $tag }} class="hp-headline-container">
-        @isset($badge)
-            <div class="hp-headline-badge">
-                {{ $badge }}
-            </div>
+        @isset ($badge)
+            <div class="hp-headline-badge">{{ $badge }}</div>
         @endisset
 
         <div class="hp-headline-content">
-            @isset($title)
+            @isset ($title)
                 @php
                     $words = str($title)->explode(' ');
                 @endphp
-
                 <h1 class="hp-headline-title">
                     @foreach ($words as $word)
                         @if (in_array(trim($word), $keywords))
@@ -48,17 +45,13 @@
                 </h1>
             @endisset
 
-            @isset($description)
-                <div class="hp-headline-description">
-                    {{ $description }}
-                </div>
+            @isset ($description)
+                <div class="hp-headline-description">{{ $description }}</div>
             @endisset
         </div>
 
-        @isset($actions)
-            <div class="hp-headline-actions">
-                {{ $actions }}
-            </div>
+        @isset ($actions)
+            <div class="hp-headline-actions">{{ $actions }}</div>
         @endisset
     </{{ $tag }}>
 </div>

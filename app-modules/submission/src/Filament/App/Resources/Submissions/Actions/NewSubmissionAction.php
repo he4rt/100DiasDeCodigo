@@ -173,7 +173,7 @@ class NewSubmissionAction extends Action
 
         $validations = $get('contains_hashtag') && $get('contains_daily_count');
 
-        if (! $validations) {
+        if (!$validations) {
 
             $attempts = (int) cache()->get($rateLimitKey, 0);
 
@@ -206,7 +206,7 @@ class NewSubmissionAction extends Action
                 ->where('user_id', auth()->id())
                 ->where('provider_id', $tweet->author->id)
                 ->exists();
-            if (! $tweetOwnership) {
+            if (!$tweetOwnership) {
                 Notification::make()
                     ->title('Para com essa porra')
                     ->body('Coloca um tweet q seja da sua conta pelo amor de deus.')

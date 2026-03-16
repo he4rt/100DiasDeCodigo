@@ -25,7 +25,7 @@
                 </div>
             </div>
         </div>
-    </x-slot>
+    </x-slot:heading>
 
     <div class="grid grid-cols-5 gap-2 sm:grid-cols-10">
         @foreach (range(1, 100) as $day)
@@ -39,7 +39,7 @@
                 $status = 'pending';
                 if ($hasSubmission) {
                     $status = 'complete';
-                } elseif ($isPast && ! $isToday) {
+                } elseif ($isPast && !$isToday) {
                     $status = 'missed';
                 }
 
@@ -50,7 +50,6 @@
                 // Past days won't exist in the loop relative to today if startDate is today.
                 // So the logic holds.
             @endphp
-
             <x-submissions.submission-entry :$day :$status :$date />
         @endforeach
     </div>

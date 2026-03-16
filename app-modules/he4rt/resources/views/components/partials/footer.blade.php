@@ -8,7 +8,7 @@
                         Conheça MeuGuia.app! Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus sed
                         egestas nisl. Vivamus blandit vehicula eleifend. Phasellus vulputate elit leo, porta vehicula
                         nunc placerat placerat.
-                    </x-slot>
+                    </x-slot:description>
                 </x-he4rt::headline>
             </div>
 

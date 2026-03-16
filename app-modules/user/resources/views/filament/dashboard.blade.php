@@ -1,10 +1,8 @@
-@props([
-    'hasTwitterIntegration',
-])
+@props (['hasTwitterIntegration'])
 <x-filament-panels::page>
     {{-- <x-dashboard.progress-overview /> --}}
     <div class="space-y-6">
-        @if (! $hasTwitterIntegration)
+        @if (!$hasTwitterIntegration)
             <x-filament::section :secondary="true" icon="fab-twitter" heading="Conecte sua conta do Twitter">
                 Pra participar do desafio você deve conectar sua conta do Twitter.
 

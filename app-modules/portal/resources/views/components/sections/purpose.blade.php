@@ -8,9 +8,11 @@
                             <x-filament::icon icon="heroicon-o-cursor-arrow-ripple" class="h-5 w-5" />
                             Resumão do Desafio
                         </x-he4rt::badge>
-                    </x-slot>
+                    </x-slot:badge>
 
-                    <x-slot:title>O que é #100DiasDeCodigo?</x-slot>
+                    <x-slot:title>
+                        O que é #100DiasDeCodigo?
+                    </x-slot:title>
 
                     <x-slot:description>
                         <div>
@@ -40,12 +42,12 @@
                                 <span class="text-gray-200">Comunidade global de suporte</span>
                             </div>
                         </div>
-                    </x-slot>
+                    </x-slot:description>
                     <x-slot:actions>
                         <x-he4rt::button icon="heroicon-s-chevron-right" variant="outline">
                             Começar Desafio
                         </x-he4rt::button>
-                    </x-slot>
+                    </x-slot:actions>
                 </x-he4rt::headline>
             </div>
 

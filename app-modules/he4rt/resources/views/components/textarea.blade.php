@@ -1,4 +1,4 @@
-@props([
+@props ([
     'name' => null,
     'id' => null,
     'label' => null,
@@ -11,11 +11,15 @@
     $isDisabled = (bool) $disabled;
 @endphp
 
-<div {{ $attributes->class('hp-input-field') }}>
+<div
+    {{
+        $attributes->class(
+            'hp-input-field',
+        )
+    }}
+>
     @if ($label)
-        <label for="{{ $inputId }}" class="hp-input-label">
-            {{ $label }}
-        </label>
+        <label for="{{ $inputId }}" class="hp-input-label"> {{ $label }} </label>
     @endif
 
     <textarea
@@ -23,6 +27,10 @@
         id="{{ $inputId }}"
         rows="{{ $rows }}"
         @if ($isDisabled) disabled @endif
-        {{ $attributes->class('hp-input resize-none') }}
+        {{
+            $attributes->class(
+                'hp-input resize-none',
+            )
+        }}
     ></textarea>
 </div>

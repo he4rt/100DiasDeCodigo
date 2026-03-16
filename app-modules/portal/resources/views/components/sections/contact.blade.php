@@ -3,10 +3,12 @@
         <div class="grid grid-cols-1 gap-8 lg:grid-cols-2">
             <div class="border-outline-low flex flex-1 flex-col gap-8 rounded-lg border p-8">
                 <x-he4rt::headline size="md">
-                    <x-slot:title>Entre em contato conosco</x-slot>
+                    <x-slot:title>
+                        Entre em contato conosco
+                    </x-slot:title>
                     <x-slot:description>
                         Histórias reais de desenvolvedores que transformaram suas carreiras através da nossa comunidade.
-                    </x-slot>
+                    </x-slot:description>
                 </x-he4rt::headline>
 
                 <hr class="border-outline-low" />
@@ -29,21 +31,27 @@
                             />
                         </div>
                         <x-he4rt::headline align="center" size="md">
-                            <x-slot:title>Venha fazer parte do nosso discord</x-slot>
+                            <x-slot:title>
+                                Venha fazer parte do nosso discord
+                            </x-slot:title>
                             <x-slot:description>
                                 Histórias reais de desenvolvedores que transformaram suas carreiras através da nossa
                                 comunidade.
-                            </x-slot>
+                            </x-slot:description>
                             <x-slot:actions>
                                 <x-he4rt::button>Entrar no Discord</x-he4rt::button>
-                            </x-slot>
+                            </x-slot:actions>
                         </x-he4rt::headline>
                     </div>
 
                     <div class="border-outline-low flex flex-col gap-4 rounded-lg border p-8">
                         <x-he4rt::headline class="mx-0" size="sm">
-                            <x-slot:title>Redes sociais</x-slot>
-                            <x-slot:description>Lorem ipsum dolor sit amet, consectetur</x-slot>
+                            <x-slot:title>
+                                Redes sociais
+                            </x-slot:title>
+                            <x-slot:description>
+                                Lorem ipsum dolor sit amet, consectetur
+                            </x-slot:description>
                             <x-slot:actions>
                                 <x-filament::icon
                                     icon="fab-discord"
@@ -65,7 +73,7 @@
                                     icon="fab-github"
                                     class="h-6 w-6 transition-all duration-500 hover:scale-105"
                                 />
-                            </x-slot>
+                            </x-slot:actions>
                         </x-he4rt::headline>
                     </div>
                 </div>

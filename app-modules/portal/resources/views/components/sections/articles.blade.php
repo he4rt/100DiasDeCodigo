@@ -6,13 +6,15 @@
                     <x-filament::icon icon="heroicon-o-document-text" class="h-5 w-5" />
                     Nossos artigos
                 </x-he4rt::badge>
-            </x-slot>
+            </x-slot:badge>
 
-            <x-slot:title>Artigos fodas da comunidade</x-slot>
+            <x-slot:title>
+                Artigos fodas da comunidade
+            </x-slot:title>
 
             <x-slot:description>
                 Contribua com projetos open source e desenvolva habilidades reais enquanto constrói seu portfólio
-            </x-slot>
+            </x-slot:description>
         </x-he4rt::headline>
 
         <div class="grid w-full grid-cols-1 items-center justify-center gap-8 sm:grid-cols-3 lg:gap-12">
@@ -24,15 +26,17 @@
                         name="Daniel Reis"
                         title="DevRel"
                     />
-                </x-slot>
-                <x-slot:title>Lorem ipsum dolor sit amet, consectetur</x-slot>
+                </x-slot:header>
+                <x-slot:title>
+                    Lorem ipsum dolor sit amet, consectetur
+                </x-slot:title>
                 <x-slot:description>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. In bibendum ut urna eleifend auctor...
-                </x-slot>
+                </x-slot:description>
                 <x-slot:tags>
                     <x-he4rt::tag>#webdev</x-he4rt::tag>
                     <x-he4rt::tag>#software</x-he4rt::tag>
-                </x-slot>
+                </x-slot:tags>
             </x-he4rt::card>
 
             <x-he4rt::card>
@@ -43,15 +47,17 @@
                         name="Daniel Reis"
                         title="DevRel"
                     />
-                </x-slot>
-                <x-slot:title>Lorem ipsum dolor sit amet, consectetur</x-slot>
+                </x-slot:header>
+                <x-slot:title>
+                    Lorem ipsum dolor sit amet, consectetur
+                </x-slot:title>
                 <x-slot:description>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. In bibendum ut urna eleifend auctor...
-                </x-slot>
+                </x-slot:description>
                 <x-slot:tags>
                     <x-he4rt::tag>#webdev</x-he4rt::tag>
                     <x-he4rt::tag>#software</x-he4rt::tag>
-                </x-slot>
+                </x-slot:tags>
             </x-he4rt::card>
 
             <x-he4rt::card>
@@ -62,15 +68,17 @@
                         name="Daniel Reis"
                         title="DevRel"
                     />
-                </x-slot>
-                <x-slot:title>Lorem ipsum dolor sit amet, consectetur</x-slot>
+                </x-slot:header>
+                <x-slot:title>
+                    Lorem ipsum dolor sit amet, consectetur
+                </x-slot:title>
                 <x-slot:description>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. In bibendum ut urna eleifend auctor...
-                </x-slot>
+                </x-slot:description>
                 <x-slot:tags>
                     <x-he4rt::tag>#webdev</x-he4rt::tag>
                     <x-he4rt::tag>#software</x-he4rt::tag>
-                </x-slot>
+                </x-slot:tags>
             </x-he4rt::card>
 
             <x-he4rt::card>
@@ -81,15 +89,17 @@
                         name="Daniel Reis"
                         title="DevRel"
                     />
-                </x-slot>
-                <x-slot:title>Lorem ipsum dolor sit amet, consectetur</x-slot>
+                </x-slot:header>
+                <x-slot:title>
+                    Lorem ipsum dolor sit amet, consectetur
+                </x-slot:title>
                 <x-slot:description>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. In bibendum ut urna eleifend auctor...
-                </x-slot>
+                </x-slot:description>
                 <x-slot:tags>
                     <x-he4rt::tag>#webdev</x-he4rt::tag>
                     <x-he4rt::tag>#software</x-he4rt::tag>
-                </x-slot>
+                </x-slot:tags>
             </x-he4rt::card>
 
             <x-he4rt::card>
@@ -100,15 +110,17 @@
                         name="Daniel Reis"
                         title="DevRel"
                     />
-                </x-slot>
-                <x-slot:title>Lorem ipsum dolor sit amet, consectetur</x-slot>
+                </x-slot:header>
+                <x-slot:title>
+                    Lorem ipsum dolor sit amet, consectetur
+                </x-slot:title>
                 <x-slot:description>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. In bibendum ut urna eleifend auctor...
-                </x-slot>
+                </x-slot:description>
                 <x-slot:tags>
                     <x-he4rt::tag>#webdev</x-he4rt::tag>
                     <x-he4rt::tag>#software</x-he4rt::tag>
-                </x-slot>
+                </x-slot:tags>
             </x-he4rt::card>
 
             <x-he4rt::card>
@@ -119,15 +131,17 @@
                         name="Daniel Reis"
                         title="DevRel"
                     />
-                </x-slot>
-                <x-slot:title>Lorem ipsum dolor sit amet, consectetur</x-slot>
+                </x-slot:header>
+                <x-slot:title>
+                    Lorem ipsum dolor sit amet, consectetur
+                </x-slot:title>
                 <x-slot:description>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. In bibendum ut urna eleifend auctor...
-                </x-slot>
+                </x-slot:description>
                 <x-slot:tags>
                     <x-he4rt::tag>#webdev</x-he4rt::tag>
                     <x-he4rt::tag>#software</x-he4rt::tag>
-                </x-slot>
+                </x-slot:tags>
             </x-he4rt::card>
         </div>
     </div>

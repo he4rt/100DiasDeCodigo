@@ -1,4 +1,4 @@
-@props([
+@props ([
     'currentDay' => 15,
 ])
 
@@ -104,7 +104,6 @@
                             $position = $milestone;
                             $isCompleted = $currentDay >= $milestone;
                         @endphp
-
                         <div
                             class="absolute z-10 -translate-x-1/2 transition-all duration-300 hover:scale-125"
                             style="left: {{ $position }}%"
@@ -154,12 +153,11 @@
                         $nextMilestone = $milestones[$index + 1] ?? 101;
                         $isCurrent = $currentDay >= $milestone && $currentDay < $nextMilestone;
                     @endphp
-
                     <div
-                        @class([
+                        @class ([
                             'flex flex-col items-center gap-1 transition-all duration-300',
                             'text-primary-500' => $isCompleted,
-                            'text-gray-400 dark:text-gray-600' => ! $isCompleted,
+                            'text-gray-400 dark:text-gray-600' => !$isCompleted,
                             'scale-110' => $isCurrent,
                         ])
                     >
@@ -167,7 +165,7 @@
                             <div class="relative">
                                 <x-filament::icon
                                     icon="heroicon-s-star"
-                                    @class(['h-4 w-4', 'text-primary-500' => $isCompleted, 'text-gray-400 dark:text-gray-600' => ! $isCompleted])
+                                    @class ([ 'h-4 w-4', 'text-primary-500' => $isCompleted, 'text-gray-400 dark:text-gray-600' => !$isCompleted, ])
                                 />
                                 @if ($isCompleted)
                                     <div class="bg-primary-500/50 absolute inset-0 rounded-full blur-sm"></div>
@@ -175,12 +173,7 @@
                             </div>
                         @endif
 
-                        <span
-                            @class([
-                                'text-xs font-semibold',
-                                'text-primary-500' => $isCurrent,
-                            ])
-                        >
+                        <span @class (['text-xs font-semibold', 'text-primary-500' => $isCurrent])>
                             Dia {{ $milestone }}
                         </span>
                         @if ($isCurrent)

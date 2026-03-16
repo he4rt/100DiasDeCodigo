@@ -1,4 +1,4 @@
-@props([
+@props ([
     'as' => 'div',
     'href' => null,
     'src' => '',
@@ -32,15 +32,15 @@
     }
 @endphp
 
-<{{ $tag }} {{ $attributes->merge(['class' => $classes])->merge($linkAttrs) }}>
+<{{ $tag }}
+    {{
+        $attributes
+            ->merge(['class' => $classes])
+            ->merge($linkAttrs)
+    }}
+>
     <div>
-        <x-he4rt::avatar
-            :src="$src"
-            x-bind:src="participant.avatar"
-            alt="{{ $name }}"
-            :size="$size"
-            :circular="true"
-        />
+        <x-he4rt::avatar :src="$src" x-bind:src="participant.avatar" alt="{{ $name }}" :size="$size" :circular="true" />
     </div>
 
     <div class="hp-author-content">

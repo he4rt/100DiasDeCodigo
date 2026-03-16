@@ -22,7 +22,7 @@ class CreateSubmissionAction
 
         $submission = Submission::query()->where('tweet_id', $tweet->id)->first();
 
-        if (! $submission) {
+        if (!$submission) {
             Submission::query()->create([
                 'user_id' => $user?->getKey() ?? null,
                 'content' => $tweet->text,

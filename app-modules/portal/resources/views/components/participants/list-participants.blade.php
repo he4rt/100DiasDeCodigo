@@ -4,12 +4,12 @@
     x-init="
         $watch('search', (newValue, oldValue) => {
             if (newValue !== oldValue) {
-                currentPage = 1
+                currentPage = 1;
             }
-        })
+        });
         $watch('[selectedSort]', () => {
-            currentPage = 1
-        })
+            currentPage = 1;
+        });
     "
     x-data="{
         search: '',
@@ -114,23 +114,19 @@
                         class="hidden items-center rounded-lg border border-gray-200 bg-white p-1 sm:flex dark:border-gray-700 dark:bg-gray-800"
                     >
                         <button
-                            x-on:click="
-                                viewMode = 'grid';
-                            "
+                            x-on:click="viewMode = 'grid'"
                             class="rounded px-2 py-1"
                             :class="{
-                                'text-white bg-primary': viewMode === 'grid'
+                                'text-white bg-primary': viewMode === 'grid',
                             }"
                         >
                             <x-filament::icon icon="heroicon-s-table-cells" class="h-4 w-4 text-white" />
                         </button>
                         <button
-                            x-on:click="
-                                viewMode = 'list';
-                            "
+                            x-on:click="viewMode = 'list'"
                             class="rounded px-2 py-1"
                             :class="{
-                                'text-white bg-primary': viewMode === 'list'
+                                'text-white bg-primary': viewMode === 'list',
                             }"
                         >
                             <x-filament::icon icon="heroicon-o-list-bullet" class="h-4 w-4 text-white" />
@@ -156,7 +152,7 @@
                 x-init="autoAnimate($refs.participantCardsWrapper)"
                 :class="{
                     'grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4': viewMode === 'grid',
-                    'flex flex-col gap-2': viewMode === 'list'
+                    'flex flex-col gap-2': viewMode === 'list',
                 }"
             >
                 <template x-for="participant in filteredParticipants" :key="participant.username">

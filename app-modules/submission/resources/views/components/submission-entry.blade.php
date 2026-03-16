@@ -1,6 +1,4 @@
-@props([
-    'submission'/**@var\He4rt\Submission\Models\Submission$submission*/,
-])
+@props (['submission' /**@var\He4rt\Submission\Models\Submission$submission*/])
 
 @php
     /** @var \He4rt\Submission\Models\Submission $submission */
@@ -57,7 +55,11 @@
                             class="text-xs text-gray-500 sm:text-sm dark:text-gray-400"
                             datetime="{{ $submission->submitted_at->toIso8601String() }}"
                         >
-                            {{ $submission->submitted_at->format('M j') }}
+                            {{
+                                $submission->submitted_at->format(
+                                    'M j',
+                                )
+                            }}
                         </time>
                     </div>
 
@@ -98,7 +100,6 @@
                     @php
                         $mediaItems = $tweet->extendedEntities?->media ?? $tweet->entities?->media;
                     @endphp
-
                     <div class="{{ count($mediaItems) > 1 ? 'grid-cols-2' : 'grid-cols-1' }} mt-3 grid gap-2">
                         @foreach ($mediaItems as $media)
                             @if ($media->type === 'photo')
@@ -150,7 +151,11 @@
                             icon="heroicon-m-arrow-path-rounded-square"
                             class="h-3.5 w-3.5 transition-transform group-hover/metric:scale-110 sm:h-4 sm:w-4"
                         />
-                        <span>{{ number_format($tweet->retweetCount) }}</span>
+                        <span>{{
+                            number_format(
+                                $tweet->retweetCount,
+                            )
+                        }}</span>
                     </div>
 
                     <div
@@ -162,7 +167,11 @@
                             icon="heroicon-m-chat-bubble-left"
                             class="h-3.5 w-3.5 transition-transform group-hover/metric:scale-110 sm:h-4 sm:w-4"
                         />
-                        <span>{{ number_format($tweet->replyCount) }}</span>
+                        <span>{{
+                            number_format(
+                                $tweet->replyCount,
+                            )
+                        }}</span>
                     </div>
 
                     <div
@@ -174,7 +183,11 @@
                             icon="heroicon-m-chat-bubble-bottom-center-text"
                             class="h-3.5 w-3.5 transition-transform group-hover/metric:scale-110 sm:h-4 sm:w-4"
                         />
-                        <span>{{ number_format($tweet->quoteCount) }}</span>
+                        <span>{{
+                            number_format(
+                                $tweet->quoteCount,
+                            )
+                        }}</span>
                     </div>
 
                     <div

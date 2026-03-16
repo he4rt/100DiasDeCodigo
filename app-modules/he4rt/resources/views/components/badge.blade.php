@@ -1,3 +1,1 @@
-<div class="hp-badge">
-    {{ $slot }}
-</div>
+<div class="hp-badge">{{ $slot }}</div>

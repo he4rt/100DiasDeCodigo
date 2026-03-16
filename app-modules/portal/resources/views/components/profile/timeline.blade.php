@@ -1,6 +1,4 @@
-@props([
-    'submissions',
-])
+@props (['submissions'])
 
 <div class="bg-gray-50 dark:bg-gray-900">
     <div class="mx-auto grid max-w-5xl grid-cols-1 gap-8 px-4 sm:px-0 lg:grid-cols-3">
