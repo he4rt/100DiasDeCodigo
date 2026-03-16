@@ -7,7 +7,6 @@ use Rector\CodingStyle\Rector\PostInc\PostIncDecToPreIncDecRector;
 use Rector\Config\RectorConfig;
 use Rector\Php70\Rector\StaticCall\StaticCallOnNonStaticToInstanceCallRector;
 use Rector\Php83\Rector\ClassMethod\AddOverrideAttributeToOverriddenMethodsRector;
-use Rector\Php84\Rector\MethodCall\NewMethodCallWithoutParenthesesRector;
 use Rector\TypeDeclaration\Rector\ArrowFunction\AddArrowFunctionReturnTypeRector;
 use RectorLaravel\Rector\Class_\ModelCastsPropertyToCastsMethodRector;
 use RectorLaravel\Rector\Class_\ReplaceExpectsMethodsInTestsRector;
@@ -33,7 +32,7 @@ return RectorConfig::configure()
         __DIR__.'/app-modules/*/tests',
     ])
     ->withSkip([__DIR__.'/bootstrap/cache'])
-    ->withCache(cacheDirectory: sys_get_temp_dir().'/rector_cache', cacheClass: FileCacheStorage::class)
+    ->withCache(cacheDirectory: __DIR__.'/.rector.result.cache', cacheClass: FileCacheStorage::class)
     ->withImportNames(removeUnusedImports: true)
     ->withRootFiles()
     ->withPhpSets()
@@ -78,6 +77,5 @@ return RectorConfig::configure()
         AddOverrideAttributeToOverriddenMethodsRector::class,
         PostIncDecToPreIncDecRector::class,
         AddArrowFunctionReturnTypeRector::class,
-        NewMethodCallWithoutParenthesesRector::class,
         StaticCallOnNonStaticToInstanceCallRector::class,
     ]);
