@@ -11,7 +11,7 @@
 /.idea
 /.nova
 /.phpunit.cache
-/.rector.cache
+/.rector.result.cache
 /.vscode
 /.zed
 /auth.json
@@ -31,10 +31,74 @@ Thumbs.db
 _ide_helper.php
 _ide_helper_models.php
 tests/Browser/Screenshots
-.github/git-commit-instructions.md
 /.composer
-/.gemini
-/.junie
+
+=== AI Agents ===
+
+# Laravel Boost
 boost.json
-GEMINI.md
+.junie
+.junie/
+.mcp.json
+
+# Generic AI Agents
 AGENTS.md
+GEMINI.md
+QWEN.md
+.ai
+.output.txt
+.output/
+.agent/
+.agentignore
+.aiderignore
+
+# Claude Code
+.claude/
+
+# GitHub Copilot
+.github/copilot-instructions.md
+.github/git-commit-instructions.md
+
+# Cursor AI
+.cursorrules
+.cursor/
+.cursor.json
+.cursor-settings.yaml
+.cursorignore
+
+# Windsurf Editor
+.windsurf/
+.windsurfrc
+
+# Tabnine AI
+.tabnineignore
+.tabnine/
+
+# Continue.dev
+.continue/
+.continuerc.json
+
+# Cline AI
+.cline/
+.clinerules
+cline.json
+
+# Codeium
+.codeium/
+
+# DeepSeek
+.deepseek/
+
+# Amazon CodeWhisperer
+.amazon-codewhisperer/
+
+# Gemini
+.gemini/
+
+# Warp AI
+.warp/
+WARP.md
+
+# Crush AI
+.crush/
+CRUSH.md
