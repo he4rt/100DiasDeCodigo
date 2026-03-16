@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
+use App\Providers\Tools\DebugbarServiceProvider;
 use Carbon\CarbonImmutable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Vite;
 use Illuminate\Support\ServiceProvider;
@@ -49,7 +49,7 @@ final class AppServiceProvider extends ServiceProvider
      */
     private function configureDatabase(): void
     {
-        Model::shouldBeStrict(! $this->app->isProduction());
+        Model::shouldBeStrict(!$this->app->isProduction());
         Model::automaticallyEagerLoadRelationships();
     }
 
@@ -87,14 +87,8 @@ final class AppServiceProvider extends ServiceProvider
 
     private function registerDebugbar(): void
     {
-        if (
-            app()->isLocal()
-            && app()->hasDebugModeEnabled()
-            && class_exists(\Barryvdh\Debugbar\ServiceProvider::class)
-            && config('debugbar.enabled')
-        ) {
-            Log::notice('Registering Debugbar Service Provider');
-            $this->app->register(\Barryvdh\Debugbar\ServiceProvider::class);
+        if ($this->app->isLocal() && class_exists(\Fruitcake\LaravelDebugbar\ServiceProvider::class)) {
+            $this->app->register(DebugbarServiceProvider::class);
         }
     }
 }

@@ -51,7 +51,7 @@ class AppPanelProvider extends PanelProvider
                 FilamentSocialitePlugin::make()
                     ->socialiteUserModelClass(SocialiteUser::class)
                     ->registration(function ($provider): bool {
-                        if (! auth()->check() && $provider === 'github') {
+                        if (!auth()->check() && $provider === 'github') {
                             return true;
                         }
 
