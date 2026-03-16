@@ -1,4 +1,4 @@
-@props([
+@props ([
     'href' => '/',
     'path' => 'images/logo.svg',
     'size' => 'md',

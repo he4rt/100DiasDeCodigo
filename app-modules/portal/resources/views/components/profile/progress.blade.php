@@ -1,5 +1,5 @@
-@props([
-    "total_days" => 0,
+@props ([
+    'total_days' => 0,
 ])
 
 <div

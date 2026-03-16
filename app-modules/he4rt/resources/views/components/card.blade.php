@@ -1,4 +1,4 @@
-@props([
+@props ([
     'as' => 'div',
     'href' => null,
     'interactive' => true,
@@ -11,7 +11,7 @@
 ])
 
 @php
-    $isInteractive = $interactive && ! $disabled;
+    $isInteractive = $interactive && !$disabled;
     $tag = $href ? 'a' : $as;
 
     $linkAttrs = [];
@@ -44,58 +44,112 @@
         ->implode(' ');
 @endphp
 
-<{{ $tag }} {{ $attributes->merge(['class' => $classes])->merge($linkAttrs) }}>
+<{{ $tag }}
+    {{
+        $attributes
+            ->merge(['class' => $classes])
+            ->merge($linkAttrs)
+    }}
+>
     {{-- Slot do Ícone --}}
-    @isset($icon)
-        <div {{ $icon->attributes->class('hp-card-icon') }}>
+    @isset ($icon)
+        <div
+            {{
+                $icon->attributes->class(
+                    'hp-card-icon',
+                )
+            }}
+        >
             {{ $icon }}
         </div>
     @endisset
 
     {{-- Slot do Header --}}
-    @isset($header)
-        <div {{ $header->attributes->class('hp-card-header') }}>
+    @isset ($header)
+        <div
+            {{
+                $header->attributes->class(
+                    'hp-card-header',
+                )
+            }}
+        >
             {{ $header }}
         </div>
     @endisset
 
     {{-- Corpo do Card (Título e Descrição) --}}
-    @isset($content)
-        <div {{  $content->attributes->class('hp-card-body')}} >
+    @isset ($content)
+        <div
+            {{
+                $content->attributes->class(
+                    'hp-card-body',
+                )
+            }}
+        >
     @else
         <div class="hp-card-body">
     @endisset
 
-        @isset($title)
-            <h3 {{ $title->attributes->class('hp-card-title') }}>
-                {{ $title }}
-            </h3>
-        @endisset
+    @isset ($title)
+        <h3
+            {{
+                $title->attributes->class(
+                    'hp-card-title',
+                )
+            }}
+        >
+            {{ $title }}
+        </h3>
+    @endisset
 
-        @isset($description)
-            <p {{ $description->attributes->class('hp-card-description') }}>
-                {{ $description }}
-            </p>
-        @endisset
+    @isset ($description)
+        <p
+            {{
+                $description->attributes->class(
+                    'hp-card-description',
+                )
+            }}
+        >
+            {{ $description }}
+        </p>
+    @endisset
     </div>
 
     {{-- Slot de Tags --}}
-    @isset($tags)
-        <div {{ $tags->attributes->class('hp-card-tags') }}>
+    @isset ($tags)
+        <div
+            {{
+                $tags->attributes->class(
+                    'hp-card-tags',
+                )
+            }}
+        >
             {{ $tags }}
         </div>
     @endisset
 
     {{-- Slot de Ações --}}
-    @isset($actions)
-        <div {{ $actions->attributes->class('hp-card-actions') }}>
+    @isset ($actions)
+        <div
+            {{
+                $actions->attributes->class(
+                    'hp-card-actions',
+                )
+            }}
+        >
             {{ $actions }}
         </div>
     @endisset
 
     {{-- Slot do Rodapé --}}
-    @isset($footer)
-        <div {{ $footer->attributes->class('hp-card-footer') }}>
+    @isset ($footer)
+        <div
+            {{
+                $footer->attributes->class(
+                    'hp-card-footer',
+                )
+            }}
+        >
             {{ $footer }}
         </div>
     @endisset

@@ -1,4 +1,4 @@
-@props([
+@props ([
     'submission' => null,
 ])
 
@@ -46,10 +46,8 @@
             <p class="text-sm text-gray-500 dark:text-gray-400">{{ '@' . $username }}</p>
         </div>
 
-        @if (! $user && $description)
-            <p class="mt-1 line-clamp-2 text-xs text-gray-500 dark:text-gray-400">
-                {{ $description }}
-            </p>
+        @if (!$user && $description)
+            <p class="mt-1 line-clamp-2 text-xs text-gray-500 dark:text-gray-400">{{ $description }}</p>
             <div class="mt-2 flex gap-4 text-xs text-gray-500 dark:text-gray-400">
                 <span>
                     <strong>{{ number_format($followers) }}</strong>
@@ -82,15 +80,12 @@
                     </div>
                 </div>
             </div>
-
             <div class="space-y-3">
                 <h4 class="text-sm font-medium text-gray-900 dark:text-white">Your Activity</h4>
                 <div class="grid grid-cols-2 gap-2">
                     <div class="rounded-lg bg-gray-50 p-2 text-center dark:bg-gray-800/50">
                         <x-filament::icon :icon="Heroicon::Heart" class="mx-auto mb-1 h-4 w-4 text-gray-400" />
-                        <p class="text-lg font-bold text-gray-900 dark:text-white">
-                            {{ $stats['total_submissions'] }}
-                        </p>
+                        <p class="text-lg font-bold text-gray-900 dark:text-white">{{ $stats['total_submissions'] }}</p>
                         <p class="text-xs text-gray-500 dark:text-gray-400">Total</p>
                     </div>
                     <div class="rounded-lg bg-gray-50 p-2 text-center dark:bg-gray-800/50">
@@ -115,7 +110,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="space-y-2">
                 <div class="flex justify-between text-sm">
                     <span class="text-gray-500 dark:text-gray-400">Progress</span>
@@ -128,7 +122,6 @@
                     ></div>
                 </div>
             </div>
-
             <div class="mt-4 border-t border-gray-200 pt-4 dark:border-gray-700">
                 <div class="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400">
                     <x-filament::icon :icon="Heroicon::Calendar" class="h-5 w-5" />

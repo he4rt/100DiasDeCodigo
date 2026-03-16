@@ -1,13 +1,10 @@
-@props([
+@props ([
     'submission' => null,
 ])
 
 @php
     /** @var \He4rt\IntegrationTwitterApi\DTOs\TweetDTO|null $tweet */
-    $tweet =
-        $submission instanceof \He4rt\Submission\Models\Submission
-            ? $submission->getTweet()
-            : $submission;
+    $tweet = $submission instanceof \He4rt\Submission\Models\Submission ? $submission->getTweet() : $submission;
 @endphp
 
 <div class="flex items-center justify-center">
@@ -54,12 +51,10 @@
             <div class="px-4 py-3">
                 <p class="text-gray-900 dark:text-gray-100">{!! $tweet->getFormattedText() !!}</p>
             </div>
-
             @if ($tweet->extendedEntities?->media || $tweet->entities?->media)
                 @php
                     $media = $tweet->extendedEntities?->media[0] ?? $tweet->entities?->media[0];
                 @endphp
-
                 @if ($media)
                     <div
                         class="relative mx-4 mb-3 overflow-hidden rounded-xl border border-gray-200 dark:border-gray-700"
@@ -72,10 +67,13 @@
                     </div>
                 @endif
             @endif
-
             <div class="flex items-center gap-1 px-4 pb-3 text-[15px] text-gray-500 dark:text-gray-400">
                 <span>
-                    {{ \Carbon\Carbon::parse($tweet->createdAt)->timezone(config('app.timezone'))->format('g:i A · M j, Y') }}
+                    {{
+                        \Carbon\Carbon::parse($tweet->createdAt)
+                            ->timezone(config('app.timezone'))
+                            ->format('g:i A · M j, Y')
+                    }}
                 </span>
             </div>
             <div class="mx-4 border-t border-gray-200 dark:border-gray-700"></div>
@@ -92,13 +90,21 @@
                 <div class="flex items-center gap-2 text-gray-500 dark:text-gray-400">
                     <x-filament::icon icon="heroicon-o-chat-bubble-oval-left" class="h-5 w-5" />
                     <span class="text-[13px] font-medium text-gray-900 dark:text-gray-100">
-                        {{ number_format($tweet->replyCount) }}
+                        {{
+                            number_format(
+                                $tweet->replyCount,
+                            )
+                        }}
                     </span>
                 </div>
                 <div class="flex items-center gap-2 text-gray-500 dark:text-gray-400">
                     <x-filament::icon icon="heroicon-o-arrow-path-rounded-square" class="h-5 w-5" />
                     <span class="text-[13px] font-medium text-gray-900 dark:text-gray-100">
-                        {{ number_format($tweet->retweetCount) }}
+                        {{
+                            number_format(
+                                $tweet->retweetCount,
+                            )
+                        }}
                     </span>
                 </div>
             </div>

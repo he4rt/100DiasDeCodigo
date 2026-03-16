@@ -1,4 +1,4 @@
-@props([
+@props ([
     'circular' => true,
     'size' => 'md',
     'src' => '',

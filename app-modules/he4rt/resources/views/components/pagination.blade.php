@@ -4,80 +4,78 @@
         moveAnimation: false,
 
         get showMiddlePages() {
-            return this.currentPage > 3 && this.currentPage < this.totalPages - 2
+            return this.currentPage > 3 && this.currentPage < this.totalPages - 2;
         },
 
         getPage(n) {
             return {
                 number: n,
                 isCurrent: this.currentPage === n,
-            }
+            };
         },
 
         get pagesInRange() {
-            if (! this.showMiddlePages) return
-            if (this.totalPages > 4 && this.currentPage < 4) return
-            if (this.totalPages > 4 && this.currentPage > this.totalPages - 3)
-                return
+            if (!this.showMiddlePages) return;
+            if (this.totalPages > 4 && this.currentPage < 4) return;
+            if (this.totalPages > 4 && this.currentPage > this.totalPages - 3) return;
 
-            const beforeCurrent = 2
-            const afterCurrent = 2
+            const beforeCurrent = 2;
+            const afterCurrent = 2;
 
-            const left = Math.max(1, this.currentPage - beforeCurrent)
+            const left = Math.max(1, this.currentPage - beforeCurrent);
 
-            const right = Math.min(this.currentPage + afterCurrent, this.totalPages)
+            const right = Math.min(this.currentPage + afterCurrent, this.totalPages);
 
-            const pages = []
+            const pages = [];
 
-            for (let i = left; i <= right; i++) pages.push(this.getPage(i))
+            for (let i = left; i <= right; i++) pages.push(this.getPage(i));
 
-            return pages
+            return pages;
         },
 
         get pagesInRangeForSmallScreen() {
-            let beforeCurrent = 1
-            let afterCurrent = 1
+            let beforeCurrent = 1;
+            let afterCurrent = 1;
 
             if (this.currentPage === this.totalPages) {
-                beforeCurrent = 2
+                beforeCurrent = 2;
             }
-            if (this.currentPage === 1) afterCurrent = 2
+            if (this.currentPage === 1) afterCurrent = 2;
 
-            const left = Math.max(1, this.currentPage - beforeCurrent)
+            const left = Math.max(1, this.currentPage - beforeCurrent);
 
-            const right = Math.min(this.currentPage + afterCurrent, this.totalPages)
+            const right = Math.min(this.currentPage + afterCurrent, this.totalPages);
 
-            const pages = []
+            const pages = [];
 
-            for (let i = left; i <= right; i++) pages.push(this.getPage(i))
+            for (let i = left; i <= right; i++) pages.push(this.getPage(i));
 
-            return pages
+            return pages;
         },
 
         middleArrowMethod() {
-            if (this.currentPage < 4) this.currentPage = this.currentPage + 3
-            else this.currentPage = this.currentPage - 3
+            if (this.currentPage < 4) this.currentPage = this.currentPage + 3;
+            else this.currentPage = this.currentPage - 3;
         },
 
         rightArrowMethod() {
-            if (this.currentPage + 3 > this.totalPages)
-                this.currentPage = this.currentPage + 1
-            else this.currentPage = this.currentPage + 3
+            if (this.currentPage + 3 > this.totalPages) this.currentPage = this.currentPage + 1;
+            else this.currentPage = this.currentPage + 3;
         },
 
         leftArrowMethod() {
-            if (this.currentPage - 3 < 1) this.currentPage = this.currentPage - 1
-            else this.currentPage = this.currentPage - 3
+            if (this.currentPage - 3 < 1) this.currentPage = this.currentPage - 1;
+            else this.currentPage = this.currentPage - 3;
         },
     }"
     x-init="
         () => {
             $watch('currentPage', () => {
-                moveAnimation = true
+                moveAnimation = true;
                 setTimeout(() => {
-                    moveAnimation = false
-                }, 300)
-            })
+                    moveAnimation = false;
+                }, 300);
+            });
         }
     "
     class="relative flex"
@@ -86,10 +84,10 @@
     <div
         class="text-white-500 mx-0.5 flex h-9 min-w-9 items-center justify-center rounded-xl text-xs transition duration-300 select-none"
         :class="{
-            'bg-neutral-200/60' : ! whiteBackground,
-            'bg-white shadow-lg shadow-black/5' : whiteBackground,
-            'cursor-pointer hover:bg-neutral-200' : currentPage !== 1,
-            'cursor-not-allowed' : currentPage === 1,
+            'bg-neutral-200/60': !whiteBackground,
+            'bg-white shadow-lg shadow-black/5': whiteBackground,
+            'cursor-pointer hover:bg-neutral-200': currentPage !== 1,
+            'cursor-not-allowed': currentPage === 1,
         }"
         x-on:click="currentPage = currentPage > 1 ? currentPage - 1 : currentPage"
     >
@@ -99,7 +97,7 @@
             height="22"
             viewBox="0 0 24 24"
             :class="{
-                'opacity-30' : currentPage === 1,
+                'opacity-30': currentPage === 1,
             }"
         >
             <path
@@ -117,11 +115,11 @@
     <div
         class="bg-primary shadow-salmon/50 absolute top-0 left-1/2 z-10 mx-0.5 flex h-[36px] min-w-[36px] items-center justify-center rounded-xl text-sm text-white shadow-lg transition-all duration-300 select-none md:hidden"
         :class="{
-            'scale-110' : moveAnimation,
+            'scale-110': moveAnimation,
 
-            '!left-[40px]' : currentPage === 1,
-            '!left-[80px]' : (currentPage > 1 && currentPage < totalPages),
-            '!left-[120px]' : currentPage === totalPages && totalPages > 2,
+            '!left-[40px]': currentPage === 1,
+            '!left-[80px]': currentPage > 1 && currentPage < totalPages,
+            '!left-[120px]': currentPage === totalPages && totalPages > 2,
         }"
         x-text="currentPage"
     ></div>
@@ -130,15 +128,15 @@
         <div
             class="bg-primary shadow-salmon/50 absolute top-0 left-1/2 z-10 mx-0.5 hidden h-[36px] min-w-[36px] items-center justify-center rounded-xl text-sm text-white shadow-lg transition-all duration-300 select-none md:flex"
             :class="{
-                'scale-110' : moveAnimation,
-                '!left-[40px]' : currentPage === 1,
-                '!left-[80px]' : currentPage === 2,
-                '!left-[120px]' : currentPage === 3,
-                '!left-[160px]' : currentPage === 4,
-                '!left-[200px]' : currentPage === 5,
-                '!left-[240px]' : currentPage === 6,
-                '!left-[280px]' : currentPage === 7,
-                '!left-[320px]' : currentPage === 8,
+                'scale-110': moveAnimation,
+                '!left-[40px]': currentPage === 1,
+                '!left-[80px]': currentPage === 2,
+                '!left-[120px]': currentPage === 3,
+                '!left-[160px]': currentPage === 4,
+                '!left-[200px]': currentPage === 5,
+                '!left-[240px]': currentPage === 6,
+                '!left-[280px]': currentPage === 7,
+                '!left-[320px]': currentPage === 8,
             }"
             x-text="currentPage"
         ></div>
@@ -148,14 +146,14 @@
         <div
             class="bg-salmon shadow-salmon/50 absolute top-0 left-1/2 z-10 mx-0.5 hidden h-[36px] min-w-[36px] items-center justify-center rounded-xl text-sm text-white shadow-lg transition-all duration-300 select-none md:flex"
             :class="{
-                'scale-110' : moveAnimation,
-                '!left-[40px]' : currentPage === 1,
-                '!left-[80px]' : currentPage === 2,
-                '!left-[120px]' : currentPage === 3,
-                '!left-[200px]' : currentPage > 3 && currentPage < (totalPages - 2),
-                '!left-[280px]' : currentPage === (totalPages - 2),
-                '!left-[320px]' : currentPage === (totalPages - 1),
-                '!left-[360px]' : currentPage === totalPages,
+                'scale-110': moveAnimation,
+                '!left-[40px]': currentPage === 1,
+                '!left-[80px]': currentPage === 2,
+                '!left-[120px]': currentPage === 3,
+                '!left-[200px]': currentPage > 3 && currentPage < totalPages - 2,
+                '!left-[280px]': currentPage === totalPages - 2,
+                '!left-[320px]': currentPage === totalPages - 1,
+                '!left-[360px]': currentPage === totalPages,
             }"
             x-text="currentPage"
         ></div>
@@ -177,24 +175,35 @@
 
     <template x-if="totalPages > 8">
         <div class="hidden w-[360px] items-center justify-center md:flex">
-            <div x-data="{
-                page: 1,
-            }">
+            <div
+                x-data="{
+                    page: 1,
+                }"
+            >
                 <x-he4rt::pagination-button />
             </div>
-            <template x-if="!showMiddlePages" x-data="{
-                page: 2,
-            }">
+            <template
+                x-if="!showMiddlePages"
+                x-data="{
+                    page: 2,
+                }"
+            >
                 <x-he4rt::pagination-button />
             </template>
-            <template x-if="!showMiddlePages" x-data="{
-                page: 3,
-            }">
+            <template
+                x-if="!showMiddlePages"
+                x-data="{
+                    page: 3,
+                }"
+            >
                 <x-he4rt::pagination-button />
             </template>
-            <template x-if="!showMiddlePages" x-data="{
-                page: 4,
-            }">
+            <template
+                x-if="!showMiddlePages"
+                x-data="{
+                    page: 4,
+                }"
+            >
                 <x-he4rt::pagination-button />
             </template>
 
@@ -238,8 +247,8 @@
                         viewBox="0 0 24 24"
                         class="absolute top-2 opacity-0 transition-all duration-200 group-hover:opacity-100"
                         :class="{
-                            'right-0 group-hover:!right-2' : currentPage > 4,
-                            'left-0 group-hover:!left-2 rotate-180' : currentPage < 4,
+                            'right-0 group-hover:!right-2': currentPage > 4,
+                            'left-0 group-hover:!left-2 rotate-180': currentPage < 4,
                         }"
                     >
                         <path
@@ -309,9 +318,11 @@
             >
                 <x-he4rt::pagination-button />
             </template>
-            <div x-data="{
-                page: totalPages,
-            }">
+            <div
+                x-data="{
+                    page: totalPages,
+                }"
+            >
                 <x-he4rt::pagination-button />
             </div>
         </div>
@@ -321,10 +332,10 @@
     <div
         class="bg-card/50 mx-0.5 flex h-9 min-w-9 items-center justify-center rounded-xl text-xs text-neutral-700 transition duration-300 select-none"
         :class="{
-            'bg-neutral-200/60' : ! whiteBackground,
-            'bg-white shadow-lg shadow-black/5' : whiteBackground,
-            'cursor-pointer hover:bg-neutral-200' : currentPage !== totalPages,
-            'cursor-not-allowed' : currentPage === totalPages,
+            'bg-neutral-200/60': !whiteBackground,
+            'bg-white shadow-lg shadow-black/5': whiteBackground,
+            'cursor-pointer hover:bg-neutral-200': currentPage !== totalPages,
+            'cursor-not-allowed': currentPage === totalPages,
         }"
         x-on:click="currentPage = currentPage < totalPages ? currentPage + 1 : currentPage"
     >
@@ -334,7 +345,7 @@
             height="22"
             viewBox="0 0 24 24"
             :class="{
-                'opacity-30' : currentPage === totalPages,
+                'opacity-30': currentPage === totalPages,
             }"
         >
             <path

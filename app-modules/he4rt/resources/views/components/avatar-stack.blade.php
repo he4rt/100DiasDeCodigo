@@ -1,4 +1,4 @@
-@props([
+@props ([
     'images' => [],
     'limit' => 5,
     'size' => 'lg',
@@ -19,7 +19,13 @@
         ->implode(' ');
 @endphp
 
-<div {{ $attributes->class('hp-avatar-stack') }}>
+<div
+    {{
+        $attributes->class(
+            'hp-avatar-stack',
+        )
+    }}
+>
     <div class="hp-avatar-stack-images">
         @foreach ($visibleImages as $index => $image)
             <x-he4rt::avatar
@@ -33,8 +39,6 @@
     </div>
 
     @if ($slot->isNotEmpty())
-        <div class="hp-avatar-stack-label">
-            {{ $slot }}
-        </div>
+        <div class="hp-avatar-stack-label">{{ $slot }}</div>
     @endif
 </div>

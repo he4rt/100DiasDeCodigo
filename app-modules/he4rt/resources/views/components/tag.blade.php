@@ -1,4 +1,4 @@
-@props([
+@props ([
     'as' => 'div',
     'href' => null,
     'disabled' => false,
@@ -27,14 +27,24 @@
     }
 @endphp
 
-<{{ $tag }} {{ $attributes->merge(['class' => 'hp-tag'])->merge($linkAttrs) }}>
-    @isset($icon)
-        <div {{ $icon->attributes->class('hp-tag-icon') }}>
+<{{ $tag }}
+    {{
+        $attributes
+            ->merge(['class' => 'hp-tag'])
+            ->merge($linkAttrs)
+    }}
+>
+    @isset ($icon)
+        <div
+            {{
+                $icon->attributes->class(
+                    'hp-tag-icon',
+                )
+            }}
+        >
             {{ $icon }}
         </div>
     @endisset
 
-    <span class="hp-tag-text" x-text="tag">
-        {{ $slot }}
-    </span>
+    <span class="hp-tag-text" x-text="tag"> {{ $slot }} </span>
 </{{ $tag }}>

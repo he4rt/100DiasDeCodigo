@@ -1,8 +1,4 @@
-@props([
-    'user',
-    'stats',
-    'twitterMetrics',
-])
+@props (['user', 'stats', 'twitterMetrics'])
 
 <div
     class="relative overflow-hidden rounded-xl bg-gray-50 shadow-sm ring-1 ring-gray-950/5 dark:bg-gray-900 dark:ring-white/10"
@@ -40,9 +36,7 @@
             <div class="flex-1 space-y-4 pt-2 text-center sm:text-left">
                 <div>
                     <div class="flex items-center justify-center gap-2 sm:justify-start">
-                        <h1 class="text-2xl font-bold text-gray-950 sm:text-3xl dark:text-white">
-                            {{ $user->name }}
-                        </h1>
+                        <h1 class="text-2xl font-bold text-gray-950 sm:text-3xl dark:text-white">{{ $user->name }}</h1>
                         @if ($user->is_verified ?? false)
                             <x-filament::icon
                                 icon="heroicon-m-check-badge"
@@ -51,9 +45,7 @@
                             />
                         @endif
                     </div>
-                    <p class="text-base font-medium text-gray-500 dark:text-gray-400">
-                        {{ '@' . $user->username }}
-                    </p>
+                    <p class="text-base font-medium text-gray-500 dark:text-gray-400">{{ '@' . $user->username }}</p>
                 </div>
 
                 {{-- Bio --}}
@@ -93,7 +85,11 @@
                         <div class="flex items-center gap-1.5" title="Total Likes">
                             <x-filament::icon icon="heroicon-c-heart" class="h-4 w-4 text-red-500" />
                             <span class="font-semibold text-gray-700 dark:text-gray-300">
-                                {{ number_format($twitterMetrics['likes']) }}
+                                {{
+                                    number_format(
+                                        $twitterMetrics['likes'],
+                                    )
+                                }}
                             </span>
                         </div>
                         <div class="flex items-center gap-1.5" title="Total Retweets">
@@ -102,19 +98,31 @@
                                 class="h-4 w-4 text-green-500"
                             />
                             <span class="font-semibold text-gray-700 dark:text-gray-300">
-                                {{ number_format($twitterMetrics['retweets']) }}
+                                {{
+                                    number_format(
+                                        $twitterMetrics['retweets'],
+                                    )
+                                }}
                             </span>
                         </div>
                         <div class="flex items-center gap-1.5" title="Total Replies">
                             <x-filament::icon icon="heroicon-m-chat-bubble-left" class="h-4 w-4 text-blue-500" />
                             <span class="font-semibold text-gray-700 dark:text-gray-300">
-                                {{ number_format($twitterMetrics['replies']) }}
+                                {{
+                                    number_format(
+                                        $twitterMetrics['replies'],
+                                    )
+                                }}
                             </span>
                         </div>
                         <div class="flex items-center gap-1.5" title="Total Views">
                             <x-filament::icon icon="heroicon-c-eye" class="h-4 w-4 text-gray-500" />
                             <span class="font-semibold text-gray-700 dark:text-gray-300">
-                                {{ number_format($twitterMetrics['views']) }}
+                                {{
+                                    number_format(
+                                        $twitterMetrics['views'],
+                                    )
+                                }}
                             </span>
                         </div>
                     </div>

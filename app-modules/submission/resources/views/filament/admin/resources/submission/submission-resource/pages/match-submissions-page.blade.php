@@ -5,14 +5,13 @@
 <x-filament-panels::page>
     <x-filament::section
         heading="Match Submissions ({{ $submissionsCount }} left)"
-        :description="filled($submission) ? $submission->getKey() : '' "
+        :description="filled($submission) ? $submission->getKey() : ''"
     >
         @if ($submission)
             <div class="flex justify-center gap-4">
                 <x-submission::submission-card :$submission />
                 <x-submission::submission-user-profile :submission="$submission" />
             </div>
-
             <div class="mt-6 flex items-center justify-center gap-4">
                 <button
                     wire:click="matchSubmission('rejected')"

@@ -10,7 +10,8 @@
         ],
         [
             'title' => 'Interaja com a comunidade',
-            'description' => 'Todos os dias, entre em contato com pelo menos duas pessoas no Twitter que também estão participando do desafio.',
+            'description' =>
+                'Todos os dias, entre em contato com pelo menos duas pessoas no Twitter que também estão participando do desafio.',
         ],
     ];
 @endphp
@@ -27,7 +28,7 @@
                         >
                             {{ $key }}
                         </div>
-                    </x-slot>
+                    </x-slot:icon>
                     <x-slot name="content"></x-slot>
                     <x-slot name="title">
                         {{ $item['title'] }}

@@ -1,4 +1,4 @@
-@props([
+@props ([
     'level' => 1,
     'size' => 'md',
 ])
@@ -6,14 +6,9 @@
 @php
     $tag = 'h' . max(1, min($level, 6));
 
-    $classes = collect([
-        'hp-heading',
-        'hp-heading-' . $size,
-    ])
+    $classes = collect(['hp-heading', 'hp-heading-' . $size])
         ->filter()
         ->implode(' ');
 @endphp
 
-<{{ $tag }} {{ $attributes->class($classes) }}>
-    {{ $slot }}
-</{{ $tag }}>
+<{{ $tag }} {{ $attributes->class($classes) }}> {{ $slot }} </{{ $tag }}>

@@ -2,17 +2,10 @@
     use App\Models\User;
 @endphp
 
-@props([
-    'users',
-    'usersCount',
-])
+@props (['users', 'usersCount'])
 @php
     /** @var \Illuminate\Support\Collection<int, User> $usersImages */
-    $usersImages = $users
-        ->map(fn (User $user) => $user->getFilamentAvatarUrl())
-        ->filter()
-        ->values()
-        ->toArray();
+    $usersImages = $users->map(fn(User $user) => $user->getFilamentAvatarUrl())->filter()->values()->toArray();
 @endphp
 
 <section class="hp-section relative" id="community">
@@ -28,23 +21,23 @@
                             <x-filament::icon icon="heroicon-o-book-open" class="h-5 w-5" />
                             #100DiasDeCodigo
                         </x-he4rt::badge>
-                    </x-slot>
+                    </x-slot:badge>
 
                     <x-slot:title>
                         Construa o hábito que vai mudar sua carreira em tecnologia
-                    </x-slot>
+                    </x-slot:title>
 
                     <x-slot:description>
                         Um desafio simples, consistente e transformador. Dedique 1 hora por dia durante 100 dias e mude
                         sua carreira na programação.
-                    </x-slot>
+                    </x-slot:description>
                     <x-slot:actions>
                         <x-he4rt::button href="/app" icon="heroicon-s-chevron-right">Começar agora</x-he4rt::button>
 
                         <x-he4rt::button icon="heroicon-s-chevron-right" variant="outline">
                             Ver Timeline
                         </x-he4rt::button>
-                    </x-slot>
+                    </x-slot:actions>
                 </x-he4rt::headline>
                 <x-he4rt::avatar-stack :images="$usersImages" limit="5">
                     Mais de {{ $usersCount }} desenvolvedores já fazem parte

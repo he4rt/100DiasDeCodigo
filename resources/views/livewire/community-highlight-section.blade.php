@@ -36,19 +36,11 @@
                     >
                         {{ $user['name'] }}
                     </p>
-                    <p class="text-xs text-gray-500 dark:text-gray-400">
-                        {{ '@' . $user['username'] }}
-                    </p>
+                    <p class="text-xs text-gray-500 dark:text-gray-400">{{ '@' . $user['username'] }}</p>
                 </div>
 
                 <div class="flex items-center gap-2">
-                    <span
-                        @class([
-                            'rounded-full px-2 py-0.5 text-xs font-medium',
-                        ])
-                    >
-                        {{ $user['badge'] }}
-                    </span>
+                    <span @class (['rounded-full px-2 py-0.5 text-xs font-medium'])> {{ $user['badge'] }} </span>
                     <span class="text-xs text-gray-500 dark:text-gray-400">Dia {{ $user['day'] }}</span>
                     <x-filament::icon
                         icon="heroicon-m-chevron-right"

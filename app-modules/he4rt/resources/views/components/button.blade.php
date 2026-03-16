@@ -1,43 +1,43 @@
-@props([
-    "as" => "button",
-    "href" => null,
-    "type" => "button",
-    "variant" => "solid", // solid | outline
-    "size" => "md", // xs | sm | md | lg
-    "rounded" => "sm", // sm | md | lg | full
-    "block" => false,
-    "disabled" => false,
-    "loading" => false,
-    "iconOnly" => false,
-    "icon" => null,
-    "iconPosition" => "trailing",
+@props ([
+    'as' => 'button',
+    'href' => null,
+    'type' => 'button',
+    'variant' => 'solid', // solid | outline
+    'size' => 'md', // xs | sm | md | lg
+    'rounded' => 'sm', // sm | md | lg | full
+    'block' => false,
+    'disabled' => false,
+    'loading' => false,
+    'iconOnly' => false,
+    'icon' => null,
+    'iconPosition' => 'trailing',
 ])
 
-@aware(["interactive" => false])
+@aware (['interactive' => false])
 
 @php
     $isLink = filled($href);
-    $tag = $isLink ? "a" : $as;
+    $tag = $isLink ? 'a' : $as;
     $isBusy = (bool) $loading;
     $isDisabled = (bool) $disabled || $isBusy;
 
-    $hasLeading = isset($leading) || (filled($icon) && $iconPosition === "leading");
-    $hasTrailing = isset($trailing) || (filled($icon) && $iconPosition === "trailing");
+    $hasLeading = isset($leading) || (filled($icon) && $iconPosition === 'leading');
+    $hasTrailing = isset($trailing) || (filled($icon) && $iconPosition === 'trailing');
 
     $classes = collect([
-        "hp-button",
-        "hp-button-" . $variant,
-        "hp-button-size-" . $size,
-        "hp-button-rounded-" . $rounded,
-        $block ? "hp-button-block" : null,
-        $iconOnly ? "hp-button-icon-only" : null,
+        'hp-button',
+        'hp-button-' . $variant,
+        'hp-button-size-' . $size,
+        'hp-button-rounded-' . $rounded,
+        $block ? 'hp-button-block' : null,
+        $iconOnly ? 'hp-button-icon-only' : null,
     ])
         ->filter()
-        ->implode(" ");
+        ->implode(' ');
 @endphp
 
 <{{ $tag }}
-    @if (! $isLink)
+    @if (!$isLink)
         type="{{ $type }}"
         @if ($isDisabled)
             disabled
@@ -63,9 +63,7 @@
     @endif
 
     @unless ($iconOnly)
-        <span class="hp-button-label {{ $isBusy ? "opacity-0" : "opacity-100" }}">
-            {{ $slot }}
-        </span>
+        <span class="hp-button-label {{ $isBusy ? "opacity-0" : "opacity-100" }}"> {{ $slot }} </span>
     @endunless
 
     @if ($hasTrailing)

@@ -1,6 +1,4 @@
-@props([
-    'submission',
-])
+@props (['submission'])
 
 @php
     if (is_array($submission)) {
