@@ -27,7 +27,7 @@ class RefreshUserSubmissions
             ->whereNotNull('username')
             ->first();
 
-        if (! $socialiteUser) {
+        if (!$socialiteUser) {
             return;
         }
 
