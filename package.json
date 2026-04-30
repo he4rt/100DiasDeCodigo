@@ -11,7 +11,7 @@
         "build": "vite build",
         "dev": "vite",
         "format": "npx prettier --write \"**/*.{js,ts,json,yml,md,css,blade.php}\"",
-        "prepare": "npx -y husky",
+        "prepare": "husky || true",
         "outdated": "npx npm-check-updates"
     },
     "devDependencies": {
