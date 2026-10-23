@@ -9,6 +9,8 @@ use Carbon\CarbonImmutable;
 use He4rt\IntegrationTwitterApi\DTOs\TweetDTO;
 use He4rt\Submission\Database\Factories\SubmissionFactory;
 use He4rt\Submission\Enums\SubmissionStatus;
+use Illuminate\Database\Eloquent\Attributes\Table;
+use Illuminate\Database\Eloquent\Attributes\UseFactory;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -22,7 +24,7 @@ use Spatie\Tags\HasTags;
  * @property int|null $approver_id
  * @property string|null $tweet_id
  * @property string $content markdown
- * @property SubmissionStatus|string $status pending, rejected, approved
+ * @property SubmissionStatus $status
  * @property CarbonImmutable $submitted_at
  * @property CarbonImmutable|null $approved_at
  * @property CarbonImmutable|null $created_at
@@ -32,9 +34,10 @@ use Spatie\Tags\HasTags;
  * @property-read string|null $progress
  * @property-read User|null $user
  * @property-read User|null $approver
- * @property-read TweetDTO $tweet
  */
-class Submission extends Model
+#[Table(name: 'submissions')]
+#[UseFactory(factoryClass: SubmissionFactory::class)]
+final class Submission extends Model
 {
     /** @use HasFactory<SubmissionFactory> */
     use HasFactory;
