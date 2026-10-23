@@ -68,8 +68,12 @@ class Submission extends Model
         return $this->belongsTo(User::class, 'approver_id');
     }
 
-    public function getTweet(): TweetDTO
+    public function getTweet(): ?TweetDTO
     {
+        if (!is_array($this->metadata)) {
+            return null;
+        }
+
         return TweetDTO::fromArray($this->metadata);
     }
 
@@ -80,7 +84,7 @@ class Submission extends Model
     {
         return Attribute::make(
             get: function () {
-                $text = $this->getTweet()->text;
+                $text = $this->getTweet()->text ?? $this->content ?? '';
                 // Matches 1/100, 1 / 100
                 preg_match('/(\d+)\s*\/\s*(\d+)/', $text, $matches);
 

@@ -113,7 +113,7 @@ class SubmissionResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('user.name')
-                    ->default(fn (?Submission $record): string => $record->getTweet()->author->userName)
+                    ->default(fn (?Submission $record): ?string => $record?->getTweet()?->author->userName)
                     ->sortable(),
 
                 TextColumn::make('user.username')

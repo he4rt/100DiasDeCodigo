@@ -68,6 +68,11 @@ class PublicUserProfilePage extends Page
         /** @var Submission $submission */
         foreach ($this->submissions as $submission) {
             $tweet = $submission->getTweet();
+
+            if ($tweet === null) {
+                continue;
+            }
+
             $this->twitterMetrics['likes'] += $tweet->likeCount;
             $this->twitterMetrics['retweets'] += $tweet->retweetCount;
             $this->twitterMetrics['replies'] += $tweet->replyCount;
