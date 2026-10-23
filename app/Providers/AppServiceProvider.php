@@ -59,7 +59,9 @@ final class AppServiceProvider extends ServiceProvider
      */
     private function configureVite(): void
     {
-        Vite::useAggressivePrefetching();
+        if ($this->app->isProduction()) {
+            Vite::useAggressivePrefetching();
+        }
     }
 
     /**
