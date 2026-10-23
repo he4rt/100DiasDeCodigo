@@ -143,9 +143,9 @@ Put the `Tests\` namespace only in `autoload-dev`, never in `autoload`. Also reg
 
 Each `app-modules/<slug>/` has exactly one `mod:<slug>` triage label, and the reverse. When you scaffold a **new** module, in the same change you MUST:
 
-1. **Add a row** to the module table in `workflow/triage-labels` (`mod:<slug>` → `<slug>`).
+1. **Add a row** to the module table in `docs/agents/triage-labels.md` (`mod:<slug>` → `<slug>`).
 2. **Create the label on GitHub**:
    `gh label create "mod:<slug>" --color "c2e0c6" --description "<short description>"`
 3. **Register the test namespace** in the root `composer.json` `autoload-dev` (see `tooling/testing`).
 
-Keep the guideline table and the GitHub labels in sync. If an issue cannot get the label of its module, triage and routing break.
+Keep the table in `docs/agents/triage-labels.md` and the GitHub labels in sync. If an issue cannot get the label of its module, triage and routing break.

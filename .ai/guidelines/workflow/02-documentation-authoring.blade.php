@@ -6,7 +6,7 @@
 
 This is the **single source of truth for where authored docs live**. Every producer obeys it: a Matt Pocock skill, a superpowers skill, any other tool, or a human. The **scope and type** of the doc decide its destination. The tool that created the doc never decides it.
 
-Read the `domain/domain-docs` guideline first. It covers `GLOSSARY-MAP.md`, the `GLOSSARY.md` of each module and the `docs/adr/` trees. Create these files only when a decision or a spec is resolved. Do not scaffold them upfront.
+Read `docs/agents/domain.md` first. It covers `GLOSSARY-MAP.md`, the `GLOSSARY.md` of each module and the `docs/adr/` trees. Create these files only when a decision or a spec is resolved. Do not scaffold them upfront.
 
 ## Engineering docs only
 
