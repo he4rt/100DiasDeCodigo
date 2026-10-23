@@ -94,7 +94,7 @@ trait InteractsWithSubmissions
                 // This implies a gap of 6 days or more breaks it. (5 full days of silence).
                 // So diffInDays <= 5 is valid.
 
-                $gap = $prevDate->diffInDays($date);
+                $gap = $date->diffInDays($prevDate);
 
                 if ($gap <= 5) {
                     $streak++;
@@ -122,7 +122,7 @@ trait InteractsWithSubmissions
         $mostRecent = $dates->first();
 
         // If the user hasn't posted for 5 days from today, current streak is 0.
-        if ($today->diffInDays($mostRecent) > 5) {
+        if ($mostRecent->diffInDays($today) > 5) {
             $currentStreak = 0;
         } else {
             // The first streak group we calculated above corresponds to the most recent submissions.
@@ -132,7 +132,7 @@ trait InteractsWithSubmissions
             $prev = $dates->first();
 
             foreach ($dates->slice(1) as $date) {
-                if ($prev->diffInDays($date) <= 5) {
+                if ($date->diffInDays($prev) <= 5) {
                     $currentStreak++;
                     $prev = $date;
                 } else {
