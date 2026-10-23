@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ed6e2f13a3284b3c495215f3f2c8e1b1",
+    "content-hash": "fae753696baf14a6500bb7dc04d4e9c0",
     "packages": [
         {
             "name": "anourvalar/eloquent-serialize",
@@ -3125,13 +3125,13 @@
             "dist": {
                 "type": "path",
                 "url": "app-modules/he4rt",
-                "reference": "c2dae2577742891fc5268261792efc1cb0e4d14a"
+                "reference": "57b337ad69c6f649e1bb3b353e3037fd4459f617"
             },
             "type": "library",
             "extra": {
                 "laravel": {
                     "providers": [
-                        "He4rt\\Core\\Providers\\He4rtServiceProvider"
+                        "He4rt\\Core\\He4rtServiceProvider"
                     ]
                 }
             },
@@ -3154,7 +3154,7 @@
             "dist": {
                 "type": "path",
                 "url": "app-modules/integration-twitter-api",
-                "reference": "cb64235be168878b886d76b885df8ef34b513cfd"
+                "reference": "34982112095646aae01bff2eff27f32c80f4c868"
             },
             "type": "library",
             "extra": {
@@ -3166,8 +3166,7 @@
             },
             "autoload": {
                 "psr-4": {
-                    "He4rt\\IntegrationTwitterApi\\": "src/",
-                    "He4rt\\IntegrationTwitterApi\\Tests\\": "tests/"
+                    "He4rt\\IntegrationTwitterApi\\": "src/"
                 }
             },
             "autoload-dev": {
@@ -3189,13 +3188,13 @@
             "dist": {
                 "type": "path",
                 "url": "app-modules/portal",
-                "reference": "8d2ef8d4bf20b0dfa5985b39b847f06150ebd4fd"
+                "reference": "7b13a8d80b0dbc22f08681f867b49cdf9341afb5"
             },
             "type": "library",
             "extra": {
                 "laravel": {
                     "providers": [
-                        "He4rt\\Portal\\Providers\\PortalServiceProvider"
+                        "He4rt\\Portal\\PortalServiceProvider"
                     ]
                 }
             },
@@ -3249,13 +3248,13 @@
             "dist": {
                 "type": "path",
                 "url": "app-modules/user",
-                "reference": "a6ccae4682e8359ce83d8b423685f1b3e5ffa9c9"
+                "reference": "041181b1797f911631dfc1c0d3f9e0f4c1dc872c"
             },
             "type": "library",
             "extra": {
                 "laravel": {
                     "providers": [
-                        "He4rt\\User\\Providers\\UserServiceProvider"
+                        "He4rt\\User\\UserServiceProvider"
                     ]
                 }
             },
@@ -14082,6 +14081,97 @@
             "time": "2026-08-10T11:01:27+00:00"
         },
         {
+            "name": "pestphp/pest-plugin-phpstan",
+            "version": "v5.2.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/pestphp/pest-plugin-phpstan.git",
+                "reference": "19afd92402be203788b73eba9fdb5f5185f66a25"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/pestphp/pest-plugin-phpstan/zipball/19afd92402be203788b73eba9fdb5f5185f66a25",
+                "reference": "19afd92402be203788b73eba9fdb5f5185f66a25",
+                "shasum": ""
+            },
+            "require": {
+                "pestphp/pest": "^5.0.0",
+                "php": "^8.4",
+                "phpstan/phpstan": "^2.2.5"
+            },
+            "conflict": {
+                "pestphp/pest": "<5.0.0"
+            },
+            "require-dev": {
+                "laravel/pao": "^1.1.2",
+                "laravel/pint": "^1.29.3",
+                "pestphp/pest-plugin-rector": "^5.0",
+                "phpstan/extension-installer": "^1.4.3",
+                "phpstan/phpstan-strict-rules": "^2.0.12",
+                "rector/rector": "^2.5.7"
+            },
+            "type": "phpstan-extension",
+            "extra": {
+                "phpstan": {
+                    "includes": [
+                        "extension.neon"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Pest\\PHPStan\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Punyapal Shah",
+                    "email": "mrpunyapal@gmail.com"
+                },
+                {
+                    "name": "Nuno Maduro",
+                    "email": "enunomaduro@gmail.com"
+                }
+            ],
+            "description": "PHPStan plugin for Pest",
+            "keywords": [
+                "PHPStan",
+                "framework",
+                "pest",
+                "php",
+                "plugin",
+                "test",
+                "testing",
+                "unit"
+            ],
+            "support": {
+                "source": "https://github.com/pestphp/pest-plugin-phpstan/tree/v5.2.2"
+            },
+            "funding": [
+                {
+                    "url": "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=66BYDWAT92N6L",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/mrpunyapal",
+                    "type": "github"
+                },
+                {
+                    "url": "https://github.com/nunomaduro",
+                    "type": "github"
+                },
+                {
+                    "url": "https://www.patreon.com/nunomaduro",
+                    "type": "patreon"
+                }
+            ],
+            "time": "2026-10-02T16:21:04+00:00"
+        },
+        {
             "name": "pestphp/pest-plugin-profanity",
             "version": "v5.0.1",
             "source": {
@@ -16853,7 +16943,7 @@
         }
     ],
     "aliases": [],
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
     "stability-flags": {},
     "prefer-stable": true,
     "prefer-lowest": false,

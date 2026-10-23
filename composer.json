@@ -46,6 +46,7 @@
         "pestphp/pest-plugin-faker": "^5.0.0",
         "pestphp/pest-plugin-laravel": "^5.0.1",
         "pestphp/pest-plugin-livewire": "^5.0.0",
+        "pestphp/pest-plugin-phpstan": "^5.2",
         "pestphp/pest-plugin-rector": "^5.0.6",
         "phpstan/extension-installer": "^1.4.3",
         "rector/rector": "^2.6.7"
@@ -55,11 +56,15 @@
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/"
-        }
+        },
+        "files": [
+            "bootstrap/helpers.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {
-            "Tests\\": "tests/"
+            "Tests\\": "tests/",
+            "He4rt\\IntegrationTwitterApi\\Tests\\": "app-modules/integration-twitter-api/tests/"
         }
     },
     "scripts": {
@@ -107,6 +112,7 @@
         "test:phpstan": "vendor/bin/phpstan analyse --ansi",
         "test:unit": "vendor/bin/pest --compact --group=unit",
         "test:feature": "vendor/bin/pest --compact --group=feature",
+        "test:arch": "vendor/bin/pest --compact --group=arch",
         "test:cov": "vendor/bin/pest --compact --coverage",
         "check": [
             "@test:rector",
@@ -144,7 +150,7 @@
             }
         }
     },
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
     "prefer-stable": true,
     "repositories": [
         {
