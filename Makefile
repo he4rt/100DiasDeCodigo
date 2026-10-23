@@ -6,22 +6,15 @@ help: ## Show available commands
 
 .PHONY: route-list
 route-list: ## List all registered routes
-	@php artisan route:list --ansi --except-vendor
-
-.PHONY: rl
-rl: route-list ## Alias for route-list
+	@php artisan route:list --except-vendor --ansi
 
 .PHONY: pint
 pint: ## Run Pint code style fixer
-	@export XDEBUG_MODE=off
-	@$(CURDIR)/vendor/bin/pint --parallel
-	@unset XDEBUG_MODE
+	@XDEBUG_MODE=off $(CURDIR)/vendor/bin/pint --parallel
 
 .PHONY: test-pint
 test-pint: ## Run Pint code style fixer in test mode
-	@export XDEBUG_MODE=off
-	@$(CURDIR)/vendor/bin/pint --test --parallel
-	@unset XDEBUG_MODE=off
+	@XDEBUG_MODE=off $(CURDIR)/vendor/bin/pint --test --parallel
 
 .PHONY: rector
 rector: ## Run Rector
@@ -40,7 +33,7 @@ p: phpstan ## Alias for phpstan
 
 .PHONY: test-phpstan
 test-phpstan: ## Run PHPStan in test mode
-	@$(CURDIR)/vendor/bin/phpstan analyse --ansi
+	@$(CURDIR)/vendor/bin/phpstan analyse --ansi --memory-limit=2G
 
 .PHONY: format
 format: rector pint ## Run Pint and Rector and try to fixes the source code
@@ -53,22 +46,26 @@ check: test-rector test-pint test-phpstan ## Run Pint, PHPStan with Rector in dr
 
 .PHONY: test
 test: ## Run all tests
-	@$(CURDIR)/vendor/bin/pest --parallel --compact
+	@$(CURDIR)/vendor/bin/pest --compact
 
 .PHONY: t
 t: test ## Alias for test
 
+.PHONY: test-shards
+test-shards: ## Regenerate tests/.pest/shards.json timings (sequential)
+	@php artisan test --compact --update-shards
+
 .PHONY: test-unit
 test-unit: ## Run unit tests
-	@$(CURDIR)/vendor/bin/pest --parallel --compact --group=unit
+	@$(CURDIR)/vendor/bin/pest --compact --group=unit
 
 .PHONY: test-feature
 test-feature: ## Run feature tests
-	@$(CURDIR)/vendor/bin/pest --parallel --compact --group=feature
+	@$(CURDIR)/vendor/bin/pest --compact --group=feature
 
-.PHONY: test-browser
-test-browser: ## Run browser tests
-	@$(CURDIR)/vendor/bin/pest --parallel --compact --group=browser
+.PHONY: setup-test-db
+setup-test-db: ## Create the testing database for running tests
+	@php artisan migrate --env=testing --no-interaction --force
 
 .PHONY: migrate-fresh
 migrate-fresh: ## Run migrations and seed the database
@@ -79,7 +76,7 @@ env-up: ## Start the development environment
 	@docker compose --file docker-compose.yml up --detach
 
 .PHONY: env-down
-env-down: ## Start the development environment
+env-down: ## Stop the development environment (removes images and volumes)
 	@docker compose --file docker-compose.yml down --rmi all --volumes
 
 .PHONY: dev
@@ -88,10 +85,10 @@ dev: ## Start the server
 
 .PHONY: setup
 setup: ## Setup the project
-	@composer install
-	@npm install
-	@composer run-script post-root-package-install
-	@composer run-script post-create-project-cmd
-	@php artisan key:generate --ansi
-	@php artisan storage:link --ansi
-	@composer run-script ide-helper
+	@composer run-script setup
+
+.PHONY: truncate
+truncate: ## Truncate laravel.log file
+	@truncate -s 0 storage/logs/laravel.log
+
+-include Makefile.local
