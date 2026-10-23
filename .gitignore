@@ -3,12 +3,19 @@
 .env
 .env.backup
 .env.production
+.env.testing
 .phpactor.json
 .phpstorm.meta.php
 .phpunit.result.cache
 .pint.result.cache
 /.fleet
 /.idea
+/.kiro
+/.agents/*
+!/.agents/setup
+!/.agents/resume
+/.amp/portals/*
+/.laracord
 /.nova
 /.phpunit.cache
 /.rector.result.cache
@@ -20,23 +27,35 @@
 /public/hot
 /public/css
 /public/fonts
+/public/fonts-manifest.dev.json
 /public/js
 /public/storage
 /storage/*.key
+/storage/debugbar
 /storage/pail
 /vendor
+/.cache
 Homestead.json
 Homestead.yaml
+*.local
 Thumbs.db
 _ide_helper.php
 _ide_helper_models.php
+auth.json
+npm-debug.log
+yarn-error.log
 tests/Browser/Screenshots
 /.composer
 
-=== AI Agents ===
+# Lerd
+.env.before_lerd
+.lerd.yaml
+
+# === AI Agents ===
 
 # Laravel Boost
 boost.json
+.amp/settings.json
 .junie
 .junie/
 .mcp.json
@@ -45,7 +64,10 @@ boost.json
 AGENTS.md
 GEMINI.md
 QWEN.md
-.ai
+.ai/*
+.ai/mcp/mcp.json
+!.ai/guidelines/
+!.ai/rules/
 .output.txt
 .output/
 .agent/
@@ -102,3 +124,9 @@ WARP.md
 # Crush AI
 .crush/
 CRUSH.md
+.superpowers/
+
+/poc
+
+.codex
+/.codex
