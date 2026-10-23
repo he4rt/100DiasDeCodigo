@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace He4rt\Portal\Providers;
+namespace He4rt\Portal;
 
 use Filament\Panel;
 use He4rt\Portal\Pages\ParticipantsPage;
