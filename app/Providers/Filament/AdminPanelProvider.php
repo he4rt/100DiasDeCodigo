@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Providers\Filament;
 
 use App\Enums\FilamentPanel;
+use App\Enums\NavigationGroup;
 use App\Filament\Shared\Actions\GoToAppAction;
 use Basement\Webhooks\FilamentWebhookPlugin;
 use Filament\Enums\UserMenuPosition;
@@ -36,6 +37,7 @@ final class AdminPanelProvider extends PanelProvider
             ->path($this->panelId->value)
             ->topbar(condition: true)
             ->topNavigation(condition: false)
+            ->navigationGroups(NavigationGroup::class)
             ->sidebarCollapsibleOnDesktop()
             ->userMenu(position: UserMenuPosition::Topbar)
             ->colors([
@@ -57,7 +59,8 @@ final class AdminPanelProvider extends PanelProvider
                 FilamentInfoWidget::class,
             ])
             ->plugins([
-                FilamentWebhookPlugin::make(),
+                FilamentWebhookPlugin::make()
+                    ->navigationGroup(NavigationGroup::Logs->name),
             ])
             ->middleware([
                 EncryptCookies::class,

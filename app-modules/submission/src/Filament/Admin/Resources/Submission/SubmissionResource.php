@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace He4rt\Submission\Filament\Admin\Resources\Submission;
 
+use App\Enums\NavigationGroup;
 use BackedEnum;
 use Filament\Resources\Pages\PageRegistration;
 use Filament\Resources\Resource;
@@ -20,6 +21,7 @@ use He4rt\Submission\Models\Submission;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use UnitEnum;
 
 final class SubmissionResource extends Resource
 {
@@ -29,6 +31,8 @@ final class SubmissionResource extends Resource
     protected static ?string $slug = 'submissions';
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+
+    protected static string|UnitEnum|null $navigationGroup = NavigationGroup::Challenge;
 
     public static function form(Schema $schema): Schema
     {
