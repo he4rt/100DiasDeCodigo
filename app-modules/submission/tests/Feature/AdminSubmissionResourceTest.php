@@ -26,6 +26,7 @@ it('lists submissions', function (): void {
     $submissions = Submission::factory()->count(2)->create();
 
     livewire(ListSubmissions::class)
+        ->loadTable()
         ->assertOk()
         ->assertCanSeeTableRecords($submissions);
 });
@@ -34,6 +35,7 @@ it('approves a pending submission', function (): void {
     $submission = Submission::factory()->pending()->create();
 
     livewire(ListSubmissions::class)
+        ->loadTable()
         ->callTableAction(ReviewSubmissionAction::class, $submission, data: [
             'status' => SubmissionStatus::Approved->value,
         ])
@@ -50,6 +52,7 @@ it('disables the review of a submission that is not pending', function (): void 
     $submission = Submission::factory()->approved()->create();
 
     livewire(ListSubmissions::class)
+        ->loadTable()
         ->assertTableActionDisabled(ReviewSubmissionAction::class, $submission);
 });
 

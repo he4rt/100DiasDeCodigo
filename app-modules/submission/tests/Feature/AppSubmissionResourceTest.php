@@ -50,6 +50,7 @@ it('lists only the submissions of the authenticated user', function (): void {
     $this->actingAs($user);
 
     livewire(ListSubmissions::class)
+        ->loadTable()
         ->assertCanSeeTableRecords([$ownSubmission])
         ->assertCanNotSeeTableRecords([$otherSubmission]);
 });

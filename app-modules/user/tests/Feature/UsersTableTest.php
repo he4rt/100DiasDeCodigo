@@ -22,6 +22,7 @@ it('sorts users by linked twitter account', function (): void {
     $withoutTwitter = User::factory()->create();
 
     livewire(ListUsers::class)
+        ->loadTable()
         ->sortTable('has_twitter', 'desc')
         ->assertCanSeeTableRecords([$withTwitter, $withoutTwitter], inOrder: true)
         ->assertTableColumnStateSet('has_twitter', true, $withTwitter)

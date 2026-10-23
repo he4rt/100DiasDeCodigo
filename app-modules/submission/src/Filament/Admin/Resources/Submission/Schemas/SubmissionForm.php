@@ -32,7 +32,6 @@ final class SubmissionForm
                             ->schema([
                                 Select::make('user_id')
                                     ->relationship('user', 'name')
-                                    ->searchable()
                                     ->disabled()
                                     ->required(),
                                 TextInput::make('tweet_id')
@@ -48,7 +47,6 @@ final class SubmissionForm
 
                         Select::make('approver_id')
                             ->relationship('approver', 'name')
-                            ->searchable()
                             ->disabled()
                             ->required(),
 
