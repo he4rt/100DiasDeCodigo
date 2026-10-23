@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Providers;
 
 use App\Providers\Tools\DebugbarServiceProvider;
+use App\Providers\Tools\SpatieBackupServiceProvider;
 use Carbon\CarbonImmutable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Date;
@@ -22,6 +23,7 @@ final class AppServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->registerDebugbar();
+        $this->registerSpatieBackup();
     }
 
     /**
@@ -94,6 +96,13 @@ final class AppServiceProvider extends ServiceProvider
     {
         if ($this->app->isLocal() && class_exists(\Fruitcake\LaravelDebugbar\ServiceProvider::class)) {
             $this->app->register(DebugbarServiceProvider::class);
+        }
+    }
+
+    private function registerSpatieBackup(): void
+    {
+        if (config()->boolean('backup.enabled')) {
+            $this->app->register(SpatieBackupServiceProvider::class);
         }
     }
 }

@@ -127,7 +127,8 @@
     "extra": {
         "laravel": {
             "dont-discover": [
-                "barryvdh/laravel-debugbar"
+                "barryvdh/laravel-debugbar",
+                "spatie/laravel-backup"
             ]
         }
     },

@@ -9,14 +9,14 @@ Schedule::command('cloudflare:reload')
     ->twiceMonthly(3, 17);
 
 Schedule::command('backup:run', ['--only-db'])
-    ->when(fn () => config('backup.enabled'))
+    ->when(fn () => config()->boolean('backup.enabled'))
     ->everyFifteenMinutes();
 
 Schedule::command('backup:clean')
-    ->when(fn () => config('backup.enabled'))
+    ->when(fn () => config()->boolean('backup.enabled'))
     ->everyOddHour();
 
 Schedule::command('backup:monitor')
-    ->when(fn () => config('backup.enabled'))
+    ->when(fn () => config()->boolean('backup.enabled'))
     ->daily()
     ->at('09:00');

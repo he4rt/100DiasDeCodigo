@@ -31,10 +31,14 @@ return [
             'files' => [
                 /*
                  * The list of directories and files that will be included in the backup.
+                 *
+                 * BACKUP_INCLUDE_PATHS is a comma-separated list of paths relative to storage/ (e.g. "app").
+                 * Empty (default) backs up the database only.
                  */
-                'include' => [
-                    base_path(),
-                ],
+                'include' => array_map(
+                    storage_path(...),
+                    array_filter(explode(',', (string) env('BACKUP_INCLUDE_PATHS', ''))),
+                ),
 
                 /*
                  * These directories and files will be excluded from the backup.
@@ -44,6 +48,9 @@ return [
                 'exclude' => [
                     base_path('vendor'),
                     base_path('node_modules'),
+                    storage_path('app/private/livewire-tmp'),
+                    storage_path(sprintf('app/private/%s', $backupName)),
+                    storage_path('app/backup-temp'),
                 ],
 
                 /*
@@ -216,7 +223,12 @@ return [
      * the `Spatie\Backup\Notifications\Notifications` classes.
      */
     'notifications' => [
-        'channels' => $channels = explode(',', (string) env('BACKUP_NOTIFIABLE_CHANNEL', 'discord')),
+        /*
+         * The backup notification channels are renamed to `spatie.backup.*` by
+         * App\Providers\Tools\SpatieBackupServiceProvider. BACKUP_NOTIFIABLE_CHANNEL
+         * must use the new names, e.g. `spatie.backup.discord`.
+         */
+        'channels' => $channels = explode(',', (string) env('BACKUP_NOTIFIABLE_CHANNEL', 'spatie.backup.discord')),
 
         'notifications' => [
             BackupHasFailedNotification::class => $channels,
