@@ -21,6 +21,7 @@ use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Facades\Vite;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 
 class GuestPanelProvider extends PanelProvider
@@ -50,6 +51,7 @@ class GuestPanelProvider extends PanelProvider
                 GoToAdminAction::make(),
             ])
             ->viteTheme('app-modules/he4rt/resources/css/theme.css')
+            ->renderHook(PanelsRenderHook::HEAD_END, fn () => Vite::fonts(['satoshi', 'fira-code']))
             ->discoverWidgets(in: app_path('Filament/Guest/Widgets'), for: 'App\Filament\Guest\Widgets')
             ->middleware([
                 EncryptCookies::class,
