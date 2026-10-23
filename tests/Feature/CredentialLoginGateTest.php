@@ -14,8 +14,9 @@ beforeEach(function (): void {
 });
 
 it('blocks credential login outside local', function (): void {
-    app()->detectEnvironment(fn (): string => 'production');
+    // Touch the database before the switch: in production, the lazy migrate:fresh aborts without --force.
     $user = User::factory()->create();
+    app()->detectEnvironment(fn (): string => 'production');
 
     livewire(LoginPage::class)
         ->set('data.email', $user->email)
@@ -27,8 +28,8 @@ it('blocks credential login outside local', function (): void {
 });
 
 it('allows credential login in local', function (): void {
-    app()->detectEnvironment(fn (): string => 'local');
     $user = User::factory()->create();
+    app()->detectEnvironment(fn (): string => 'local');
 
     livewire(LoginPage::class)
         ->set('data.email', $user->email)
