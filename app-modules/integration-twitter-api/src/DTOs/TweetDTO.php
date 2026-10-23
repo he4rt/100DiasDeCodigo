@@ -6,7 +6,7 @@ namespace He4rt\IntegrationTwitterApi\DTOs;
 
 use JsonSerializable;
 
-readonly class TweetDTO implements JsonSerializable
+final readonly class TweetDTO implements JsonSerializable
 {
     public function __construct(
         public string $id,
@@ -30,6 +30,9 @@ readonly class TweetDTO implements JsonSerializable
         public ?EntitiesDTO $extendedEntities = null,
     ) {}
 
+    /**
+     * @param  array<string, mixed>  $data
+     */
     public static function fromArray(array $data): self
     {
         return new self(
@@ -60,6 +63,9 @@ readonly class TweetDTO implements JsonSerializable
         return 'https://twitter.com/he4rt/status/'.$this->id;
     }
 
+    /**
+     * @return array<string, mixed>
+     */
     public function jsonSerialize(): array
     {
         return [

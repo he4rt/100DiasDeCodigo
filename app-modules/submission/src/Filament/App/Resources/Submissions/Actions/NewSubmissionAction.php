@@ -28,7 +28,7 @@ use Illuminate\Support\HtmlString;
 
 use function Illuminate\Support\minutes;
 
-class NewSubmissionAction extends Action
+final class NewSubmissionAction extends Action
 {
     protected function setUp(): void
     {
@@ -128,14 +128,16 @@ class NewSubmissionAction extends Action
         $this->modalFooterActions([]);
 
         $this->action(function (array $data): void {
-            $tweet = TweetDTO::fromArray($data['tweet_payload']);
+            /** @var array<string, mixed> $tweetPayload */
+            $tweetPayload = $data['tweet_payload'];
+            $tweet = TweetDTO::fromArray($tweetPayload);
             auth()->user()->submissions()
                 ->create([
                     'submitted_at' => Date::parse($tweet->createdAt)->timezone(config('app.timezone')),
                     'content' => $tweet->getFormattedText(),
                     'tweet_id' => $tweet->id,
                     'status' => SubmissionStatus::Pending,
-                    'metadata' => $tweet->jsonSerialize(),
+                    'metadata' => $tweet,
                 ]);
 
             Notification::make()
@@ -146,7 +148,7 @@ class NewSubmissionAction extends Action
         });
     }
 
-    public static function getDefaultName(): ?string
+    public static function getDefaultName(): string
     {
         return 'new-submission-action';
     }

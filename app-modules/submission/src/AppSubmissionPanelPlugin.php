@@ -7,7 +7,7 @@ namespace He4rt\Submission;
 use Filament\Contracts\Plugin;
 use Filament\Panel;
 
-class AppSubmissionPanelPlugin implements Plugin
+final class AppSubmissionPanelPlugin implements Plugin
 {
     public function getId(): string
     {

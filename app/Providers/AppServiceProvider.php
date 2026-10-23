@@ -5,10 +5,12 @@ declare(strict_types=1);
 namespace App\Providers;
 
 use App\Providers\Tools\DebugbarServiceProvider;
+use App\Providers\Tools\SpatieBackupServiceProvider;
 use Carbon\CarbonImmutable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Vite;
 use Illuminate\Support\ServiceProvider;
@@ -21,6 +23,7 @@ final class AppServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->registerDebugbar();
+        $this->registerSpatieBackup();
     }
 
     /**
@@ -58,7 +61,9 @@ final class AppServiceProvider extends ServiceProvider
      */
     private function configureVite(): void
     {
-        Vite::useAggressivePrefetching();
+        if ($this->app->isProduction()) {
+            Vite::useAggressivePrefetching();
+        }
     }
 
     /**
@@ -82,13 +87,22 @@ final class AppServiceProvider extends ServiceProvider
      */
     private function configureHttp(): void
     {
-        // Http::preventStrayRequests();
+        if ($this->app->runningUnitTests()) {
+            Http::preventStrayRequests();
+        }
     }
 
     private function registerDebugbar(): void
     {
         if ($this->app->isLocal() && class_exists(\Fruitcake\LaravelDebugbar\ServiceProvider::class)) {
             $this->app->register(DebugbarServiceProvider::class);
+        }
+    }
+
+    private function registerSpatieBackup(): void
+    {
+        if (config()->boolean('backup.enabled')) {
+            $this->app->register(SpatieBackupServiceProvider::class);
         }
     }
 }

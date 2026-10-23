@@ -16,7 +16,7 @@ final class DatabaseSeeder extends Seeder
     public function run(): void
     {
         if (app()->isLocal()) {
-            User::factory()->admin()->create([
+            $admin = User::factory()->admin()->create([
                 'name' => 'Linus Torvalds',
                 'username' => 'torvalds',
             ]);
@@ -25,11 +25,10 @@ final class DatabaseSeeder extends Seeder
                 ->count(10)
                 ->create();
 
-            $users->each(function ($user): void {
-                Submission::factory()
-                    ->count(random_int(5, 8))
-                    ->for($user)
-                    ->create();
+            $users->each(function (User $user) use ($admin): void {
+                Submission::factory()->count(random_int(3, 5))->for($user)->approved($admin)->create();
+                Submission::factory()->count(2)->for($user)->pending()->create();
+                Submission::factory()->for($user)->rejected($admin)->create();
             });
 
         }

@@ -8,7 +8,7 @@ use App\Models\User;
 use Illuminate\Contracts\View\View;
 use Livewire\Component;
 
-class SubmissionCalendar extends Component
+final class SubmissionCalendar extends Component
 {
     public User $user;
 

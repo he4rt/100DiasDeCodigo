@@ -7,8 +7,11 @@ namespace He4rt\IntegrationTwitterApi\Http\Requests;
 use He4rt\IntegrationTwitterApi\Endpoints\Webhook\TwitterWebhookResponse;
 use Illuminate\Foundation\Http\FormRequest;
 
-class TwitterWebhookRequest extends FormRequest
+final class TwitterWebhookRequest extends FormRequest
 {
+    /**
+     * @return array<string, array<int, string>>
+     */
     public function rules(): array
     {
         return [

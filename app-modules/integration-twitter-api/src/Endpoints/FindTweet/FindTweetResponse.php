@@ -6,7 +6,7 @@ namespace He4rt\IntegrationTwitterApi\Endpoints\FindTweet;
 
 use He4rt\IntegrationTwitterApi\DTOs\TweetDTO;
 
-readonly class FindTweetResponse
+final readonly class FindTweetResponse
 {
     /**
      * @param  TweetDTO[]  $tweets
@@ -16,6 +16,9 @@ readonly class FindTweetResponse
         public int $count
     ) {}
 
+    /**
+     * @param  array<string, mixed>  $data
+     */
     public static function fromArray(array $data): self
     {
         return new self(

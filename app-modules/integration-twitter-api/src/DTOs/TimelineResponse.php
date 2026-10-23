@@ -6,7 +6,7 @@ namespace He4rt\IntegrationTwitterApi\DTOs;
 
 use JsonSerializable;
 
-readonly class TimelineResponse implements JsonSerializable
+final readonly class TimelineResponse implements JsonSerializable
 {
     /**
      * @param  TweetDTO[]  $tweets
@@ -17,6 +17,9 @@ readonly class TimelineResponse implements JsonSerializable
         public ?string $nextCursor,
     ) {}
 
+    /**
+     * @param  array<string, mixed>  $data
+     */
     public static function fromArray(array $data): self
     {
         return new self(

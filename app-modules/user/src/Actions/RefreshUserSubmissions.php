@@ -15,11 +15,11 @@ use He4rt\Submission\Actions\CreateSubmissionAction;
 
 use function Illuminate\Support\hours;
 
-class RefreshUserSubmissions
+final readonly class RefreshUserSubmissions
 {
-    public function __construct(private readonly CreateSubmissionAction $createSubmissionAction) {}
+    public function __construct(private CreateSubmissionAction $createSubmissionAction) {}
 
-    public function for(User $record): void
+    public function handle(User $record): void
     {
         $socialiteUser = SocialiteUser::query()
             ->where('user_id', $record->getKey())
@@ -39,7 +39,7 @@ class RefreshUserSubmissions
         }
 
         foreach ($response->tweets as $tweet) {
-            $this->createSubmissionAction->for($socialiteUser->user, $tweet);
+            $this->createSubmissionAction->handle($socialiteUser->user, $tweet);
         }
     }
 
@@ -83,6 +83,6 @@ class RefreshUserSubmissions
             );
         }
 
-        return '(from:%s) (#100DiasDeCodigo)';
+        return sprintf('(from:%s) (#100DiasDeCodigo)', $username);
     }
 }

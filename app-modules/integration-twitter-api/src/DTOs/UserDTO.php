@@ -6,7 +6,7 @@ namespace He4rt\IntegrationTwitterApi\DTOs;
 
 use JsonSerializable;
 
-readonly class UserDTO implements JsonSerializable
+final readonly class UserDTO implements JsonSerializable
 {
     public function __construct(
         public string $id,
@@ -37,6 +37,9 @@ readonly class UserDTO implements JsonSerializable
         public ?string $automatedBy = null,
     ) {}
 
+    /**
+     * @param  array<string, mixed>  $data
+     */
     public static function fromArray(array $data): self
     {
         return new self(

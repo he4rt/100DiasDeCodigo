@@ -6,7 +6,7 @@ namespace He4rt\IntegrationTwitterApi\DTOs;
 
 use JsonSerializable;
 
-readonly class ProfileBioEntitiesDTO implements JsonSerializable
+final readonly class ProfileBioEntitiesDTO implements JsonSerializable
 {
     /**
      * @param  UrlEntityDTO[]|null  $descriptionUrls
@@ -17,6 +17,9 @@ readonly class ProfileBioEntitiesDTO implements JsonSerializable
         public ?array $urlUrls,
     ) {}
 
+    /**
+     * @param  array<string, mixed>  $data
+     */
     public static function fromArray(array $data): self
     {
         $descriptionUrls = isset($data['description']['urls'])

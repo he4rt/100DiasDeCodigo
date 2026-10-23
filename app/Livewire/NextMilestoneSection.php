@@ -8,7 +8,7 @@ use App\Models\User;
 use Illuminate\Contracts\View\View;
 use Livewire\Component;
 
-class NextMilestoneSection extends Component
+final class NextMilestoneSection extends Component
 {
     public User $user;
 

@@ -10,9 +10,9 @@ use He4rt\Submission\Enums\SubmissionStatus;
 use He4rt\Submission\Models\Submission;
 use Illuminate\Support\Facades\Date;
 
-class CreateSubmissionAction
+final readonly class CreateSubmissionAction
 {
-    public function for(?User $user, TweetDTO $tweet): void
+    public function handle(?User $user, TweetDTO $tweet): void
     {
         $isPropaganda = str($tweet->text)->lower()->doesntContain('100diasdecodigo');
 
@@ -28,7 +28,7 @@ class CreateSubmissionAction
                 'content' => $tweet->text,
                 'tweet_id' => $tweet->id,
                 'status' => SubmissionStatus::Pending,
-                'metadata' => $tweet->jsonSerialize(),
+                'metadata' => $tweet,
                 'submitted_at' => Date::parse($tweet->createdAt)->timezone(config('app.timezone')),
             ]);
 
@@ -37,7 +37,7 @@ class CreateSubmissionAction
 
         $submission->update([
             'content' => $tweet->text,
-            'metadata' => $tweet->jsonSerialize(),
+            'metadata' => $tweet,
             'submitted_at' => Date::parse($tweet->createdAt)->timezone(config('app.timezone')),
         ]);
     }

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Providers\Filament;
 
+use App\Enums\FilamentPanel;
 use App\Filament\Shared\Actions\GoToAdminAction;
 use App\Filament\Shared\Actions\GoToAppAction;
 use Filament\Http\Middleware\AuthenticateSession;
@@ -17,18 +18,19 @@ use He4rt\Portal\Pages\PortalPage;
 use He4rt\Portal\Pages\PublicUserProfilePage;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
-use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
+use Illuminate\Foundation\Http\Middleware\PreventRequestForgery;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Facades\Vite;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 
-class GuestPanelProvider extends PanelProvider
+final class GuestPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
     {
         return $panel
-            ->id('guest')
+            ->id(FilamentPanel::Guest->value)
             ->default()
             ->path('')
             ->colors([
@@ -50,6 +52,7 @@ class GuestPanelProvider extends PanelProvider
                 GoToAdminAction::make(),
             ])
             ->viteTheme('app-modules/he4rt/resources/css/theme.css')
+            ->renderHook(PanelsRenderHook::HEAD_END, fn () => Vite::fonts(['satoshi', 'fira-code']))
             ->discoverWidgets(in: app_path('Filament/Guest/Widgets'), for: 'App\Filament\Guest\Widgets')
             ->middleware([
                 EncryptCookies::class,
@@ -57,7 +60,7 @@ class GuestPanelProvider extends PanelProvider
                 StartSession::class,
                 AuthenticateSession::class,
                 ShareErrorsFromSession::class,
-                VerifyCsrfToken::class,
+                PreventRequestForgery::class,
                 SubstituteBindings::class,
                 DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,

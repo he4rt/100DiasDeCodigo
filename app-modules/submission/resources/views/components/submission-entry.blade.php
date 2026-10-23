@@ -2,11 +2,12 @@
 
 @php
     /** @var \He4rt\Submission\Models\Submission $submission */
-    /** @var \He4rt\IntegrationTwitterApi\DTOs\TweetDTO $tweet */
+    /** @var \He4rt\IntegrationTwitterApi\DTOs\TweetDTO|null $tweet */
     $tweet = $submission->getTweet();
     $user = $submission->user;
 @endphp
 
+@if ($tweet)
 <div class="group is-active relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse">
     <article
         class="hover:border-primary-500/20 dark:hover:border-primary-400/20 group/card rounded-xl border border-gray-200 bg-gray-200 shadow-sm transition-all duration-300 dark:border-gray-800 dark:bg-gray-800"
@@ -206,3 +207,4 @@
         </div>
     </article>
 </div>
+@endif

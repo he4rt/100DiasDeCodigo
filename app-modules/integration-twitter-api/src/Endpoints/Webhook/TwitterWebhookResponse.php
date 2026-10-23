@@ -6,7 +6,7 @@ namespace He4rt\IntegrationTwitterApi\Endpoints\Webhook;
 
 use He4rt\IntegrationTwitterApi\DTOs\TweetDTO;
 
-class TwitterWebhookResponse
+final class TwitterWebhookResponse
 {
     /**
      * @param  TweetDTO[]  $tweets
@@ -16,6 +16,9 @@ class TwitterWebhookResponse
         public int $count
     ) {}
 
+    /**
+     * @param  array<string, mixed>  $data
+     */
     public static function fromArray(array $data): self
     {
         return new self(

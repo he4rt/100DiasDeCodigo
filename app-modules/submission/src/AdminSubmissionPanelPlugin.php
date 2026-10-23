@@ -7,7 +7,7 @@ namespace He4rt\Submission;
 use Filament\Contracts\Plugin;
 use Filament\Panel;
 
-class AdminSubmissionPanelPlugin implements Plugin
+final class AdminSubmissionPanelPlugin implements Plugin
 {
     public function getId(): string
     {
@@ -22,8 +22,5 @@ class AdminSubmissionPanelPlugin implements Plugin
         );
     }
 
-    public function boot(Panel $panel): void
-    {
-        // TODO: Implement boot() method.
-    }
+    public function boot(Panel $panel): void {}
 }

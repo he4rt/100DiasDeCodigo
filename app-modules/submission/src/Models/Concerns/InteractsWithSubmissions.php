@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace He4rt\Submission\Models\Concerns;
 
+use Carbon\CarbonImmutable;
 use He4rt\Submission\Models\Submission;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Date;
 
@@ -55,14 +57,7 @@ trait InteractsWithSubmissions
      */
     protected function calculateSubmissionStats(): array
     {
-        // Get all submission dates, distinct, ordered by date desc
-        $dates = $this->submissions()
-            ->selectRaw('DATE(submitted_at) as date')
-            ->whereNotNull('submitted_at')
-            ->distinct()
-            ->orderBy('date', 'desc')
-            ->pluck('date')
-            ->map(fn (string $date) => Date::parse($date)->startOfDay());
+        $dates = $this->submissionDays();
 
         if ($dates->isEmpty()) {
             return [
@@ -74,7 +69,9 @@ trait InteractsWithSubmissions
         }
 
         $totalDays = $dates->count();
-        $totalSubmissions = $this->submissions()->count();
+        $totalSubmissions = $this->relationLoaded('submissions')
+            ? $this->submissions->count()
+            : $this->submissions()->count();
         $longestStreak = 0;
         $currentStreak = 0;
 
@@ -94,7 +91,7 @@ trait InteractsWithSubmissions
                 // This implies a gap of 6 days or more breaks it. (5 full days of silence).
                 // So diffInDays <= 5 is valid.
 
-                $gap = $prevDate->diffInDays($date);
+                $gap = $date->diffInDays($prevDate);
 
                 if ($gap <= 5) {
                     $streak++;
@@ -122,7 +119,7 @@ trait InteractsWithSubmissions
         $mostRecent = $dates->first();
 
         // If the user hasn't posted for 5 days from today, current streak is 0.
-        if ($today->diffInDays($mostRecent) > 5) {
+        if ($mostRecent->diffInDays($today) > 5) {
             $currentStreak = 0;
         } else {
             // The first streak group we calculated above corresponds to the most recent submissions.
@@ -132,7 +129,7 @@ trait InteractsWithSubmissions
             $prev = $dates->first();
 
             foreach ($dates->slice(1) as $date) {
-                if ($prev->diffInDays($date) <= 5) {
+                if ($date->diffInDays($prev) <= 5) {
                     $currentStreak++;
                     $prev = $date;
                 } else {
@@ -167,5 +164,32 @@ trait InteractsWithSubmissions
     protected function getTotalSubmissionsAttribute(): int
     {
         return $this->getSubmissionStats()['total_submissions'];
+    }
+
+    /**
+     * Distinct submission days, newest first. Reads the loaded relation when present.
+     *
+     * @return Collection<int, CarbonImmutable>
+     */
+    private function submissionDays(): Collection
+    {
+        if ($this->relationLoaded('submissions')) {
+            return $this->submissions
+                ->pluck('submitted_at')
+                ->filter()
+                ->map(fn (CarbonImmutable $date): CarbonImmutable => $date->startOfDay())
+                ->unique(fn (CarbonImmutable $date): string => $date->toDateString())
+                ->sortDesc()
+                ->values();
+        }
+
+        return $this->submissions()
+            ->selectRaw('DATE(submitted_at) as date')
+            ->whereNotNull('submitted_at')
+            ->distinct()
+            ->orderBy('date', 'desc')
+            ->pluck('date')
+            ->map(fn (string $date): CarbonImmutable => Date::parse($date)->startOfDay())
+            ->values();
     }
 }

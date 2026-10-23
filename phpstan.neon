@@ -3,7 +3,14 @@ includes:
     - phpstan.ignore.neon
 
 parameters:
-    level: 6
+    level: 7
+    checkImplicitMixed: true
+
+    tmpDir: .cache/phpstan
+
+    stubFiles:
+        - app/Enums/FilamentPanel.php
+        - stubs/phpstan/Panel.stub
 
     paths:
         - app

@@ -3,12 +3,18 @@
 .env
 .env.backup
 .env.production
+.env.testing
 .phpactor.json
 .phpstorm.meta.php
 .phpunit.result.cache
 .pint.result.cache
 /.fleet
 /.idea
+/.agents/*
+!/.agents/setup
+!/.agents/resume
+/.amp/portals/*
+/.laracord
 /.nova
 /.phpunit.cache
 /.rector.result.cache
@@ -20,23 +26,37 @@
 /public/hot
 /public/css
 /public/fonts
+/public/fonts-manifest.dev.json
 /public/js
 /public/storage
 /storage/*.key
+/storage/debugbar
 /storage/pail
 /vendor
+/.cache
 Homestead.json
 Homestead.yaml
+*.local
 Thumbs.db
 _ide_helper.php
 _ide_helper_models.php
+auth.json
+npm-debug.log
+yarn-error.log
 tests/Browser/Screenshots
 /.composer
 
-=== AI Agents ===
+# Lerd
+.env.before_lerd
+.lerd.yaml
+
+# === AI Agents ===
+# Written by `php artisan boost:install` / `boost:update` (guidelines, MCP config, skills).
+# Audited against vendor/laravel/boost/src/Install/Agents/*.php. Keep local, never commit.
 
 # Laravel Boost
 boost.json
+.amp/settings.json
 .junie
 .junie/
 .mcp.json
@@ -45,7 +65,10 @@ boost.json
 AGENTS.md
 GEMINI.md
 QWEN.md
-.ai
+.ai/*
+.ai/mcp/mcp.json
+!.ai/guidelines/
+!.ai/rules/
 .output.txt
 .output/
 .agent/
@@ -53,11 +76,16 @@ QWEN.md
 .aiderignore
 
 # Claude Code
+CLAUDE.md
 .claude/
 
-# GitHub Copilot
+# Codex
+.codex/
+
+# GitHub Copilot (mcp.json lands in /.vscode, ignored above)
 .github/copilot-instructions.md
 .github/git-commit-instructions.md
+.github/skills/
 
 # Cursor AI
 .cursorrules
@@ -102,3 +130,22 @@ WARP.md
 # Crush AI
 .crush/
 CRUSH.md
+.superpowers/
+
+# Pi
+.pi/
+
+# Grok Build
+.grok/
+
+# Factory Droid
+.factory/
+
+# Kiro
+.kiro/
+
+# OpenCode
+opencode.json
+opencode.jsonc
+
+/poc

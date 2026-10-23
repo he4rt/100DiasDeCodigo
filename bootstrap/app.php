@@ -14,10 +14,11 @@ return Application::configure(basePath: dirname(__DIR__))
         commands: __DIR__.'/../routes/console.php',
         health: '/up',
     )
-    ->withMiddleware(function (Middleware $middleware): void {
+    ->withMiddleware(static function (Middleware $middleware): void {
         $middleware->replace(
             TrustProxies::class,
             Monicahq\Cloudflare\Http\Middleware\TrustProxies::class
         );
     })
-    ->withExceptions(function (Exceptions $exceptions): void {})->create();
+    ->withExceptions(static function (Exceptions $exceptions): void {})
+    ->create();

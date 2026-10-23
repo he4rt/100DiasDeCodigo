@@ -19,7 +19,7 @@ use Throwable;
 /**
  * @property Schema $submissionForm
  */
-class UserDashboard extends Dashboard
+final class UserDashboard extends Dashboard
 {
     use CanUseDatabaseTransactions;
 
@@ -69,12 +69,14 @@ class UserDashboard extends Dashboard
                 ->send();
         }
 
-        $field = $this->data['field'] ?? [];
-        $technologies = $this->data['technologies'] ?? [];
-        unset($this->data['field'], $this->data['technologies']);
+        $data = $this->data ?? [];
+        $field = $data['field'] ?? [];
+        $technologies = $data['technologies'] ?? [];
+        unset($data['field'], $data['technologies']);
+        $this->data = $data;
 
         $submission = Submission::query()->create([
-            ...$this->data,
+            ...$data,
             'user_id' => auth()->id(),
             'submitted_at' => now(),
             'status' => SubmissionStatus::Pending,
@@ -91,6 +93,9 @@ class UserDashboard extends Dashboard
         auth()->user()->invalidateSubmissionStatsCache();
     }
 
+    /**
+     * @return NewSubmissionAction[]
+     */
     protected function getHeaderActions(): array
     {
         return [

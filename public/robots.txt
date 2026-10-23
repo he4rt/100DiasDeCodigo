@@ -1,2 +1,7 @@
 User-agent: *
-Disallow:
+Disallow: /admin
+Disallow: /app
+Disallow: /oauth
+Disallow: /webhooks
+
+Allow: /

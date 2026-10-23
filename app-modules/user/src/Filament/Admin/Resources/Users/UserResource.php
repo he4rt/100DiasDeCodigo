@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace He4rt\User\Filament\Admin\Resources\Users;
 
+use App\Enums\NavigationGroup;
 use App\Models\User;
 use BackedEnum;
+use Filament\Resources\Pages\PageRegistration;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
@@ -15,12 +17,15 @@ use He4rt\User\Filament\Admin\Resources\Users\Pages\EditUser;
 use He4rt\User\Filament\Admin\Resources\Users\Pages\ListUsers;
 use He4rt\User\Filament\Admin\Resources\Users\Schemas\UserForm;
 use He4rt\User\Filament\Admin\Resources\Users\Tables\UsersTable;
+use UnitEnum;
 
-class UserResource extends Resource
+final class UserResource extends Resource
 {
     protected static ?string $model = User::class;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+
+    protected static string|UnitEnum|null $navigationGroup = NavigationGroup::Challenge;
 
     protected static ?string $recordTitleAttribute = 'username';
 
@@ -41,6 +46,9 @@ class UserResource extends Resource
         ];
     }
 
+    /**
+     * @return array<string, PageRegistration>
+     */
     public static function getPages(): array
     {
         return [

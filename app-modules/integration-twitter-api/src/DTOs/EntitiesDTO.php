@@ -6,7 +6,7 @@ namespace He4rt\IntegrationTwitterApi\DTOs;
 
 use JsonSerializable;
 
-readonly class EntitiesDTO implements JsonSerializable
+final readonly class EntitiesDTO implements JsonSerializable
 {
     /**
      * @param  HashtagEntityDTO[]  $hashtags
@@ -21,6 +21,9 @@ readonly class EntitiesDTO implements JsonSerializable
         public array $media = [],
     ) {}
 
+    /**
+     * @param  array<string, mixed>  $data
+     */
     public static function fromArray(array $data): self
     {
         return new self(

@@ -9,8 +9,9 @@ use Filament\Forms\Components\Select;
 use Filament\Notifications\Notification;
 use Filament\Support\Icons\Heroicon;
 use He4rt\Submission\Enums\SubmissionStatus;
+use He4rt\Submission\Models\Submission;
 
-class ReviewSubmissionAction extends Action
+final class ReviewSubmissionAction extends Action
 {
     protected function setUp(): void
     {
@@ -19,7 +20,7 @@ class ReviewSubmissionAction extends Action
         $this->label('Review Submission')
             ->icon(Heroicon::CheckCircle)
             ->color('primary')
-            ->disabled(fn ($record): bool => $record->status !== SubmissionStatus::Pending)
+            ->disabled(fn (Submission $record): bool => $record->status !== SubmissionStatus::Pending)
             ->modal()
             ->modalHeading('Review Submission')
             ->modalDescription('Choose a status for this submission:')
@@ -29,7 +30,8 @@ class ReviewSubmissionAction extends Action
                     ->options(SubmissionStatus::class)
                     ->required(),
             ])
-            ->action(function (array $data, $record): void {
+            ->action(function (array $data, Submission $record): void {
+                /** @var SubmissionStatus $status */
                 $status = $data['status'];
                 $updateData = [
                     'status' => $status,
@@ -51,7 +53,7 @@ class ReviewSubmissionAction extends Action
 
     }
 
-    public static function getDefaultName(): ?string
+    public static function getDefaultName(): string
     {
         return 'review-submission-action';
     }

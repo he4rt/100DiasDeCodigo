@@ -7,7 +7,7 @@ namespace He4rt\Core\Filament\Pages;
 use Filament\Pages\Dashboard;
 use Filament\Support\Enums\Width;
 
-class He4rtPage extends Dashboard
+final class He4rtPage extends Dashboard
 {
     protected string $view = 'he4rt::3pontos.views.homepage';
 

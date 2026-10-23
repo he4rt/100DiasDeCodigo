@@ -8,7 +8,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class ValidateTwitterInboundRequest
+final class ValidateTwitterInboundRequest
 {
     /**
      * Handle an incoming request.

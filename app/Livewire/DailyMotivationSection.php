@@ -7,7 +7,7 @@ namespace App\Livewire;
 use Illuminate\Contracts\View\View;
 use Livewire\Component;
 
-class DailyMotivationSection extends Component
+final class DailyMotivationSection extends Component
 {
     public function render(): View
     {

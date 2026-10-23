@@ -4,17 +4,21 @@ declare(strict_types=1);
 
 namespace He4rt\User\Filament\Admin\Resources\Users\Pages;
 
+use Filament\Actions\Action;
 use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ListRecords;
 use He4rt\User\Filament\Admin\Resources\Users\Actions\BulkRefreshSubmissionsAction;
 use He4rt\User\Filament\Admin\Resources\Users\UserResource;
 
-class ListUsers extends ListRecords
+final class ListUsers extends ListRecords
 {
     protected static string $resource = UserResource::class;
 
     protected ?string $heading = '';
 
+    /**
+     * @return Action[]
+     */
     protected function getHeaderActions(): array
     {
         return [

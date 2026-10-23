@@ -7,7 +7,7 @@ namespace App\Livewire;
 use Illuminate\Contracts\View\View;
 use Livewire\Component;
 
-class CommunityHighlightSection extends Component
+final class CommunityHighlightSection extends Component
 {
     public function render(): View
     {

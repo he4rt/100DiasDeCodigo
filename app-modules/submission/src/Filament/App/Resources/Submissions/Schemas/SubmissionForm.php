@@ -10,7 +10,7 @@ use Filament\Schemas\Components\Fieldset;
 use Filament\Schemas\Components\Grid;
 use Filament\Schemas\Schema;
 
-class SubmissionForm
+final class SubmissionForm
 {
     public static function configure(Schema $schema): Schema
     {

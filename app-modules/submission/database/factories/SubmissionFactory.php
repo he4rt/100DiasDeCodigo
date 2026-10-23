@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Date;
 
 /** @extends Factory<Submission> */
-class SubmissionFactory extends Factory
+final class SubmissionFactory extends Factory
 {
     protected $model = Submission::class;
 
@@ -23,7 +23,7 @@ class SubmissionFactory extends Factory
             'metadata' => [
                 'id' => fake()->uuid(),
                 'text' => fake()->sentence(12),
-                'createdAt' => Date::now(),
+                'createdAt' => Date::now()->format('D M d H:i:s O Y'),
                 'author' => [
                     'id' => fake()->uuid(),
                     'name' => fake()->name(),
@@ -36,7 +36,7 @@ class SubmissionFactory extends Factory
                     'isBlueVerified' => fake()->boolean(),
                     'verifiedType' => 'blue',
                     'canDm' => fake()->boolean(),
-                    'createdAt' => Date::now(),
+                    'createdAt' => Date::now()->format('D M d H:i:s O Y'),
                     'favouritesCount' => fake()->numberBetween(0, 50_000),
                     'mediaCount' => fake()->numberBetween(0, 5_000),
                     'statusesCount' => fake()->numberBetween(0, 100_000),
@@ -48,23 +48,50 @@ class SubmissionFactory extends Factory
                     'possiblySensitive' => false,
                     'isAutomated' => false,
                 ],
-                'retweetCount' => fake()->numberBetween(0, 1000),
+                'retweetCount' => fake()->numberBetween(0, 1_000),
                 'replyCount' => fake()->numberBetween(0, 300),
-                'likeCount' => fake()->numberBetween(0, 5000),
+                'likeCount' => fake()->numberBetween(0, 5_000),
                 'quoteCount' => fake()->numberBetween(0, 200),
-                'viewCount' => fake()->numberBetween(100, 200000),
+                'viewCount' => fake()->numberBetween(100, 200_000),
                 'lang' => 'pt',
                 'isReply' => fake()->boolean(),
             ],
 
-            'status' => fake()->randomElement(SubmissionStatus::cases())->value,
+            'status' => SubmissionStatus::Pending,
             'content' => fake()->sentence(),
-            'approved_at' => Date::now(),
+            'approved_at' => null,
             'created_at' => Date::now(),
             'updated_at' => Date::now(),
 
             'user_id' => User::factory(),
-            'approver_id' => 1,
+            'approver_id' => null,
         ];
+    }
+
+    public function pending(): self
+    {
+        return $this->state([
+            'status' => SubmissionStatus::Pending,
+            'approved_at' => null,
+            'approver_id' => null,
+        ]);
+    }
+
+    public function approved(?User $approver = null): self
+    {
+        return $this->state([
+            'status' => SubmissionStatus::Approved,
+            'approved_at' => Date::now(),
+            'approver_id' => $approver ?? User::factory(),
+        ]);
+    }
+
+    public function rejected(?User $approver = null): self
+    {
+        return $this->state([
+            'status' => SubmissionStatus::Rejected,
+            'approved_at' => null,
+            'approver_id' => $approver ?? User::factory(),
+        ]);
     }
 }

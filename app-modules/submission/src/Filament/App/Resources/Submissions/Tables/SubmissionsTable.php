@@ -17,12 +17,10 @@ use Filament\Tables\Table;
 use He4rt\Submission\Enums\SubmissionStatus;
 use He4rt\Submission\Models\Submission;
 
-class SubmissionsTable
+final class SubmissionsTable
 {
     public static function configure(Table $table): Table
     {
-        $format = 'd/m/Y H:i';
-
         return $table
             ->columns([
                 TextColumn::make('content')
@@ -33,24 +31,22 @@ class SubmissionsTable
                     ->badge()
                     ->sortable(),
                 TextColumn::make('submitted_at')
-                    ->dateTime($format)
+                    ->dateTime()
                     ->sortable(),
                 TextColumn::make('approver.name')
                     ->label('Reviewed By')
                     ->placeholder('Pending')
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('approved_at')
-                    ->dateTime($format)
+                    ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('created_at')
-                    ->dateTime($format)
+                    ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 IconColumn::make('tweet_url')
                     ->state(fn (Submission $record) => filled($record->tweet_id))
-                    ->alignCenter()
-                    ->verticallyAlignCenter()
                     ->label('Ver tweet')
                     ->icon(Heroicon::ArrowUpRight)
                     ->url(fn (Submission $record) => $record->tweet_id ? sprintf('https://x.com/i/status/%s', $record->tweet_id) : null)

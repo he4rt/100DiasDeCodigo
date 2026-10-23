@@ -6,7 +6,7 @@ namespace He4rt\IntegrationTwitterApi\Tests\Entities;
 
 use He4rt\IntegrationTwitterApi\DTOs\TweetDTO;
 
-class TweetDTOFactory
+final class TweetDTOFactory
 {
     public static function with(string $tweetId, string $userId, string $content): TweetDTO
     {
@@ -62,11 +62,11 @@ Iniciei o processo de registro na parte de autenticação e esbarrei com algumas
                     'url' => [],
                 ],
                 'fastFollowersCount' => 0,
-                'favouritesCount' => 7995,
+                'favouritesCount' => 7_995,
                 'hasCustomTimelines' => true,
                 'isTranslator' => false,
                 'mediaCount' => 63,
-                'statusesCount' => 4926,
+                'statusesCount' => 4_926,
                 'withheldInCountries' => [],
                 'affiliatesHighlightedLabel' => [],
                 'possiblySensitive' => false,

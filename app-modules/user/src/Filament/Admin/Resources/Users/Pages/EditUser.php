@@ -8,10 +8,13 @@ use Filament\Actions\DeleteAction;
 use Filament\Resources\Pages\EditRecord;
 use He4rt\User\Filament\Admin\Resources\Users\UserResource;
 
-class EditUser extends EditRecord
+final class EditUser extends EditRecord
 {
     protected static string $resource = UserResource::class;
 
+    /**
+     * @return DeleteAction[]
+     */
     protected function getHeaderActions(): array
     {
         return [

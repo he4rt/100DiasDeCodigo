@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Date;
 /**
  * @extends Factory<SocialiteUser>
  */
-class SocialiteUserFactory extends Factory
+final class SocialiteUserFactory extends Factory
 {
     protected $model = SocialiteUser::class;
 

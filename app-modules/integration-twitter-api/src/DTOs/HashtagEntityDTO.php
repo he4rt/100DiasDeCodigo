@@ -6,13 +6,16 @@ namespace He4rt\IntegrationTwitterApi\DTOs;
 
 use JsonSerializable;
 
-readonly class HashtagEntityDTO implements JsonSerializable
+final readonly class HashtagEntityDTO implements JsonSerializable
 {
     public function __construct(
         public string $text,
         public array $indices,
     ) {}
 
+    /**
+     * @param  array<string, mixed>  $data
+     */
     public static function fromArray(array $data): self
     {
         return new self(

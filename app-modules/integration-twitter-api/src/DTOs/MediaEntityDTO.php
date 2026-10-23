@@ -6,7 +6,7 @@ namespace He4rt\IntegrationTwitterApi\DTOs;
 
 use JsonSerializable;
 
-readonly class MediaEntityDTO implements JsonSerializable
+final readonly class MediaEntityDTO implements JsonSerializable
 {
     public function __construct(
         public string $idStr,
@@ -19,6 +19,9 @@ readonly class MediaEntityDTO implements JsonSerializable
         public ?string $mediaKey,
     ) {}
 
+    /**
+     * @param  array<string, mixed>  $data
+     */
     public static function fromArray(array $data): self
     {
         return new self(

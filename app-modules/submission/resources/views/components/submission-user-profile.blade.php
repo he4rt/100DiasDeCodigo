@@ -6,8 +6,7 @@
     use Filament\Support\Icons\Heroicon;
 
     $user = $submission->user;
-    $metadata = $submission->metadata;
-    $author = $metadata['author'] ?? null;
+    $author = $submission->getTweet()?->author;
 
     $stats = $user?->getSubmissionStats() ?? [
         'current_streak' => 0,
@@ -16,12 +15,12 @@
         'total_submissions' => 0,
     ];
 
-    $name = $user?->name ?? ($author['name'] ?? 'Unknown User');
-    $username = $user?->username ?? ($author['userName'] ?? 'unknown');
-    $avatar = $user?->getFilamentAvatarUrl() ?? ($author['profilePicture'] ?? null);
-    $description = $author['description'] ?? null;
-    $followers = $author['followers'] ?? 0;
-    $following = $author['following'] ?? 0;
+    $name = $user?->name ?? ($author->name ?? 'Unknown User');
+    $username = $user?->username ?? ($author->userName ?? 'unknown');
+    $avatar = $user?->getFilamentAvatarUrl() ?? $author?->profilePicture;
+    $description = $author?->description;
+    $followers = $author->followers ?? 0;
+    $following = $author->following ?? 0;
 @endphp
 
 <aside

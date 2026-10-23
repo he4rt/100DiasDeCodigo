@@ -7,8 +7,11 @@ namespace He4rt\Submission\Models;
 use App\Models\User;
 use Carbon\CarbonImmutable;
 use He4rt\IntegrationTwitterApi\DTOs\TweetDTO;
+use He4rt\Submission\Casts\AsTweet;
 use He4rt\Submission\Database\Factories\SubmissionFactory;
 use He4rt\Submission\Enums\SubmissionStatus;
+use Illuminate\Database\Eloquent\Attributes\Table;
+use Illuminate\Database\Eloquent\Attributes\UseFactory;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -22,19 +25,20 @@ use Spatie\Tags\HasTags;
  * @property int|null $approver_id
  * @property string|null $tweet_id
  * @property string $content markdown
- * @property SubmissionStatus|string $status pending, rejected, approved
+ * @property SubmissionStatus $status
  * @property CarbonImmutable $submitted_at
  * @property CarbonImmutable|null $approved_at
  * @property CarbonImmutable|null $created_at
  * @property CarbonImmutable|null $updated_at
  * @property CarbonImmutable|null $deleted_at
- * @property array<string, mixed>|null $metadata
+ * @property TweetDTO|null $metadata
  * @property-read string|null $progress
  * @property-read User|null $user
  * @property-read User|null $approver
- * @property-read TweetDTO $tweet
  */
-class Submission extends Model
+#[Table(name: 'submissions')]
+#[UseFactory(factoryClass: SubmissionFactory::class)]
+final class Submission extends Model
 {
     /** @use HasFactory<SubmissionFactory> */
     use HasFactory;
@@ -68,9 +72,9 @@ class Submission extends Model
         return $this->belongsTo(User::class, 'approver_id');
     }
 
-    public function getTweet(): TweetDTO
+    public function getTweet(): ?TweetDTO
     {
-        return TweetDTO::fromArray($this->metadata);
+        return $this->metadata;
     }
 
     /**
@@ -80,7 +84,7 @@ class Submission extends Model
     {
         return Attribute::make(
             get: function () {
-                $text = $this->getTweet()->text;
+                $text = $this->metadata->text ?? $this->content ?? '';
                 // Matches 1/100, 1 / 100
                 preg_match('/(\d+)\s*\/\s*(\d+)/', $text, $matches);
 
@@ -94,7 +98,7 @@ class Submission extends Model
         return [
             'submitted_at' => 'datetime',
             'approved_at' => 'datetime',
-            'metadata' => 'json',
+            'metadata' => AsTweet::class,
             'status' => SubmissionStatus::class,
         ];
     }

@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Providers\Filament;
 
+use App\Enums\FilamentPanel;
+use App\Enums\NavigationGroup;
 use App\Filament\Shared\Actions\GoToAppAction;
 use Basement\Webhooks\FilamentWebhookPlugin;
 use Filament\Enums\UserMenuPosition;
@@ -19,21 +21,23 @@ use Filament\Widgets\AccountWidget;
 use Filament\Widgets\FilamentInfoWidget;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
-use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
+use Illuminate\Foundation\Http\Middleware\PreventRequestForgery;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 
 final class AdminPanelProvider extends PanelProvider
 {
+    private FilamentPanel $panelId = FilamentPanel::Admin;
+
     public function panel(Panel $panel): Panel
     {
         return $panel
-            ->default()
-            ->id('admin')
-            ->path('admin')
-            ->topbar(true)
-            ->topNavigation(false)
+            ->id($this->panelId->value)
+            ->path($this->panelId->value)
+            ->topbar(condition: true)
+            ->topNavigation(condition: false)
+            ->navigationGroups(NavigationGroup::class)
             ->sidebarCollapsibleOnDesktop()
             ->userMenu(position: UserMenuPosition::Topbar)
             ->colors([
@@ -55,7 +59,8 @@ final class AdminPanelProvider extends PanelProvider
                 FilamentInfoWidget::class,
             ])
             ->plugins([
-                FilamentWebhookPlugin::make(),
+                FilamentWebhookPlugin::make()
+                    ->navigationGroup(NavigationGroup::Logs->name),
             ])
             ->middleware([
                 EncryptCookies::class,
@@ -63,7 +68,7 @@ final class AdminPanelProvider extends PanelProvider
                 StartSession::class,
                 AuthenticateSession::class,
                 ShareErrorsFromSession::class,
-                VerifyCsrfToken::class,
+                PreventRequestForgery::class,
                 SubstituteBindings::class,
                 DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Providers\Filament;
 
+use App\Enums\FilamentPanel;
 use App\Filament\Shared\Actions\GoToAdminAction;
 use App\Filament\Shared\Pages\LoginPage;
 use App\Models\SocialiteUser;
@@ -20,27 +21,31 @@ use Filament\Support\Colors\Color;
 use Filament\Widgets\AccountWidget;
 use Filament\Widgets\FilamentInfoWidget;
 use He4rt\User\Filament\Pages\UserDashboard;
+use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
-use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
+use Illuminate\Foundation\Http\Middleware\PreventRequestForgery;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Laravel\Socialite\Contracts\User as SocialiteUserContract;
 
-class AppPanelProvider extends PanelProvider
+final class AppPanelProvider extends PanelProvider
 {
+    private FilamentPanel $panelId = FilamentPanel::App;
+
     public function panel(Panel $panel): Panel
     {
         return $panel
-            ->id('app')
-            ->path('app')
+            ->id($this->panelId->value)
+            ->path($this->panelId->value)
             ->colors([
                 'primary' => Color::Purple,
+                'github' => Color::hex('#2f2a6b'),
             ])
             ->viteTheme('resources/css/filament/admin/theme.css')
             ->login(LoginPage::class)
-            ->topbar(true)
+            ->topbar(condition: true)
             ->topNavigation()
             ->discoverResources(in: app_path('Filament/App/Resources'), for: 'App\Filament\App\Resources')
             ->discoverPages(in: app_path('Filament/App/Pages'), for: 'App\Filament\App\Pages')
@@ -57,15 +62,16 @@ class AppPanelProvider extends PanelProvider
 
                         return auth()->check() && $provider === 'twitter';
                     })
-                    ->slug('app')
+                    ->slug($this->panelId->value)
                     ->createUserUsing(function (
                         string $provider,
                         SocialiteUserContract $oauthUser,
                         FilamentSocialitePlugin $plugin,
-                    ) {
+                    ): Authenticatable {
+                        $authenticatedUser = auth()->user();
 
-                        if (auth()->check()) {
-                            return auth()->user();
+                        if ($authenticatedUser !== null) {
+                            return $authenticatedUser;
                         }
 
                         $query = User::query();
@@ -89,7 +95,7 @@ class AppPanelProvider extends PanelProvider
                         Provider::make('github')
                             ->label('Login with Github')
                             ->icon('fab-github')
-                            ->color(Color::hex('#2f2a6b'))
+                            ->color('github')
                             ->scopes(config('services.github.scopes')),
                         Provider::make('twitter')
                             ->label('Twitter')
@@ -111,7 +117,7 @@ class AppPanelProvider extends PanelProvider
                 StartSession::class,
                 AuthenticateSession::class,
                 ShareErrorsFromSession::class,
-                VerifyCsrfToken::class,
+                PreventRequestForgery::class,
                 SubstituteBindings::class,
                 DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,

@@ -7,7 +7,7 @@ namespace App\Providers\Tools;
 use Fruitcake\LaravelDebugbar\ServiceProvider;
 use Illuminate\Contracts\Events\Dispatcher;
 
-class DebugbarServiceProvider extends ServiceProvider
+final class DebugbarServiceProvider extends ServiceProvider
 {
     public function boot(Dispatcher $events): void
     {

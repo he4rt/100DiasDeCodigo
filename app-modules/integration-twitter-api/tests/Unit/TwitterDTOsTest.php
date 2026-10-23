@@ -138,30 +138,30 @@ it('can parse twitter timeline response', function (): void {
         }
         JSON;
 
-    $data = json_decode($json, true);
+    $data = json_decode($json, associative: true);
 
     $timeline = TimelineResponse::fromArray($data);
 
-    $this->assertInstanceOf(TimelineResponse::class, $timeline);
-    $this->assertCount(1, $timeline->tweets);
-    $this->assertTrue($timeline->hasNextPage);
-    $this->assertEquals('cursor123', $timeline->nextCursor);
+    expect($timeline)->toBeInstanceOf(TimelineResponse::class);
+    expect($timeline->tweets)->toHaveCount(1);
+    expect($timeline->hasNextPage)->toBeTrue();
+    expect($timeline->nextCursor)->toEqual('cursor123');
 
     $tweet = $timeline->tweets[0];
-    $this->assertEquals('1234567890', $tweet->id);
-    $this->assertEquals('Hello World', $tweet->text);
-    $this->assertEquals('testuser', $tweet->author->userName);
-    $this->assertCount(1, $tweet->entities->hashtags);
-    $this->assertEquals('hello', $tweet->entities->hashtags[0]->text);
-    $this->assertCount(1, $tweet->author->profileBio->entities->descriptionUrls);
-    $this->assertEquals('https://t.co/xyz', $tweet->author->profileBio->entities->descriptionUrls[0]->url);
+    expect($tweet->id)->toEqual('1234567890');
+    expect($tweet->text)->toEqual('Hello World');
+    expect($tweet->author->userName)->toEqual('testuser');
+    expect($tweet->entities->hashtags)->toHaveCount(1);
+    expect($tweet->entities->hashtags[0]->text)->toEqual('hello');
+    expect($tweet->author->profileBio->entities->descriptionUrls)->toHaveCount(1);
+    expect($tweet->author->profileBio->entities->descriptionUrls[0]->url)->toEqual('https://t.co/xyz');
 
     $encoded = json_encode($timeline);
-    $decoded = json_decode($encoded, true);
+    $decoded = json_decode($encoded, associative: true);
 
-    $this->assertEquals($data['tweets'][0]['id'], $decoded['tweets'][0]['id']);
-    $this->assertEquals($data['has_next_page'], $decoded['has_next_page']);
-    $this->assertEquals($data['next_cursor'], $decoded['next_cursor']);
+    expect($decoded['tweets'][0]['id'])->toEqual($data['tweets'][0]['id']);
+    expect($decoded['has_next_page'])->toEqual($data['has_next_page']);
+    expect($decoded['next_cursor'])->toEqual($data['next_cursor']);
 });
 
 it('can format tweet text correctly', function (): void {
@@ -523,7 +523,7 @@ it('can format tweet text correctly', function (): void {
 }
 JSON;
 
-    $data = json_decode($json, true);
+    $data = json_decode($json, associative: true);
     $dto = TweetDTO::fromArray($data);
 
     $formatted = $dto->getFormattedText();

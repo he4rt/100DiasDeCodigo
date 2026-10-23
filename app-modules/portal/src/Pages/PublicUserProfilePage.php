@@ -10,7 +10,7 @@ use Filament\Support\Enums\Width;
 use He4rt\Submission\Models\Submission;
 use Illuminate\Database\Eloquent\Collection;
 
-class PublicUserProfilePage extends Page
+final class PublicUserProfilePage extends Page
 {
     public User $user;
 
@@ -63,11 +63,16 @@ class PublicUserProfilePage extends Page
         $this->calculateTwitterMetrics();
     }
 
-    protected function calculateTwitterMetrics(): void
+    private function calculateTwitterMetrics(): void
     {
         /** @var Submission $submission */
         foreach ($this->submissions as $submission) {
             $tweet = $submission->getTweet();
+
+            if ($tweet === null) {
+                continue;
+            }
+
             $this->twitterMetrics['likes'] += $tweet->likeCount;
             $this->twitterMetrics['retweets'] += $tweet->retweetCount;
             $this->twitterMetrics['replies'] += $tweet->replyCount;

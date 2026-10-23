@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace He4rt\Submission\Filament\App\Resources\Submissions;
 
 use BackedEnum;
+use Filament\Resources\Pages\PageRegistration;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
@@ -18,7 +19,7 @@ use He4rt\Submission\Models\Submission;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class SubmissionResource extends Resource
+final class SubmissionResource extends Resource
 {
     /** @var class-string<Submission>|null */
     protected static ?string $model = Submission::class;
@@ -44,6 +45,9 @@ class SubmissionResource extends Resource
         ];
     }
 
+    /**
+     * @return array<string, PageRegistration>
+     */
     public static function getPages(): array
     {
         return [

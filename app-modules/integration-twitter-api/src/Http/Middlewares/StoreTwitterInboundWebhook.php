@@ -10,7 +10,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class StoreTwitterInboundWebhook
+final class StoreTwitterInboundWebhook
 {
     /**
      * Handle an incoming request.
