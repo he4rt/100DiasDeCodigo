@@ -68,6 +68,7 @@ final class ParticipantsPage extends Page
 
         $participants = User::query()
             ->whereHas('submissions')
+            ->with('submissions')
             ->get();
 
         $this->participantsCount = $participants->count();

@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace He4rt\Submission\Models\Concerns;
 
+use Carbon\CarbonImmutable;
 use He4rt\Submission\Models\Submission;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Date;
 
@@ -55,14 +57,7 @@ trait InteractsWithSubmissions
      */
     protected function calculateSubmissionStats(): array
     {
-        // Get all submission dates, distinct, ordered by date desc
-        $dates = $this->submissions()
-            ->selectRaw('DATE(submitted_at) as date')
-            ->whereNotNull('submitted_at')
-            ->distinct()
-            ->orderBy('date', 'desc')
-            ->pluck('date')
-            ->map(fn (string $date) => Date::parse($date)->startOfDay());
+        $dates = $this->submissionDays();
 
         if ($dates->isEmpty()) {
             return [
@@ -74,7 +69,9 @@ trait InteractsWithSubmissions
         }
 
         $totalDays = $dates->count();
-        $totalSubmissions = $this->submissions()->count();
+        $totalSubmissions = $this->relationLoaded('submissions')
+            ? $this->submissions->count()
+            : $this->submissions()->count();
         $longestStreak = 0;
         $currentStreak = 0;
 
@@ -167,5 +164,32 @@ trait InteractsWithSubmissions
     protected function getTotalSubmissionsAttribute(): int
     {
         return $this->getSubmissionStats()['total_submissions'];
+    }
+
+    /**
+     * Distinct submission days, newest first. Reads the loaded relation when present.
+     *
+     * @return Collection<int, CarbonImmutable>
+     */
+    private function submissionDays(): Collection
+    {
+        if ($this->relationLoaded('submissions')) {
+            return $this->submissions
+                ->pluck('submitted_at')
+                ->filter()
+                ->map(fn (CarbonImmutable $date): CarbonImmutable => $date->startOfDay())
+                ->unique(fn (CarbonImmutable $date): string => $date->toDateString())
+                ->sortDesc()
+                ->values();
+        }
+
+        return $this->submissions()
+            ->selectRaw('DATE(submitted_at) as date')
+            ->whereNotNull('submitted_at')
+            ->distinct()
+            ->orderBy('date', 'desc')
+            ->pluck('date')
+            ->map(fn (string $date): CarbonImmutable => Date::parse($date)->startOfDay())
+            ->values();
     }
 }
