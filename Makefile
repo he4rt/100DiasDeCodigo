@@ -63,6 +63,10 @@ test-unit: ## Run unit tests
 test-feature: ## Run feature tests
 	@$(CURDIR)/vendor/bin/pest --compact --group=feature
 
+.PHONY: test-arch
+test-arch: ## Run architecture tests
+	@$(CURDIR)/vendor/bin/pest --compact --group=arch
+
 .PHONY: setup-test-db
 setup-test-db: ## Create the testing database for running tests
 	@php artisan migrate --env=testing --no-interaction --force
