@@ -43,9 +43,11 @@ class ParticipantsPage extends Page
 
     public static function abbreviate(int|float $value, int $precision = 1): string
     {
-        return $value >= 1_000
-            ? Number::abbreviate($value, $precision)
-            : (string) $value;
+        if ($value < 1_000) {
+            return (string) $value;
+        }
+
+        return Number::abbreviate($value, $precision) ?: (string) $value;
     }
 
     public function getHeading(): string
@@ -141,7 +143,7 @@ class ParticipantsPage extends Page
             ['icon' => 'heroicon-o-users', 'color' => 'text-primary', 'value' => $this->participantsCount, 'label' => 'Participantes'],
             ['icon' => 'heroicon-o-trophy', 'color' => 'text-green-500', 'value' => $this->winnersCount, 'label' => 'Vencedores'],
             ['icon' => 'heroicon-o-calendar', 'color' => 'text-warning-500', 'value' => $this->totalDaysCount, 'label' => 'Dias no Total'],
-            ['icon' => 'heroicon-s-fire', 'color' => 'text-orange-500', 'value' => Number::abbreviate($this->streakAvg, 2), 'label' => 'Média de Streak'],
+            ['icon' => 'heroicon-s-fire', 'color' => 'text-orange-500', 'value' => Number::abbreviate($this->streakAvg, 2) ?: (string) $this->streakAvg, 'label' => 'Média de Streak'],
         ];
     }
 

@@ -128,7 +128,9 @@ class NewSubmissionAction extends Action
         $this->modalFooterActions([]);
 
         $this->action(function (array $data): void {
-            $tweet = TweetDTO::fromArray($data['tweet_payload']);
+            /** @var array<string, mixed> $tweetPayload */
+            $tweetPayload = $data['tweet_payload'];
+            $tweet = TweetDTO::fromArray($tweetPayload);
             auth()->user()->submissions()
                 ->create([
                     'submitted_at' => Date::parse($tweet->createdAt)->timezone(config('app.timezone')),

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace He4rt\User\Filament\Admin\Resources\Users\Tables;
 
+use App\Models\User;
 use DutchCodingCompany\FilamentSocialite\Models\SocialiteUser;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
@@ -31,7 +32,7 @@ class UsersTable
                     ->searchable(),
                 IconColumn::make('has_twitter')
                     ->boolean()
-                    ->state(fn ($record) => SocialiteUser::query()
+                    ->state(fn (User $record): bool => SocialiteUser::query()
                         ->where('provider', 'twitter')
                         ->where('user_id', $record->getKey())->exists())
                     ->sortable(),

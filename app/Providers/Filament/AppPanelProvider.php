@@ -20,6 +20,7 @@ use Filament\Support\Colors\Color;
 use Filament\Widgets\AccountWidget;
 use Filament\Widgets\FilamentInfoWidget;
 use He4rt\User\Filament\Pages\UserDashboard;
+use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Foundation\Http\Middleware\PreventRequestForgery;
@@ -37,6 +38,7 @@ class AppPanelProvider extends PanelProvider
             ->path('app')
             ->colors([
                 'primary' => Color::Purple,
+                'github' => Color::hex('#2f2a6b'),
             ])
             ->viteTheme('resources/css/filament/admin/theme.css')
             ->login(LoginPage::class)
@@ -62,10 +64,11 @@ class AppPanelProvider extends PanelProvider
                         string $provider,
                         SocialiteUserContract $oauthUser,
                         FilamentSocialitePlugin $plugin,
-                    ) {
+                    ): Authenticatable {
+                        $authenticatedUser = auth()->user();
 
-                        if (auth()->check()) {
-                            return auth()->user();
+                        if ($authenticatedUser !== null) {
+                            return $authenticatedUser;
                         }
 
                         $query = User::query();
@@ -89,7 +92,7 @@ class AppPanelProvider extends PanelProvider
                         Provider::make('github')
                             ->label('Login with Github')
                             ->icon('fab-github')
-                            ->color(Color::hex('#2f2a6b'))
+                            ->color('github')
                             ->scopes(config('services.github.scopes')),
                         Provider::make('twitter')
                             ->label('Twitter')

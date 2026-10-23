@@ -36,7 +36,10 @@ class ListSubmissions extends ListRecords
      */
     protected function getTableQuery(): ?Builder
     {
-        return parent::getTableQuery()
+        /** @var Builder<Submission> $query */
+        $query = parent::getTableQuery();
+
+        return $query
             ->where('user_id', auth()->id())
             ->latest('submitted_at');
     }
