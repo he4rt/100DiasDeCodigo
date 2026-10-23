@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace He4rt\Submission\Filament\Admin\Resources\Submission;
 
+use Filament\Resources\Pages\PageRegistration;
 use BackedEnum;
 use Filament\Actions\Action;
 use Filament\Actions\BulkActionGroup;
@@ -69,7 +70,7 @@ class SubmissionResource extends Resource
                                     ->suffixAction(
                                         Action::make('Check Tweet')
                                             ->icon(Heroicon::ArrowUpRight)
-                                            ->url(fn (string $state) => sprintf('https://x.com/i/status/%s', $state), true)
+                                            ->url(fn (string $state) => sprintf('https://x.com/i/status/%s', $state), shouldOpenInNewTab: true)
                                     )
                                     ->required(),
                             ]),
@@ -154,6 +155,9 @@ class SubmissionResource extends Resource
             ]);
     }
 
+    /**
+     * @return array<string, PageRegistration>
+     */
     public static function getPages(): array
     {
         return [

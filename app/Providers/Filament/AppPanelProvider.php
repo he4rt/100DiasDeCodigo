@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Providers\Filament;
 
+use Illuminate\Foundation\Http\Middleware\PreventRequestForgery;
 use App\Filament\Shared\Actions\GoToAdminAction;
 use App\Filament\Shared\Pages\LoginPage;
 use App\Models\SocialiteUser;
@@ -22,7 +23,6 @@ use Filament\Widgets\FilamentInfoWidget;
 use He4rt\User\Filament\Pages\UserDashboard;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
-use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
@@ -40,7 +40,7 @@ class AppPanelProvider extends PanelProvider
             ])
             ->viteTheme('resources/css/filament/admin/theme.css')
             ->login(LoginPage::class)
-            ->topbar(true)
+            ->topbar(condition: true)
             ->topNavigation()
             ->discoverResources(in: app_path('Filament/App/Resources'), for: 'App\Filament\App\Resources')
             ->discoverPages(in: app_path('Filament/App/Pages'), for: 'App\Filament\App\Pages')
@@ -111,7 +111,7 @@ class AppPanelProvider extends PanelProvider
                 StartSession::class,
                 AuthenticateSession::class,
                 ShareErrorsFromSession::class,
-                VerifyCsrfToken::class,
+                PreventRequestForgery::class,
                 SubstituteBindings::class,
                 DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,

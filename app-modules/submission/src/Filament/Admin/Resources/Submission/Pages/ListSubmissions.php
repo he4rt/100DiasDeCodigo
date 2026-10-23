@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace He4rt\Submission\Filament\Admin\Resources\Submission\Pages;
 
+use Filament\Support\Components\ViewComponent;
 use Filament\Actions\Action;
 use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ListRecords;
@@ -36,6 +37,9 @@ class ListSubmissions extends ListRecords
         ];
     }
 
+    /**
+     * @return ViewComponent[]
+     */
     protected function getHeaderActions(): array
     {
         return [

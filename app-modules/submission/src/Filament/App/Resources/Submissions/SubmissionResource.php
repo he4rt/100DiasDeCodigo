@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace He4rt\Submission\Filament\App\Resources\Submissions;
 
+use Filament\Resources\Pages\PageRegistration;
 use BackedEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
@@ -44,6 +45,9 @@ class SubmissionResource extends Resource
         ];
     }
 
+    /**
+     * @return array<string, PageRegistration>
+     */
     public static function getPages(): array
     {
         return [

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace He4rt\User\Filament\Admin\Resources\Users;
 
+use Filament\Resources\Pages\PageRegistration;
 use App\Models\User;
 use BackedEnum;
 use Filament\Resources\Resource;
@@ -41,6 +42,9 @@ class UserResource extends Resource
         ];
     }
 
+    /**
+     * @return array<string, PageRegistration>
+     */
     public static function getPages(): array
     {
         return [

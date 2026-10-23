@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Providers\Filament;
 
+use Illuminate\Foundation\Http\Middleware\PreventRequestForgery;
 use App\Filament\Shared\Actions\GoToAdminAction;
 use App\Filament\Shared\Actions\GoToAppAction;
 use Filament\Http\Middleware\AuthenticateSession;
@@ -17,7 +18,6 @@ use He4rt\Portal\Pages\PortalPage;
 use He4rt\Portal\Pages\PublicUserProfilePage;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
-use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\Support\Facades\Blade;
@@ -59,7 +59,7 @@ class GuestPanelProvider extends PanelProvider
                 StartSession::class,
                 AuthenticateSession::class,
                 ShareErrorsFromSession::class,
-                VerifyCsrfToken::class,
+                PreventRequestForgery::class,
                 SubstituteBindings::class,
                 DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,

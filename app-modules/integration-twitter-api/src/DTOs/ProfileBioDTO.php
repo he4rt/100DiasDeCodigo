@@ -13,6 +13,9 @@ readonly class ProfileBioDTO implements JsonSerializable
         public ?ProfileBioEntitiesDTO $entities,
     ) {}
 
+    /**
+     * @param array<string, mixed> $data
+     */
     public static function fromArray(array $data): self
     {
         return new self(

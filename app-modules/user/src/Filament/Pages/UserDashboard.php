@@ -91,6 +91,9 @@ class UserDashboard extends Dashboard
         auth()->user()->invalidateSubmissionStatsCache();
     }
 
+    /**
+     * @return NewSubmissionAction[]
+     */
     protected function getHeaderActions(): array
     {
         return [

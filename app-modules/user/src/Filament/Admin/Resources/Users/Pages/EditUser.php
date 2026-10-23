@@ -12,6 +12,9 @@ class EditUser extends EditRecord
 {
     protected static string $resource = UserResource::class;
 
+    /**
+     * @return DeleteAction[]
+     */
     protected function getHeaderActions(): array
     {
         return [

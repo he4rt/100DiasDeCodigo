@@ -2,4 +2,4 @@
 
 declare(strict_types=1);
 
-test('that true is true')->expect(true)->toBeTrue();
+test('that true is true')->expect(value: true)->toBeTrue();

@@ -15,6 +15,9 @@ class ListSubmissions extends ListRecords
 {
     protected static string $resource = SubmissionResource::class;
 
+    /**
+     * @return array<string, Tab>
+     */
     public function getTabs(): array
     {
         return [

@@ -37,6 +37,9 @@ readonly class UserDTO implements JsonSerializable
         public ?string $automatedBy = null,
     ) {}
 
+    /**
+     * @param array<string, mixed> $data
+     */
     public static function fromArray(array $data): self
     {
         return new self(
