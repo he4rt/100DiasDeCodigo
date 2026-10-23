@@ -5,8 +5,8 @@ Issues and specs for this repo live as GitHub issues on `he4rt/100DiasDeCodigo`.
 ## Conventions
 
 - **Create an issue**: `gh issue create --title "..." --body "..."`. Use a heredoc for multi-line bodies.
-- **Read an issue**: `gh issue view <number> --comments`, filtering comments by `jq` and also fetching labels.
-- **List issues**: `gh issue list --state open --json number,title,body,labels,comments --jq '[.[] | {number, title, body, labels: [.labels[].name], comments: [.comments[].body]}]'` with appropriate `--label` and `--state` filters.
+- **Read an issue**: `gh issue view <number> --json number,title,body,labels,comments --jq '{number, title, body, labels: [.labels[].name], comments: [.comments[] | {author: .author.login, body}]}'`. Do not rely on `--comments` alone: piped output prints only the comments, and `--jq` needs `--json`.
+- **List issues**: `gh issue list --state open --limit 200 --json number,title,body,labels,comments --jq '[.[] | {number, title, body, labels: [.labels[].name], comments: [.comments[].body]}]'` with appropriate `--label` and `--state` filters. The default limit is 30; raise `--limit` until the result count is below it, so bulk operations do not miss issues.
 - **Comment on an issue**: `gh issue comment <number> --body "..."`
 - **Apply / remove labels**: `gh issue edit <number> --add-label "..."` / `--remove-label "..."`
 - **Close**: `gh issue close <number>`
@@ -62,7 +62,7 @@ Create a GitHub issue.
 
 ## When a skill says "fetch the relevant ticket"
 
-Run `gh issue view <number> --comments`.
+Run `gh issue view <number> --json number,title,body,labels,comments` (see **Read an issue** above).
 
 ## Wayfinding operations
 
@@ -82,6 +82,6 @@ Use GitHub's **native** relationships instead of plain-text "Blocked by" lines. 
 - **Spec/epic → tickets**: parent / sub-issue. `gh api --method POST repos/{owner}/{repo}/issues/{PARENT}/sub_issues -F sub_issue_id=<child REST id>`.
 - **Ticket blocking edges**: `gh api --method POST repos/{owner}/{repo}/issues/{N}/dependencies/blocked_by -F issue_id=<blocker REST id>` (creates the inverse "blocking" automatically).
 - **Relates to**: no public API — set manually in the Relationships panel when useful.
-- **Read edges**: `.../issues/{N}/dependencies/blocked_by`, `.../dependencies/blocking`, `.../issues/{PARENT}/sub_issues`.
+- **Read edges**: `.../issues/{N}/dependencies/blocked_by`, `.../issues/{N}/dependencies/blocking`, `.../issues/{PARENT}/sub_issues`.
 
 Use the REST numeric `id` (`gh api repos/{owner}/{repo}/issues/{N} --jq .id`), never the issue `number` nor the GraphQL node id. Use `-F` (typed), not `-f`, or the id is rejected as a string (`422 not of type integer`).
