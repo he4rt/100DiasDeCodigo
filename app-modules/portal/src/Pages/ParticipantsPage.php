@@ -66,13 +66,13 @@ class ParticipantsPage extends Page
             Js::make('autoAnimate', Vite::asset('resources/js/autoAnimate.js'))->module(),
         ]);
 
-        $participantsQuery = User::query()
-            ->whereHas('submissions');
+        $participants = User::query()
+            ->whereHas('submissions')
+            ->get();
 
-        $this->participantsCount = (clone $participantsQuery)->count();
+        $this->participantsCount = $participants->count();
 
-        $this->participants = $participantsQuery
-            ->get()
+        $this->participants = $participants
             ->map(function (User $user): array {
                 $metrics = self::calculateTwitterMetrics($user->submissions);
                 $currentStreak = $user->current_streak;
@@ -105,7 +105,9 @@ class ParticipantsPage extends Page
             })
             ->all();
 
-        $this->streakAvg = $this->participantsCount / $this->generalStreakCount;
+        $this->streakAvg = $this->participantsCount > 0
+            ? $this->generalStreakCount / $this->participantsCount
+            : 0;
     }
 
     /**
@@ -122,6 +124,11 @@ class ParticipantsPage extends Page
         /** @var Submission $submission */
         foreach ($submissions as $submission) {
             $tweet = $submission->getTweet();
+
+            if ($tweet === null) {
+                continue;
+            }
+
             $metrics['likes'] += $tweet->likeCount;
             $metrics['views'] += $tweet->viewCount;
         }
