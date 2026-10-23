@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace He4rt\User\Filament\Admin\Resources\Users\Tables;
 
-use App\Models\User;
-use DutchCodingCompany\FilamentSocialite\Models\SocialiteUser;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
@@ -13,12 +11,16 @@ use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use He4rt\User\Filament\Admin\Resources\Users\Actions\RefreshSubmissionsAction;
+use Illuminate\Database\Eloquent\Builder;
 
 class UsersTable
 {
     public static function configure(Table $table): Table
     {
         return $table
+            ->modifyQueryUsing(fn (Builder $query): Builder => $query->withExists([
+                'accounts as has_twitter' => fn (Builder $query): Builder => $query->where('provider', 'twitter'),
+            ]))
             ->columns([
                 TextColumn::make('name')
                     ->searchable(),
@@ -32,9 +34,6 @@ class UsersTable
                     ->searchable(),
                 IconColumn::make('has_twitter')
                     ->boolean()
-                    ->state(fn (User $record): bool => SocialiteUser::query()
-                        ->where('provider', 'twitter')
-                        ->where('user_id', $record->getKey())->exists())
                     ->sortable(),
                 TextColumn::make('created_at')
                     ->dateTime()
