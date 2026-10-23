@@ -23,19 +23,14 @@ permissions: {}
 
 jobs:
   tests:
-    name: 'Shard ${{ matrix.shard }}/2'
+    name: Tests
     runs-on: ubuntu-latest
     timeout-minutes: 5
     permissions:
       contents: read
     concurrency:
-      group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}-tests-${{ matrix.shard }}
+      group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}-tests
       cancel-in-progress: true
-
-    strategy:
-      fail-fast: false
-      matrix:
-        shard: [1, 2]
 
     services:
       postgres:
@@ -91,6 +86,5 @@ jobs:
       - name: Run Tests
         env:
           DB_PORT: ${{ job.services.postgres.ports['5432'] }}
-          SHARD: ${{ matrix.shard }}
         run: |
-          vendor/bin/pest --ci --parallel --shard="${SHARD}"/2
+          vendor/bin/pest --ci --parallel

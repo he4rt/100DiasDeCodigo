@@ -51,10 +51,6 @@ test: ## Run all tests
 .PHONY: t
 t: test ## Alias for test
 
-.PHONY: test-shards
-test-shards: ## Regenerate tests/.pest/shards.json timings (sequential)
-	@php artisan test --compact --update-shards
-
 .PHONY: test-unit
 test-unit: ## Run unit tests
 	@$(CURDIR)/vendor/bin/pest --compact --group=unit
