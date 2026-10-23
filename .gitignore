@@ -10,7 +10,6 @@
 .pint.result.cache
 /.fleet
 /.idea
-/.kiro
 /.agents/*
 !/.agents/setup
 !/.agents/resume
@@ -52,6 +51,8 @@ tests/Browser/Screenshots
 .lerd.yaml
 
 # === AI Agents ===
+# Written by `php artisan boost:install` / `boost:update` (guidelines, MCP config, skills).
+# Audited against vendor/laravel/boost/src/Install/Agents/*.php. Keep local, never commit.
 
 # Laravel Boost
 boost.json
@@ -75,11 +76,16 @@ QWEN.md
 .aiderignore
 
 # Claude Code
+CLAUDE.md
 .claude/
 
-# GitHub Copilot
+# Codex
+.codex/
+
+# GitHub Copilot (mcp.json lands in /.vscode, ignored above)
 .github/copilot-instructions.md
 .github/git-commit-instructions.md
+.github/skills/
 
 # Cursor AI
 .cursorrules
@@ -126,7 +132,20 @@ WARP.md
 CRUSH.md
 .superpowers/
 
-/poc
+# Pi
+.pi/
 
-.codex
-/.codex
+# Grok Build
+.grok/
+
+# Factory Droid
+.factory/
+
+# Kiro
+.kiro/
+
+# OpenCode
+opencode.json
+opencode.jsonc
+
+/poc
