@@ -64,7 +64,7 @@ class SubmissionFactory extends Factory
             'updated_at' => Date::now(),
 
             'user_id' => User::factory(),
-            'approver_id' => 1,
+            'approver_id' => null,
         ];
     }
 }
