@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Date;
 
 /** @extends Factory<Submission> */
-class SubmissionFactory extends Factory
+final class SubmissionFactory extends Factory
 {
     protected $model = Submission::class;
 
@@ -57,14 +57,41 @@ class SubmissionFactory extends Factory
                 'isReply' => fake()->boolean(),
             ],
 
-            'status' => fake()->randomElement(SubmissionStatus::cases())->value,
+            'status' => SubmissionStatus::Pending,
             'content' => fake()->sentence(),
-            'approved_at' => Date::now(),
+            'approved_at' => null,
             'created_at' => Date::now(),
             'updated_at' => Date::now(),
 
             'user_id' => User::factory(),
             'approver_id' => null,
         ];
+    }
+
+    public function pending(): self
+    {
+        return $this->state([
+            'status' => SubmissionStatus::Pending,
+            'approved_at' => null,
+            'approver_id' => null,
+        ]);
+    }
+
+    public function approved(?User $approver = null): self
+    {
+        return $this->state([
+            'status' => SubmissionStatus::Approved,
+            'approved_at' => Date::now(),
+            'approver_id' => $approver ?? User::factory(),
+        ]);
+    }
+
+    public function rejected(?User $approver = null): self
+    {
+        return $this->state([
+            'status' => SubmissionStatus::Rejected,
+            'approved_at' => null,
+            'approver_id' => $approver ?? User::factory(),
+        ]);
     }
 }
