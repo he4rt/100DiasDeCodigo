@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-use He4rt\Submission\Models\Submission;
 use Illuminate\Database\Eloquent\Casts\AsArrayObject;
 use Illuminate\Database\Eloquent\Casts\AsCollection;
 use Illuminate\Database\Eloquent\Casts\AsEncryptedArrayObject;
@@ -49,11 +48,7 @@ const BANNED_CASTS = [
  *
  * @var array<class-string<Model>, array<string, string>>
  */
-const ALLOWED_LOOSE_CASTS = [
-    Submission::class => [
-        'metadata' => 'DÍVIDA: shape conhecido; cabe VO.',
-    ],
-];
+const ALLOWED_LOOSE_CASTS = [];
 
 /**
  * Todo model concreto de `app/Models` e `app-modules/{module}/src`.

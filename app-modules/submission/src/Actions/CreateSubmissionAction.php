@@ -28,7 +28,7 @@ final readonly class CreateSubmissionAction
                 'content' => $tweet->text,
                 'tweet_id' => $tweet->id,
                 'status' => SubmissionStatus::Pending,
-                'metadata' => $tweet->jsonSerialize(),
+                'metadata' => $tweet,
                 'submitted_at' => Date::parse($tweet->createdAt)->timezone(config('app.timezone')),
             ]);
 
@@ -37,7 +37,7 @@ final readonly class CreateSubmissionAction
 
         $submission->update([
             'content' => $tweet->text,
-            'metadata' => $tweet->jsonSerialize(),
+            'metadata' => $tweet,
             'submitted_at' => Date::parse($tweet->createdAt)->timezone(config('app.timezone')),
         ]);
     }

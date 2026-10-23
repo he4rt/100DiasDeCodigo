@@ -137,7 +137,7 @@ final class NewSubmissionAction extends Action
                     'content' => $tweet->getFormattedText(),
                     'tweet_id' => $tweet->id,
                     'status' => SubmissionStatus::Pending,
-                    'metadata' => $tweet->jsonSerialize(),
+                    'metadata' => $tweet,
                 ]);
 
             Notification::make()

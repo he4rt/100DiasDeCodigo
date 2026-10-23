@@ -7,6 +7,7 @@ namespace He4rt\Submission\Models;
 use App\Models\User;
 use Carbon\CarbonImmutable;
 use He4rt\IntegrationTwitterApi\DTOs\TweetDTO;
+use He4rt\Submission\Casts\AsTweet;
 use He4rt\Submission\Database\Factories\SubmissionFactory;
 use He4rt\Submission\Enums\SubmissionStatus;
 use Illuminate\Database\Eloquent\Attributes\Table;
@@ -30,7 +31,7 @@ use Spatie\Tags\HasTags;
  * @property CarbonImmutable|null $created_at
  * @property CarbonImmutable|null $updated_at
  * @property CarbonImmutable|null $deleted_at
- * @property array<string, mixed>|null $metadata
+ * @property TweetDTO|null $metadata
  * @property-read string|null $progress
  * @property-read User|null $user
  * @property-read User|null $approver
@@ -73,11 +74,7 @@ final class Submission extends Model
 
     public function getTweet(): ?TweetDTO
     {
-        if (!is_array($this->metadata)) {
-            return null;
-        }
-
-        return TweetDTO::fromArray($this->metadata);
+        return $this->metadata;
     }
 
     /**
@@ -87,7 +84,7 @@ final class Submission extends Model
     {
         return Attribute::make(
             get: function () {
-                $text = $this->getTweet()->text ?? $this->content ?? '';
+                $text = $this->metadata->text ?? $this->content ?? '';
                 // Matches 1/100, 1 / 100
                 preg_match('/(\d+)\s*\/\s*(\d+)/', $text, $matches);
 
@@ -101,7 +98,7 @@ final class Submission extends Model
         return [
             'submitted_at' => 'datetime',
             'approved_at' => 'datetime',
-            'metadata' => 'json',
+            'metadata' => AsTweet::class,
             'status' => SubmissionStatus::class,
         ];
     }

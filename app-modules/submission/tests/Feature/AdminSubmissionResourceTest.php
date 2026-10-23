@@ -9,6 +9,7 @@ use He4rt\Submission\Enums\SubmissionStatus;
 use He4rt\Submission\Filament\Admin\Resources\Submission\Actions\ReviewSubmissionAction;
 use He4rt\Submission\Filament\Admin\Resources\Submission\Pages\EditSubmission;
 use He4rt\Submission\Filament\Admin\Resources\Submission\Pages\ListSubmissions;
+use He4rt\Submission\Filament\Admin\Resources\Submission\Pages\MatchSubmissionsPage;
 use He4rt\Submission\Models\Submission;
 
 use function Pest\Livewire\livewire;
@@ -57,4 +58,14 @@ it('renders the edit page', function (): void {
 
     livewire(EditSubmission::class, ['record' => $submission->getRouteKey()])
         ->assertOk();
+});
+
+it('shows the tweet author of a pending submission without a participant', function (): void {
+    $submission = Submission::factory()->pending()->create(['user_id' => null]);
+    $author = $submission->getTweet()?->author;
+
+    livewire(MatchSubmissionsPage::class)
+        ->assertOk()
+        ->assertSee($author?->name)
+        ->assertSee($author?->description);
 });

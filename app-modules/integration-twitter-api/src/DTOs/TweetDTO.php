@@ -63,6 +63,9 @@ final readonly class TweetDTO implements JsonSerializable
         return 'https://twitter.com/he4rt/status/'.$this->id;
     }
 
+    /**
+     * @return array<string, mixed>
+     */
     public function jsonSerialize(): array
     {
         return [

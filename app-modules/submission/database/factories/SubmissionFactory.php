@@ -23,7 +23,7 @@ final class SubmissionFactory extends Factory
             'metadata' => [
                 'id' => fake()->uuid(),
                 'text' => fake()->sentence(12),
-                'createdAt' => Date::now(),
+                'createdAt' => Date::now()->format('D M d H:i:s O Y'),
                 'author' => [
                     'id' => fake()->uuid(),
                     'name' => fake()->name(),
@@ -36,7 +36,7 @@ final class SubmissionFactory extends Factory
                     'isBlueVerified' => fake()->boolean(),
                     'verifiedType' => 'blue',
                     'canDm' => fake()->boolean(),
-                    'createdAt' => Date::now(),
+                    'createdAt' => Date::now()->format('D M d H:i:s O Y'),
                     'favouritesCount' => fake()->numberBetween(0, 50_000),
                     'mediaCount' => fake()->numberBetween(0, 5_000),
                     'statusesCount' => fake()->numberBetween(0, 100_000),
