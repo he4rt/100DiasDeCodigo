@@ -1,0 +1,10 @@
+<?php
+
+namespace Filament;
+
+/**
+ * @see \App\Providers\FilamentServiceProvider::configureMacros()
+ *
+ * @method \App\Enums\FilamentPanel currentPanel()
+ */
+class Panel {}

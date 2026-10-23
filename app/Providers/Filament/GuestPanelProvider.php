@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Providers\Filament;
 
+use App\Enums\FilamentPanel;
 use App\Filament\Shared\Actions\GoToAdminAction;
 use App\Filament\Shared\Actions\GoToAppAction;
 use Filament\Http\Middleware\AuthenticateSession;
@@ -24,12 +25,12 @@ use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Vite;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 
-class GuestPanelProvider extends PanelProvider
+final class GuestPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
     {
         return $panel
-            ->id('guest')
+            ->id(FilamentPanel::Guest->value)
             ->default()
             ->path('')
             ->colors([

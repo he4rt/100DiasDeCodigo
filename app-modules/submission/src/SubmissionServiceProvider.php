@@ -7,16 +7,14 @@ namespace He4rt\Submission;
 use Filament\Panel;
 use Illuminate\Support\ServiceProvider;
 
-class SubmissionServiceProvider extends ServiceProvider
+final class SubmissionServiceProvider extends ServiceProvider
 {
     public function register(): void
     {
-        Panel::configureUsing(fn (Panel $panel) => match ($panel->getId()) {
-            'app' => $panel->plugin(new AppSubmissionPanelPlugin),
-            'admin' => $panel->plugin(new AdminSubmissionPanelPlugin),
+        Panel::configureUsing(fn (Panel $panel) => match (true) {
+            $panel->currentPanel()->isApp() => $panel->plugin(new AppSubmissionPanelPlugin),
+            $panel->currentPanel()->isAdmin() => $panel->plugin(new AdminSubmissionPanelPlugin),
             default => null,
         });
     }
-
-    public function boot(): void {}
 }

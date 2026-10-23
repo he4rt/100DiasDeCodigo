@@ -8,5 +8,9 @@ parameters:
 
     tmpDir: .cache/phpstan
 
+    stubFiles:
+        - app/Enums/FilamentPanel.php
+        - stubs/phpstan/Panel.stub
+
     paths:
         - app

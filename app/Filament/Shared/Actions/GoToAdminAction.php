@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Filament\Shared\Actions;
 
+use App\Enums\FilamentPanel;
 use BackedEnum;
 use Closure;
 use Filament\Actions\Action;
@@ -11,7 +12,7 @@ use Filament\Facades\Filament;
 use Filament\Support\Icons\Heroicon;
 use Illuminate\Contracts\Support\Htmlable;
 
-class GoToAdminAction extends Action
+final class GoToAdminAction extends Action
 {
     protected string|Htmlable|Closure|null $label = 'Ir para o administrativo';
 
@@ -22,10 +23,10 @@ class GoToAdminAction extends Action
         parent::setUp();
 
         $this->visible(fn () => auth()->user()?->isAdmin());
-        $this->url(fn () => url(Filament::getPanel('admin')->getUrl()));
+        $this->url(fn () => url(Filament::getPanel(FilamentPanel::Admin->value)->getUrl()));
     }
 
-    public static function getDefaultName(): ?string
+    public static function getDefaultName(): string
     {
         return 'go-to-admin';
     }

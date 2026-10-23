@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Providers\Filament;
 
+use App\Enums\FilamentPanel;
 use App\Filament\Shared\Actions\GoToAdminAction;
 use App\Filament\Shared\Pages\LoginPage;
 use App\Models\SocialiteUser;
@@ -29,13 +30,15 @@ use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Laravel\Socialite\Contracts\User as SocialiteUserContract;
 
-class AppPanelProvider extends PanelProvider
+final class AppPanelProvider extends PanelProvider
 {
+    private FilamentPanel $panelId = FilamentPanel::App;
+
     public function panel(Panel $panel): Panel
     {
         return $panel
-            ->id('app')
-            ->path('app')
+            ->id($this->panelId->value)
+            ->path($this->panelId->value)
             ->colors([
                 'primary' => Color::Purple,
                 'github' => Color::hex('#2f2a6b'),
@@ -59,7 +62,7 @@ class AppPanelProvider extends PanelProvider
 
                         return auth()->check() && $provider === 'twitter';
                     })
-                    ->slug('app')
+                    ->slug($this->panelId->value)
                     ->createUserUsing(function (
                         string $provider,
                         SocialiteUserContract $oauthUser,

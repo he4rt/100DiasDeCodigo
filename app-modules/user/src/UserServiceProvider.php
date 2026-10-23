@@ -7,12 +7,12 @@ namespace He4rt\User;
 use Filament\Panel;
 use Illuminate\Support\ServiceProvider;
 
-class UserServiceProvider extends ServiceProvider
+final class UserServiceProvider extends ServiceProvider
 {
     public function register(): void
     {
         Panel::configureUsing(function (Panel $panel): void {
-            if ($panel->getId() === 'admin') {
+            if ($panel->currentPanel()->isAdmin()) {
                 $panel->discoverResources(
                     in: __DIR__.'/Filament/Admin/Resources',
                     for: 'He4rt\\User\\Filament\\Admin\\Resources'
@@ -20,6 +20,4 @@ class UserServiceProvider extends ServiceProvider
             }
         });
     }
-
-    public function boot(): void {}
 }

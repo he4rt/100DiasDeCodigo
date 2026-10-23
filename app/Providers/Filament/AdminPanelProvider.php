@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Providers\Filament;
 
+use App\Enums\FilamentPanel;
 use App\Filament\Shared\Actions\GoToAppAction;
 use Basement\Webhooks\FilamentWebhookPlugin;
 use Filament\Enums\UserMenuPosition;
@@ -26,11 +27,13 @@ use Illuminate\View\Middleware\ShareErrorsFromSession;
 
 final class AdminPanelProvider extends PanelProvider
 {
+    private FilamentPanel $panelId = FilamentPanel::Admin;
+
     public function panel(Panel $panel): Panel
     {
         return $panel
-            ->id('admin')
-            ->path('admin')
+            ->id($this->panelId->value)
+            ->path($this->panelId->value)
             ->topbar(condition: true)
             ->topNavigation(condition: false)
             ->sidebarCollapsibleOnDesktop()
