@@ -83,6 +83,6 @@ class RefreshUserSubmissions
             );
         }
 
-        return '(from:%s) (#100DiasDeCodigo)';
+        return sprintf('(from:%s) (#100DiasDeCodigo)', $username);
     }
 }
