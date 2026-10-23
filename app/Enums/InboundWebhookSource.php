@@ -8,11 +8,12 @@ use BackedEnum;
 use Basement\Webhooks\Contracts\InboundWebhookContract;
 use Filament\Support\Colors\Color;
 use Filament\Support\Contracts\HasColor;
+use Filament\Support\Contracts\HasDescription;
 use Filament\Support\Contracts\HasIcon;
 use Filament\Support\Contracts\HasLabel;
 use Filament\Support\Icons\Heroicon;
 
-enum InboundWebhookSource: string implements HasColor, HasIcon, HasLabel, InboundWebhookContract
+enum InboundWebhookSource: string implements HasColor, HasDescription, HasIcon, HasLabel, InboundWebhookContract
 {
     case TwitterApi = 'twitter-api';
 
@@ -20,6 +21,13 @@ enum InboundWebhookSource: string implements HasColor, HasIcon, HasLabel, Inboun
     {
         return match ($this) {
             self::TwitterApi => Color::Teal,
+        };
+    }
+
+    public function getDescription(): string
+    {
+        return match ($this) {
+            self::TwitterApi => 'Tweets with the challenge hashtag, sent by the Twitter API webhook',
         };
     }
 
