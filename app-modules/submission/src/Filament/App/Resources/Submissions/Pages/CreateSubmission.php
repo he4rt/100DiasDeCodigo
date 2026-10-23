@@ -10,30 +10,18 @@ use He4rt\Submission\Enums\SubmissionStatus;
 use He4rt\Submission\Filament\App\Resources\Submissions\SubmissionResource;
 use He4rt\Submission\Models\Submission;
 
-class CreateSubmission extends CreateRecord
+final class CreateSubmission extends CreateRecord
 {
     protected static string $resource = SubmissionResource::class;
 
     protected function mutateFormDataBeforeCreate(array $data): array
     {
-        $data['user_id'] = auth()->id();
-        $data['submitted_at'] = now();
-        $data['status'] = SubmissionStatus::Pending;
-
-        return $data;
-    }
-
-    protected function beforeCreate(): void
-    {
-        $userId = $this->data['user_id'];
-        $submittedAt = $this->data['submitted_at'];
-
-        $exists = Submission::query()
-            ->where('user_id', $userId)
-            ->whereDate('submitted_at', $submittedAt)
+        $alreadySubmittedToday = Submission::query()
+            ->where('user_id', auth()->id())
+            ->whereDate('submitted_at', today())
             ->exists();
 
-        if ($exists) {
+        if ($alreadySubmittedToday) {
             Notification::make()
                 ->danger()
                 ->title('You have already submitted your daily progress for this date.')
@@ -41,5 +29,11 @@ class CreateSubmission extends CreateRecord
 
             $this->halt();
         }
+
+        $data['user_id'] = auth()->id();
+        $data['submitted_at'] = now();
+        $data['status'] = SubmissionStatus::Pending;
+
+        return $data;
     }
 }
