@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace He4rt\User\Filament\Admin\Resources\Users;
 
-use Filament\Resources\Pages\PageRegistration;
 use App\Models\User;
 use BackedEnum;
+use Filament\Resources\Pages\PageRegistration;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;

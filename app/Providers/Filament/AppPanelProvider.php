@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Providers\Filament;
 
-use Illuminate\Foundation\Http\Middleware\PreventRequestForgery;
 use App\Filament\Shared\Actions\GoToAdminAction;
 use App\Filament\Shared\Pages\LoginPage;
 use App\Models\SocialiteUser;
@@ -23,6 +22,7 @@ use Filament\Widgets\FilamentInfoWidget;
 use He4rt\User\Filament\Pages\UserDashboard;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
+use Illuminate\Foundation\Http\Middleware\PreventRequestForgery;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;

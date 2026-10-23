@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace He4rt\Submission\Filament\App\Resources\Submissions;
 
-use Filament\Resources\Pages\PageRegistration;
 use BackedEnum;
+use Filament\Resources\Pages\PageRegistration;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;

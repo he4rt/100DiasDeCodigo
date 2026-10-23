@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace He4rt\Submission\Filament\Admin\Resources\Submission\Pages;
 
-use Filament\Support\Components\ViewComponent;
 use Filament\Actions\Action;
 use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ListRecords;
 use Filament\Schemas\Components\Tabs\Tab;
+use Filament\Support\Components\ViewComponent;
 use He4rt\Submission\Enums\SubmissionStatus;
 use He4rt\Submission\Filament\Admin\Resources\Submission\SubmissionResource;
 use He4rt\Submission\Models\Submission;

@@ -48,7 +48,7 @@ return [
     */
 
     'argon' => [
-        'memory' => env('ARGON_MEMORY', 65536),
+        'memory' => env('ARGON_MEMORY', 65_536),
         'threads' => env('ARGON_THREADS', 1),
         'time' => env('ARGON_TIME', 4),
         'verify' => env('HASH_VERIFY', default: true),

@@ -31,7 +31,7 @@ it('can process twitter webhook', function (): void {
         'rule_tag' => 'tag',
         'rule_value' => '(#100DiasDeCodigo)',
         'event_type' => 'tweet',
-        'timestamp' => 1765996281150,
+        'timestamp' => 1_765_996_281_150,
     ];
 
     $this->postJson(
@@ -68,7 +68,7 @@ it('can process twitter webhook but skip if tweet doesnt have the tag', function
         'rule_tag' => 'tag',
         'rule_value' => '(#100DiasDeCodigo)',
         'event_type' => 'tweet',
-        'timestamp' => 1765996281150,
+        'timestamp' => 1_765_996_281_150,
     ];
 
     $this->postJson(
@@ -102,7 +102,7 @@ it('cannot process twitter webhook with wrong key', function (): void {
         'rule_tag' => 'tag',
         'rule_value' => '(#100DiasDeCodigo)',
         'event_type' => 'tweet',
-        'timestamp' => 1765996281150,
+        'timestamp' => 1_765_996_281_150,
     ];
 
     $this->postJson(

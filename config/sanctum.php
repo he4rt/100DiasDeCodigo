@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-use Illuminate\Foundation\Http\Middleware\PreventRequestForgery;
 use Illuminate\Cookie\Middleware\EncryptCookies;
+use Illuminate\Foundation\Http\Middleware\PreventRequestForgery;
 use Laravel\Sanctum\Http\Middleware\AuthenticateSession;
 use Laravel\Sanctum\Sanctum;
 

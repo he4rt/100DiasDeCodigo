@@ -43,7 +43,7 @@ class ParticipantsPage extends Page
 
     public static function abbreviate(int|float $value, int $precision = 1): string
     {
-        return $value >= 1000
+        return $value >= 1_000
             ? Number::abbreviate($value, $precision)
             : (string) $value;
     }

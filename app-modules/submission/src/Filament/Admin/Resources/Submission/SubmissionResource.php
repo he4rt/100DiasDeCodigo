@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace He4rt\Submission\Filament\Admin\Resources\Submission;
 
-use Filament\Resources\Pages\PageRegistration;
 use BackedEnum;
 use Filament\Actions\Action;
 use Filament\Actions\BulkActionGroup;
@@ -20,6 +19,7 @@ use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Infolists\Components\TextEntry;
+use Filament\Resources\Pages\PageRegistration;
 use Filament\Resources\Resource;
 use Filament\Schemas\Components\Fieldset;
 use Filament\Schemas\Components\View;
