@@ -1,22 +1,24 @@
 services:
-  sycorax-db:
+  100diasdecodigo-db:
     build:
       dockerfile: docker/postgres.Dockerfile
       context: .
     image: postgres.local:18
-    container_name: sycorax-db
+    container_name: 100diasdecodigo-db
     restart: no
     hostname: dev
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: dev_sycorax
+      POSTGRES_DB: dev_100diasdecodigo
+      TZ: Etc/UTC
+      PGTZ: Etc/UTC
     ports:
       - '5432:5432'
     volumes:
-      - sycorax-db:/var/lib/postgresql/data
+      - 100diasdecodigo-db:/var/lib/postgresql
     networks:
-      - dev-sycorax
+      - dev-100dias
     healthcheck:
       test: ['CMD-SHELL', 'pg_isready --quiet --username=postgres --dbname=postgres || exit 1']
       interval: 10s
@@ -24,18 +26,18 @@ services:
       timeout: 10s
       start_period: 15s
 
-  sycorax-redis:
+  100diasdecodigo-redis:
     build:
       dockerfile: docker/redis.Dockerfile
       context: .
     image: redis.local:8
-    container_name: sycorax-redis
+    container_name: 100diasdecodigo-redis
     restart: no
     hostname: dev
     ports:
       - '6379:6379'
     networks:
-      - dev-sycorax
+      - dev-100dias
     healthcheck:
       test: ['CMD-SHELL', 'redis-cli --raw incr ping || exit 1']
       interval: 10s
@@ -43,19 +45,19 @@ services:
       timeout: 10s
       start_period: 15s
 
-  sycorax-mailpit:
+  100diasdecodigo-mailpit:
     build:
       dockerfile: docker/mailpit.Dockerfile
       context: .
     image: mailpit.local:1
-    container_name: sycorax-mailpit
+    container_name: 100diasdecodigo-mailpit
     restart: no
     hostname: dev
     ports:
       - '1025:1025'
       - '8025:8025'
     networks:
-      - dev-sycorax
+      - dev-100dias
     healthcheck:
       test: ['CMD', '/mailpit', 'readyz']
       interval: 10s
@@ -64,13 +66,13 @@ services:
       start_period: 10s
 
 volumes:
-  sycorax-db:
-    name: sycorax-db
+  100diasdecodigo-db:
+    name: 100diasdecodigo-db
 
 networks:
-  dev-sycorax:
-    name: dev-sycorax
+  dev-100dias:
+    name: dev-100dias
     driver: bridge
     driver_opts:
-      com.docker.network.bridge.name: dev-sycorax
+      com.docker.network.bridge.name: dev-100dias
       com.docker.network.bridge.host_binding_ipv4: '127.0.0.1'
