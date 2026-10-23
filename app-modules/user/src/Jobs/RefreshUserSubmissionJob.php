@@ -9,7 +9,7 @@ use He4rt\User\Actions\RefreshUserSubmissions;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Queue\Queueable;
 
-class RefreshUserSubmissionJob implements ShouldQueue
+final class RefreshUserSubmissionJob implements ShouldQueue
 {
     use Queueable;
 
@@ -23,6 +23,6 @@ class RefreshUserSubmissionJob implements ShouldQueue
      */
     public function handle(): void
     {
-        resolve(RefreshUserSubmissions::class)->for($this->user);
+        resolve(RefreshUserSubmissions::class)->handle($this->user);
     }
 }

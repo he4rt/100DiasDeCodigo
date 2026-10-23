@@ -6,7 +6,7 @@ namespace He4rt\IntegrationTwitterApi\DTOs;
 
 use JsonSerializable;
 
-readonly class ProfileBioEntitiesDTO implements JsonSerializable
+final readonly class ProfileBioEntitiesDTO implements JsonSerializable
 {
     /**
      * @param  UrlEntityDTO[]|null  $descriptionUrls

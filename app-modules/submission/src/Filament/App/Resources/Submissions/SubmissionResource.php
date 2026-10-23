@@ -19,7 +19,7 @@ use He4rt\Submission\Models\Submission;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class SubmissionResource extends Resource
+final class SubmissionResource extends Resource
 {
     /** @var class-string<Submission>|null */
     protected static ?string $model = Submission::class;

@@ -28,7 +28,7 @@ use Illuminate\Support\HtmlString;
 
 use function Illuminate\Support\minutes;
 
-class NewSubmissionAction extends Action
+final class NewSubmissionAction extends Action
 {
     protected function setUp(): void
     {
@@ -148,7 +148,7 @@ class NewSubmissionAction extends Action
         });
     }
 
-    public static function getDefaultName(): ?string
+    public static function getDefaultName(): string
     {
         return 'new-submission-action';
     }

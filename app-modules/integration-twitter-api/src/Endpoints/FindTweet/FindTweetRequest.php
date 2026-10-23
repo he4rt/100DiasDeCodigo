@@ -6,7 +6,7 @@ namespace He4rt\IntegrationTwitterApi\Endpoints\FindTweet;
 
 use JsonSerializable;
 
-readonly class FindTweetRequest implements JsonSerializable
+final readonly class FindTweetRequest implements JsonSerializable
 {
     /**
      * @param  string[]  $tweetIds

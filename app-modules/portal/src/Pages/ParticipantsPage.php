@@ -14,7 +14,7 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Vite;
 use Illuminate\Support\Number;
 
-class ParticipantsPage extends Page
+final class ParticipantsPage extends Page
 {
     protected string $view = 'portal::filament.guest.pages.participants-page';
 
@@ -22,24 +22,24 @@ class ParticipantsPage extends Page
 
     protected static ?string $slug = 'participants';
 
-    protected string $heroTitle = 'Meet the Challengers';
-
-    protected string $subtitle = 'Descubra desenvolvedores que estão superando seus próprios limites com o #100DiasDeCodigo e encontre pessoas para evoluir e programar junto com você';
-
-    /** @var array<int, array<string, mixed>> */
-    protected array $participants = [];
-
     protected Width|string|null $maxContentWidth = Width::Full;
 
-    protected int $participantsCount = 0;
+    private string $heroTitle = 'Meet the Challengers';
 
-    protected int $totalDaysCount = 0;
+    private string $subtitle = 'Descubra desenvolvedores que estão superando seus próprios limites com o #100DiasDeCodigo e encontre pessoas para evoluir e programar junto com você';
 
-    protected int $winnersCount = 0;
+    /** @var array<int, array<string, mixed>> */
+    private array $participants = [];
 
-    protected float $streakAvg = 0;
+    private int $participantsCount = 0;
 
-    protected int $generalStreakCount = 0;
+    private int $totalDaysCount = 0;
+
+    private int $winnersCount = 0;
+
+    private float $streakAvg = 0;
+
+    private int $generalStreakCount = 0;
 
     public static function abbreviate(int|float $value, int $precision = 1): string
     {
@@ -96,9 +96,9 @@ class ParticipantsPage extends Page
                     'current_streak' => $currentStreak,
                     'tags' => ['#php', '#vibecoding', '#laravel', 'alpine.js', '#fullstack'],
                     'twitter_metrics' => [
-                        'likes' => static::abbreviate($metrics['likes']),
+                        'likes' => self::abbreviate($metrics['likes']),
                         'likes_raw' => $metrics['likes'],
-                        'views' => static::abbreviate($metrics['views']),
+                        'views' => self::abbreviate($metrics['views']),
                         'views_raw' => $metrics['views'],
                     ],
                 ];
@@ -110,11 +110,21 @@ class ParticipantsPage extends Page
             : 0;
     }
 
+    protected function getViewData(): array
+    {
+        return [
+            'title' => $this->heroTitle,
+            'counters' => $this->getHeroInfo(),
+            'subtitle' => $this->subtitle,
+            'participants' => $this->participants,
+        ];
+    }
+
     /**
      * @param  Collection<int, Submission>  $submissions
      * @return array{likes:int, views:int}
      */
-    protected function calculateTwitterMetrics(Collection $submissions): array
+    private function calculateTwitterMetrics(Collection $submissions): array
     {
         $metrics = [
             'likes' => 0,
@@ -144,23 +154,13 @@ class ParticipantsPage extends Page
      *     label: string
      * }>
      */
-    protected function getHeroInfo(): array
+    private function getHeroInfo(): array
     {
         return [
             ['icon' => 'heroicon-o-users', 'color' => 'text-primary', 'value' => $this->participantsCount, 'label' => 'Participantes'],
             ['icon' => 'heroicon-o-trophy', 'color' => 'text-green-500', 'value' => $this->winnersCount, 'label' => 'Vencedores'],
             ['icon' => 'heroicon-o-calendar', 'color' => 'text-warning-500', 'value' => $this->totalDaysCount, 'label' => 'Dias no Total'],
             ['icon' => 'heroicon-s-fire', 'color' => 'text-orange-500', 'value' => Number::abbreviate($this->streakAvg, 2) ?: (string) $this->streakAvg, 'label' => 'Média de Streak'],
-        ];
-    }
-
-    protected function getViewData(): array
-    {
-        return [
-            'title' => $this->heroTitle,
-            'counters' => $this->getHeroInfo(),
-            'subtitle' => $this->subtitle,
-            'participants' => $this->participants,
         ];
     }
 }

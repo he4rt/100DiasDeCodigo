@@ -11,7 +11,7 @@ use Filament\Actions\RestoreAction;
 use Filament\Resources\Pages\EditRecord;
 use He4rt\Submission\Filament\App\Resources\Submissions\SubmissionResource;
 
-class EditSubmission extends EditRecord
+final class EditSubmission extends EditRecord
 {
     protected static string $resource = SubmissionResource::class;
 

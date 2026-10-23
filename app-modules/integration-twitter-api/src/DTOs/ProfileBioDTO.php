@@ -6,7 +6,7 @@ namespace He4rt\IntegrationTwitterApi\DTOs;
 
 use JsonSerializable;
 
-readonly class ProfileBioDTO implements JsonSerializable
+final readonly class ProfileBioDTO implements JsonSerializable
 {
     public function __construct(
         public string $description,

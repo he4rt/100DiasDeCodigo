@@ -10,9 +10,9 @@ use He4rt\Submission\Enums\SubmissionStatus;
 use He4rt\Submission\Models\Submission;
 use Illuminate\Support\Facades\Date;
 
-class CreateSubmissionAction
+final readonly class CreateSubmissionAction
 {
-    public function for(?User $user, TweetDTO $tweet): void
+    public function handle(?User $user, TweetDTO $tweet): void
     {
         $isPropaganda = str($tweet->text)->lower()->doesntContain('100diasdecodigo');
 

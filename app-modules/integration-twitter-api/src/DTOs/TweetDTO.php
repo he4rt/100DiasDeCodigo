@@ -6,7 +6,7 @@ namespace He4rt\IntegrationTwitterApi\DTOs;
 
 use JsonSerializable;
 
-readonly class TweetDTO implements JsonSerializable
+final readonly class TweetDTO implements JsonSerializable
 {
     public function __construct(
         public string $id,

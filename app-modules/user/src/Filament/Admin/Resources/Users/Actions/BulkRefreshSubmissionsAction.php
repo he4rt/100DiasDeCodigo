@@ -14,7 +14,7 @@ use He4rt\User\Jobs\RefreshUserSubmissionJob;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Support\HtmlString;
 
-class BulkRefreshSubmissionsAction extends Action
+final class BulkRefreshSubmissionsAction extends Action
 {
     protected string|Htmlable|Closure|null $label = '';
 
@@ -32,7 +32,7 @@ class BulkRefreshSubmissionsAction extends Action
         $this->action(fn () => $this->refreshSubmissions());
     }
 
-    public static function getDefaultName(): ?string
+    public static function getDefaultName(): string
     {
         return 'bulk-refresh-submissions-action';
     }

@@ -11,7 +11,7 @@ use He4rt\Submission\Filament\App\Resources\Submissions\SubmissionResource;
 use He4rt\Submission\Models\Submission;
 use Illuminate\Database\Eloquent\Builder;
 
-class ListSubmissions extends ListRecords
+final class ListSubmissions extends ListRecords
 {
     protected static string $resource = SubmissionResource::class;
 
@@ -32,9 +32,9 @@ class ListSubmissions extends ListRecords
     }
 
     /**
-     * @return Builder<Submission>|null
+     * @return Builder<Submission>
      */
-    protected function getTableQuery(): ?Builder
+    protected function getTableQuery(): Builder
     {
         /** @var Builder<Submission> $query */
         $query = parent::getTableQuery();

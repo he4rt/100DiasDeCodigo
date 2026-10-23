@@ -6,7 +6,7 @@ namespace He4rt\IntegrationTwitterApi\DTOs;
 
 use JsonSerializable;
 
-readonly class UrlEntityDTO implements JsonSerializable
+final readonly class UrlEntityDTO implements JsonSerializable
 {
     public function __construct(
         public string $url,

@@ -6,7 +6,7 @@ namespace He4rt\IntegrationTwitterApi\Endpoints\FindTweet;
 
 use He4rt\IntegrationTwitterApi\DTOs\TweetDTO;
 
-readonly class FindTweetResponse
+final readonly class FindTweetResponse
 {
     /**
      * @param  TweetDTO[]  $tweets

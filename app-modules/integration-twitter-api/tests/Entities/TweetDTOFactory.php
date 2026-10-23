@@ -6,7 +6,7 @@ namespace He4rt\IntegrationTwitterApi\Tests\Entities;
 
 use He4rt\IntegrationTwitterApi\DTOs\TweetDTO;
 
-class TweetDTOFactory
+final class TweetDTOFactory
 {
     public static function with(string $tweetId, string $userId, string $content): TweetDTO
     {

@@ -19,7 +19,7 @@ use Throwable;
 /**
  * @property Schema $submissionForm
  */
-class UserDashboard extends Dashboard
+final class UserDashboard extends Dashboard
 {
     use CanUseDatabaseTransactions;
 

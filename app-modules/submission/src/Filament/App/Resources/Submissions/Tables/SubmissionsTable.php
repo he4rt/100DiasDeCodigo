@@ -17,7 +17,7 @@ use Filament\Tables\Table;
 use He4rt\Submission\Enums\SubmissionStatus;
 use He4rt\Submission\Models\Submission;
 
-class SubmissionsTable
+final class SubmissionsTable
 {
     public static function configure(Table $table): Table
     {

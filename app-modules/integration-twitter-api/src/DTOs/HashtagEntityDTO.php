@@ -6,7 +6,7 @@ namespace He4rt\IntegrationTwitterApi\DTOs;
 
 use JsonSerializable;
 
-readonly class HashtagEntityDTO implements JsonSerializable
+final readonly class HashtagEntityDTO implements JsonSerializable
 {
     public function __construct(
         public string $text,

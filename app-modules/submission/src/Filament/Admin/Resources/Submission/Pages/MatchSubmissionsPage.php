@@ -9,7 +9,7 @@ use He4rt\Submission\Enums\SubmissionStatus;
 use He4rt\Submission\Filament\Admin\Resources\Submission\SubmissionResource;
 use He4rt\Submission\Models\Submission;
 
-class MatchSubmissionsPage extends Page
+final class MatchSubmissionsPage extends Page
 {
     public static ?string $title = '';
 

@@ -20,7 +20,7 @@ it('searches the tweets of the user when the advanced query is off', function ()
         'username' => 'johndoe',
     ]);
 
-    resolve(RefreshUserSubmissions::class)->for($socialiteUser->user);
+    resolve(RefreshUserSubmissions::class)->handle($socialiteUser->user);
 
     Http::assertSent(fn (Request $request): bool => str_contains($request->url(), 'advanced_search')
         && Uri::of($request->url())->query()->get('query') === '(from:johndoe) (#100DiasDeCodigo)');

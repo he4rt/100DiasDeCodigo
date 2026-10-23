@@ -14,7 +14,7 @@ use He4rt\Submission\Filament\Admin\Resources\Submission\SubmissionResource;
 use He4rt\Submission\Models\Submission;
 use Illuminate\Database\Eloquent\Builder;
 
-class ListSubmissions extends ListRecords
+final class ListSubmissions extends ListRecords
 {
     protected static string $resource = SubmissionResource::class;
 

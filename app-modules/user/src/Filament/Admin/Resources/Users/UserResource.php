@@ -17,7 +17,7 @@ use He4rt\User\Filament\Admin\Resources\Users\Pages\ListUsers;
 use He4rt\User\Filament\Admin\Resources\Users\Schemas\UserForm;
 use He4rt\User\Filament\Admin\Resources\Users\Tables\UsersTable;
 
-class UserResource extends Resource
+final class UserResource extends Resource
 {
     protected static ?string $model = User::class;
 

@@ -13,7 +13,7 @@ use Filament\Tables\Table;
 use He4rt\User\Filament\Admin\Resources\Users\Actions\RefreshSubmissionsAction;
 use Illuminate\Database\Eloquent\Builder;
 
-class UsersTable
+final class UsersTable
 {
     public static function configure(Table $table): Table
     {

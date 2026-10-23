@@ -8,7 +8,7 @@ use Spatie\Backup\BackupDestination\Backup;
 use Spatie\Backup\BackupDestination\BackupCollection;
 use Spatie\Backup\Tasks\Cleanup\CleanupStrategy;
 
-class SimpleStrategy extends CleanupStrategy
+final class SimpleStrategy extends CleanupStrategy
 {
     public function deleteOldBackups(BackupCollection $backups): void
     {

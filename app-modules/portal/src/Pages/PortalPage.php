@@ -11,21 +11,21 @@ use Filament\Support\Facades\FilamentView;
 use Filament\View\PanelsRenderHook;
 use Illuminate\Support\Facades\Blade;
 
-class PortalPage extends Dashboard
+final class PortalPage extends Dashboard
 {
     protected string $view = 'portal::homepage';
 
     protected static ?string $title = 'Desafio';
 
-    protected string $description = 'Um desafio simples, consistente e transformador. Dedique 1 hora por dia durante 100 dias e mude sua carreira.';
-
-    protected string $coverImage;
-
-    protected string $url;
-
     protected static ?string $navigationLabel = 'Portal';
 
     protected Width|string|null $maxContentWidth = Width::Full;
+
+    private string $description = 'Um desafio simples, consistente e transformador. Dedique 1 hora por dia durante 100 dias e mude sua carreira.';
+
+    private string $coverImage;
+
+    private string $url;
 
     public static function getNavigationIcon(): null
     {
@@ -50,7 +50,18 @@ class PortalPage extends Dashboard
         return null;
     }
 
-    protected function registerMetaTags(): void
+    protected function getViewData(): array
+    {
+        return [
+            'users' => User::query()
+                ->latest()
+                ->limit(5)
+                ->get(),
+            'usersCount' => User::query()->count(),
+        ];
+    }
+
+    private function registerMetaTags(): void
     {
         FilamentView::registerRenderHook(
             PanelsRenderHook::HEAD_START,
@@ -61,16 +72,5 @@ class PortalPage extends Dashboard
                 'coverImage' => $this->coverImage,
             ]),
         );
-    }
-
-    protected function getViewData(): array
-    {
-        return [
-            'users' => User::query()
-                ->latest()
-                ->limit(5)
-                ->get(),
-            'usersCount' => User::query()->count(),
-        ];
     }
 }

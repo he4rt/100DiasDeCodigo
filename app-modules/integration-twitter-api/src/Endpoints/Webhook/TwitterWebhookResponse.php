@@ -6,7 +6,7 @@ namespace He4rt\IntegrationTwitterApi\Endpoints\Webhook;
 
 use He4rt\IntegrationTwitterApi\DTOs\TweetDTO;
 
-class TwitterWebhookResponse
+final class TwitterWebhookResponse
 {
     /**
      * @param  TweetDTO[]  $tweets

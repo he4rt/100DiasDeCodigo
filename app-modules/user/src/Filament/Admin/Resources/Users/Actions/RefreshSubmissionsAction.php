@@ -13,7 +13,7 @@ use Filament\Support\Icons\Heroicon;
 use He4rt\User\Jobs\RefreshUserSubmissionJob;
 use Illuminate\Contracts\Support\Htmlable;
 
-class RefreshSubmissionsAction extends Action
+final class RefreshSubmissionsAction extends Action
 {
     protected string|Htmlable|Closure|null $label = '';
 
@@ -26,7 +26,7 @@ class RefreshSubmissionsAction extends Action
         $this->action($this->refreshSubmissions(...));
     }
 
-    public static function getDefaultName(): ?string
+    public static function getDefaultName(): string
     {
         return 'refresh-submissions-action';
     }

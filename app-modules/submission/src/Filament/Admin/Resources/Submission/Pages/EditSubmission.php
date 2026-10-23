@@ -12,7 +12,7 @@ use Filament\Resources\Pages\EditRecord;
 use He4rt\Submission\Filament\Admin\Resources\Submission\Actions\ReviewSubmissionAction;
 use He4rt\Submission\Filament\Admin\Resources\Submission\SubmissionResource;
 
-class EditSubmission extends EditRecord
+final class EditSubmission extends EditRecord
 {
     protected static string $resource = SubmissionResource::class;
 

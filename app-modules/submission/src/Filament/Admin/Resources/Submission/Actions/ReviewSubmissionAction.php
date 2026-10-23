@@ -11,7 +11,7 @@ use Filament\Support\Icons\Heroicon;
 use He4rt\Submission\Enums\SubmissionStatus;
 use He4rt\Submission\Models\Submission;
 
-class ReviewSubmissionAction extends Action
+final class ReviewSubmissionAction extends Action
 {
     protected function setUp(): void
     {
@@ -53,7 +53,7 @@ class ReviewSubmissionAction extends Action
 
     }
 
-    public static function getDefaultName(): ?string
+    public static function getDefaultName(): string
     {
         return 'review-submission-action';
     }

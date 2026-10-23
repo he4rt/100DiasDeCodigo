@@ -6,7 +6,7 @@ namespace He4rt\Core;
 
 use Illuminate\Support\ServiceProvider;
 
-class He4rtServiceProvider extends ServiceProvider
+final class He4rtServiceProvider extends ServiceProvider
 {
     public function register(): void {}
 
