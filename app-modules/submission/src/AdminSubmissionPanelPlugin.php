@@ -22,8 +22,5 @@ class AdminSubmissionPanelPlugin implements Plugin
         );
     }
 
-    public function boot(Panel $panel): void
-    {
-        // TODO: Implement boot() method.
-    }
+    public function boot(Panel $panel): void {}
 }
